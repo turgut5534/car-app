@@ -1,20 +1,25 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
 import { CarsService } from './cars.service';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
+import { JwtAuthGuard } from 'src/middlewares/jwt-guard';
+import { UserId } from 'src/auth/decorators/current-user.decorator';
 
+@UseGuards(JwtAuthGuard)
 @Controller('cars')
 export class CarsController {
   constructor(private readonly carsService: CarsService) {}
 
   @Post()
-  create(@Body() createCarDto: CreateCarDto) {
-    return this.carsService.create(createCarDto);
+  create(@UserId() userId : string, @Body() createCarDto: CreateCarDto) {
+
+    return this.carsService.create(createCarDto, userId);
   }
 
   @Get()
-  findAll() {
-    return this.carsService.findAll();
+  findAll(@UserId() userId : string) {
+
+    return this.carsService.findAll(userId);
   }
 
   @Get(':id')
