@@ -20,6 +20,7 @@ model User {
   password     String
   currency     String   @default("PLN")
   language     String   @default("en")
+  isVerified   Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 

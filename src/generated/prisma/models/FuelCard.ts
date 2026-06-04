@@ -525,10 +525,6 @@ export type FuelCardUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.FuelCardScalarWhereInput | Prisma.FuelCardScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type FuelCardCreateNestedOneWithoutTransactionsInput = {
   create?: Prisma.XOR<Prisma.FuelCardCreateWithoutTransactionsInput, Prisma.FuelCardUncheckedCreateWithoutTransactionsInput>
   connectOrCreate?: Prisma.FuelCardCreateOrConnectWithoutTransactionsInput

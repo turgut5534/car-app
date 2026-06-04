@@ -1,4 +1,9 @@
-import { Injectable, BadRequestException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  ConflictException,
+  NotFoundException,
+} from '@nestjs/common';
 import { User } from 'src/generated/prisma/client';
 import { PrismaService } from 'src/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto/create-user.dto';
@@ -7,6 +12,19 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
+
+  async findOne(id: string): Promise<User> {
+
+    const user = await this.prisma.user.findFirst({
+      where : {id}
+    })
+
+    if (!user) {
+      throw new NotFoundException('User not found')
+    }
+
+    return user
+  }
 
   async getUsers(): Promise<User[]> {
     return this.prisma.user.findMany({});
@@ -21,7 +39,7 @@ export class UsersService {
       });
 
       if (existingUser) {
-        throw new ConflictException('Email already exists')
+        throw new ConflictException('Email already exists');
       }
       const user = await this.prisma.user.create({
         data: {
