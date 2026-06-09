@@ -13,21 +13,17 @@ import * as bcrypt from 'bcrypt';
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findOne(id: string): Promise<User> {
+  async getProfile(id: string): Promise<User> {
 
-    const user = await this.prisma.user.findFirst({
-      where : {id}
-    })
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+    });
 
     if (!user) {
-      throw new NotFoundException('User not found')
+      throw new NotFoundException('User not found');
     }
 
-    return user
-  }
-
-  async getUsers(): Promise<User[]> {
-    return this.prisma.user.findMany({});
+    return user;
   }
 
   async saveUser(data: CreateUserDto): Promise<User> {
@@ -39,11 +35,15 @@ export class UsersService {
       });
 
       if (existingUser) {
+        if (!existingUser.isVerified) {
+          throw new ConflictException(
+            'Email already registered but not verified. Verification email sent again.',
+          );
+        }
         throw new ConflictException('Email already exists');
       }
       const user = await this.prisma.user.create({
         data: {
-          name: data.name,
           email: data.email,
           password: hashedPassword,
         },

@@ -15,10 +15,12 @@ datasource db {
 
 model User {
   id           String   @id @default(uuid())
-  name         String
+  name         String?
   email        String   @unique
   password     String
   currency     String   @default("PLN")
+  distanceUnit String   @default("km")
+  theme        String   @default("system")
   language     String   @default("en")
   isVerified   Boolean  @default(false)
   createdAt    DateTime @default(now())
@@ -40,7 +42,6 @@ model User {
 model Car {
   id          String   @id @default(uuid())
   ownerId     String
-  name        String
   plate       String?
   brand       String?
   model       String?

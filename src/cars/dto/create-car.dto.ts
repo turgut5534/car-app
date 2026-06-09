@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsInt,
   IsOptional,
@@ -6,9 +7,6 @@ import {
 } from 'class-validator';
 
 export class CreateCarDto {
-  @IsString()
-  name!: string;
-
   @IsOptional()
   @IsString()
   plate?: string;
@@ -22,6 +20,7 @@ export class CreateCarDto {
   model?: string;
 
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   @Min(1900)
   year?: number;
@@ -31,6 +30,7 @@ export class CreateCarDto {
   fuelType?: string;
 
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   @Min(0)
   currentKm?: number;

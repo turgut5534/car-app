@@ -1,7 +1,11 @@
-import { PrismaService } from "src/prisma.service";
-import { JwtService } from "@nestjs/jwt";
-import { UnauthorizedException, Injectable } from "@nestjs/common";
-import * as bcrypt from 'bcrypt'
+import { PrismaService } from 'src/prisma.service';
+import { JwtService } from '@nestjs/jwt';
+import {
+  UnauthorizedException,
+  Injectable,
+  ForbiddenException,
+} from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -11,6 +15,7 @@ export class AuthService {
   ) {}
 
   async login(email: string, password: string) {
+    console.log('asdssd');
     const user = await this.prisma.user.findUnique({
       where: { email: email.toLowerCase() },
     });
@@ -25,11 +30,9 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    // await this.prisma.user.update({
-    //   where: { id: user.id },
-    //   data: { lastLoginAt: new Date() },
-    // });
-
+    // if (!user.isVerified) {
+    //   throw new ForbiddenException('Please verify your account first');
+    // }
     return {
       accessToken: await this.jwt.signAsync({
         sub: user.id,
@@ -37,5 +40,16 @@ export class AuthService {
         // role: user.role
       }),
     };
+  }
+
+  async checkEmail(email: string): Promise<boolean> {
+
+
+        console.log(email)
+    const user = await this.prisma.user.findFirst({
+      where: { email },
+    });
+
+    return !!user;
   }
 }

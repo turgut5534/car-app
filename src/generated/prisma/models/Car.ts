@@ -39,7 +39,6 @@ export type CarSumAggregateOutputType = {
 export type CarMinAggregateOutputType = {
   id: string | null
   ownerId: string | null
-  name: string | null
   plate: string | null
   brand: string | null
   model: string | null
@@ -54,7 +53,6 @@ export type CarMinAggregateOutputType = {
 export type CarMaxAggregateOutputType = {
   id: string | null
   ownerId: string | null
-  name: string | null
   plate: string | null
   brand: string | null
   model: string | null
@@ -69,7 +67,6 @@ export type CarMaxAggregateOutputType = {
 export type CarCountAggregateOutputType = {
   id: number
   ownerId: number
-  name: number
   plate: number
   brand: number
   model: number
@@ -96,7 +93,6 @@ export type CarSumAggregateInputType = {
 export type CarMinAggregateInputType = {
   id?: true
   ownerId?: true
-  name?: true
   plate?: true
   brand?: true
   model?: true
@@ -111,7 +107,6 @@ export type CarMinAggregateInputType = {
 export type CarMaxAggregateInputType = {
   id?: true
   ownerId?: true
-  name?: true
   plate?: true
   brand?: true
   model?: true
@@ -126,7 +121,6 @@ export type CarMaxAggregateInputType = {
 export type CarCountAggregateInputType = {
   id?: true
   ownerId?: true
-  name?: true
   plate?: true
   brand?: true
   model?: true
@@ -228,7 +222,6 @@ export type CarGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type CarGroupByOutputType = {
   id: string
   ownerId: string
-  name: string
   plate: string | null
   brand: string | null
   model: string | null
@@ -266,7 +259,6 @@ export type CarWhereInput = {
   NOT?: Prisma.CarWhereInput | Prisma.CarWhereInput[]
   id?: Prisma.StringFilter<"Car"> | string
   ownerId?: Prisma.StringFilter<"Car"> | string
-  name?: Prisma.StringFilter<"Car"> | string
   plate?: Prisma.StringNullableFilter<"Car"> | string | null
   brand?: Prisma.StringNullableFilter<"Car"> | string | null
   model?: Prisma.StringNullableFilter<"Car"> | string | null
@@ -289,7 +281,6 @@ export type CarWhereInput = {
 export type CarOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
-  name?: Prisma.SortOrder
   plate?: Prisma.SortOrderInput | Prisma.SortOrder
   brand?: Prisma.SortOrderInput | Prisma.SortOrder
   model?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -315,7 +306,6 @@ export type CarWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.CarWhereInput[]
   NOT?: Prisma.CarWhereInput | Prisma.CarWhereInput[]
   ownerId?: Prisma.StringFilter<"Car"> | string
-  name?: Prisma.StringFilter<"Car"> | string
   plate?: Prisma.StringNullableFilter<"Car"> | string | null
   brand?: Prisma.StringNullableFilter<"Car"> | string | null
   model?: Prisma.StringNullableFilter<"Car"> | string | null
@@ -338,7 +328,6 @@ export type CarWhereUniqueInput = Prisma.AtLeast<{
 export type CarOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
-  name?: Prisma.SortOrder
   plate?: Prisma.SortOrderInput | Prisma.SortOrder
   brand?: Prisma.SortOrderInput | Prisma.SortOrder
   model?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -361,7 +350,6 @@ export type CarScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CarScalarWhereWithAggregatesInput | Prisma.CarScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Car"> | string
   ownerId?: Prisma.StringWithAggregatesFilter<"Car"> | string
-  name?: Prisma.StringWithAggregatesFilter<"Car"> | string
   plate?: Prisma.StringNullableWithAggregatesFilter<"Car"> | string | null
   brand?: Prisma.StringNullableWithAggregatesFilter<"Car"> | string | null
   model?: Prisma.StringNullableWithAggregatesFilter<"Car"> | string | null
@@ -375,7 +363,6 @@ export type CarScalarWhereWithAggregatesInput = {
 
 export type CarCreateInput = {
   id?: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -398,7 +385,6 @@ export type CarCreateInput = {
 export type CarUncheckedCreateInput = {
   id?: string
   ownerId: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -419,7 +405,6 @@ export type CarUncheckedCreateInput = {
 
 export type CarUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -442,7 +427,6 @@ export type CarUpdateInput = {
 export type CarUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -464,7 +448,6 @@ export type CarUncheckedUpdateInput = {
 export type CarCreateManyInput = {
   id?: string
   ownerId: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -478,7 +461,6 @@ export type CarCreateManyInput = {
 
 export type CarUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -493,7 +475,6 @@ export type CarUpdateManyMutationInput = {
 export type CarUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -518,7 +499,6 @@ export type CarOrderByRelationAggregateInput = {
 export type CarCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
-  name?: Prisma.SortOrder
   plate?: Prisma.SortOrder
   brand?: Prisma.SortOrder
   model?: Prisma.SortOrder
@@ -538,7 +518,6 @@ export type CarAvgOrderByAggregateInput = {
 export type CarMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
-  name?: Prisma.SortOrder
   plate?: Prisma.SortOrder
   brand?: Prisma.SortOrder
   model?: Prisma.SortOrder
@@ -553,7 +532,6 @@ export type CarMaxOrderByAggregateInput = {
 export type CarMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
-  name?: Prisma.SortOrder
   plate?: Prisma.SortOrder
   brand?: Prisma.SortOrder
   model?: Prisma.SortOrder
@@ -620,10 +598,6 @@ export type CarUncheckedUpdateManyWithoutOwnerNestedInput = {
   update?: Prisma.CarUpdateWithWhereUniqueWithoutOwnerInput | Prisma.CarUpdateWithWhereUniqueWithoutOwnerInput[]
   updateMany?: Prisma.CarUpdateManyWithWhereWithoutOwnerInput | Prisma.CarUpdateManyWithWhereWithoutOwnerInput[]
   deleteMany?: Prisma.CarScalarWhereInput | Prisma.CarScalarWhereInput[]
-}
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
 }
 
 export type NullableIntFieldUpdateOperationsInput = {
@@ -738,7 +712,6 @@ export type CarUpdateOneWithoutRemindersNestedInput = {
 
 export type CarCreateWithoutOwnerInput = {
   id?: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -759,7 +732,6 @@ export type CarCreateWithoutOwnerInput = {
 
 export type CarUncheckedCreateWithoutOwnerInput = {
   id?: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -810,7 +782,6 @@ export type CarScalarWhereInput = {
   NOT?: Prisma.CarScalarWhereInput | Prisma.CarScalarWhereInput[]
   id?: Prisma.StringFilter<"Car"> | string
   ownerId?: Prisma.StringFilter<"Car"> | string
-  name?: Prisma.StringFilter<"Car"> | string
   plate?: Prisma.StringNullableFilter<"Car"> | string | null
   brand?: Prisma.StringNullableFilter<"Car"> | string | null
   model?: Prisma.StringNullableFilter<"Car"> | string | null
@@ -824,7 +795,6 @@ export type CarScalarWhereInput = {
 
 export type CarCreateWithoutMembersInput = {
   id?: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -846,7 +816,6 @@ export type CarCreateWithoutMembersInput = {
 export type CarUncheckedCreateWithoutMembersInput = {
   id?: string
   ownerId: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -882,7 +851,6 @@ export type CarUpdateToOneWithWhereWithoutMembersInput = {
 
 export type CarUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -904,7 +872,6 @@ export type CarUpdateWithoutMembersInput = {
 export type CarUncheckedUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -924,7 +891,6 @@ export type CarUncheckedUpdateWithoutMembersInput = {
 
 export type CarCreateWithoutServicesInput = {
   id?: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -946,7 +912,6 @@ export type CarCreateWithoutServicesInput = {
 export type CarUncheckedCreateWithoutServicesInput = {
   id?: string
   ownerId: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -982,7 +947,6 @@ export type CarUpdateToOneWithWhereWithoutServicesInput = {
 
 export type CarUpdateWithoutServicesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1004,7 +968,6 @@ export type CarUpdateWithoutServicesInput = {
 export type CarUncheckedUpdateWithoutServicesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1024,7 +987,6 @@ export type CarUncheckedUpdateWithoutServicesInput = {
 
 export type CarCreateWithoutFuelsInput = {
   id?: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -1046,7 +1008,6 @@ export type CarCreateWithoutFuelsInput = {
 export type CarUncheckedCreateWithoutFuelsInput = {
   id?: string
   ownerId: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -1082,7 +1043,6 @@ export type CarUpdateToOneWithWhereWithoutFuelsInput = {
 
 export type CarUpdateWithoutFuelsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1104,7 +1064,6 @@ export type CarUpdateWithoutFuelsInput = {
 export type CarUncheckedUpdateWithoutFuelsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1124,7 +1083,6 @@ export type CarUncheckedUpdateWithoutFuelsInput = {
 
 export type CarCreateWithoutExpensesInput = {
   id?: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -1146,7 +1104,6 @@ export type CarCreateWithoutExpensesInput = {
 export type CarUncheckedCreateWithoutExpensesInput = {
   id?: string
   ownerId: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -1182,7 +1139,6 @@ export type CarUpdateToOneWithWhereWithoutExpensesInput = {
 
 export type CarUpdateWithoutExpensesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1204,7 +1160,6 @@ export type CarUpdateWithoutExpensesInput = {
 export type CarUncheckedUpdateWithoutExpensesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1224,7 +1179,6 @@ export type CarUncheckedUpdateWithoutExpensesInput = {
 
 export type CarCreateWithoutCardTransactionsInput = {
   id?: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -1246,7 +1200,6 @@ export type CarCreateWithoutCardTransactionsInput = {
 export type CarUncheckedCreateWithoutCardTransactionsInput = {
   id?: string
   ownerId: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -1282,7 +1235,6 @@ export type CarUpdateToOneWithWhereWithoutCardTransactionsInput = {
 
 export type CarUpdateWithoutCardTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1304,7 +1256,6 @@ export type CarUpdateWithoutCardTransactionsInput = {
 export type CarUncheckedUpdateWithoutCardTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1324,7 +1275,6 @@ export type CarUncheckedUpdateWithoutCardTransactionsInput = {
 
 export type CarCreateWithoutDocumentsInput = {
   id?: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -1346,7 +1296,6 @@ export type CarCreateWithoutDocumentsInput = {
 export type CarUncheckedCreateWithoutDocumentsInput = {
   id?: string
   ownerId: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -1382,7 +1331,6 @@ export type CarUpdateToOneWithWhereWithoutDocumentsInput = {
 
 export type CarUpdateWithoutDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1404,7 +1352,6 @@ export type CarUpdateWithoutDocumentsInput = {
 export type CarUncheckedUpdateWithoutDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1424,7 +1371,6 @@ export type CarUncheckedUpdateWithoutDocumentsInput = {
 
 export type CarCreateWithoutRemindersInput = {
   id?: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -1446,7 +1392,6 @@ export type CarCreateWithoutRemindersInput = {
 export type CarUncheckedCreateWithoutRemindersInput = {
   id?: string
   ownerId: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -1482,7 +1427,6 @@ export type CarUpdateToOneWithWhereWithoutRemindersInput = {
 
 export type CarUpdateWithoutRemindersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1504,7 +1448,6 @@ export type CarUpdateWithoutRemindersInput = {
 export type CarUncheckedUpdateWithoutRemindersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1524,7 +1467,6 @@ export type CarUncheckedUpdateWithoutRemindersInput = {
 
 export type CarCreateManyOwnerInput = {
   id?: string
-  name: string
   plate?: string | null
   brand?: string | null
   model?: string | null
@@ -1538,7 +1480,6 @@ export type CarCreateManyOwnerInput = {
 
 export type CarUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1559,7 +1500,6 @@ export type CarUpdateWithoutOwnerInput = {
 
 export type CarUncheckedUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1580,7 +1520,6 @@ export type CarUncheckedUpdateWithoutOwnerInput = {
 
 export type CarUncheckedUpdateManyWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1680,7 +1619,6 @@ export type CarCountOutputTypeCountCardTransactionsArgs<ExtArgs extends runtime.
 export type CarSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   ownerId?: boolean
-  name?: boolean
   plate?: boolean
   brand?: boolean
   model?: boolean
@@ -1704,7 +1642,6 @@ export type CarSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type CarSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   ownerId?: boolean
-  name?: boolean
   plate?: boolean
   brand?: boolean
   model?: boolean
@@ -1720,7 +1657,6 @@ export type CarSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extension
 export type CarSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   ownerId?: boolean
-  name?: boolean
   plate?: boolean
   brand?: boolean
   model?: boolean
@@ -1736,7 +1672,6 @@ export type CarSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extension
 export type CarSelectScalar = {
   id?: boolean
   ownerId?: boolean
-  name?: boolean
   plate?: boolean
   brand?: boolean
   model?: boolean
@@ -1748,7 +1683,7 @@ export type CarSelectScalar = {
   updatedAt?: boolean
 }
 
-export type CarOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ownerId" | "name" | "plate" | "brand" | "model" | "year" | "fuelType" | "currentKm" | "imageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["car"]>
+export type CarOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ownerId" | "plate" | "brand" | "model" | "year" | "fuelType" | "currentKm" | "imageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["car"]>
 export type CarInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   members?: boolean | Prisma.Car$membersArgs<ExtArgs>
@@ -1782,7 +1717,6 @@ export type $CarPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     ownerId: string
-    name: string
     plate: string | null
     brand: string | null
     model: string | null
@@ -2225,7 +2159,6 @@ export interface Prisma__CarClient<T, Null = never, ExtArgs extends runtime.Type
 export interface CarFieldRefs {
   readonly id: Prisma.FieldRef<"Car", 'String'>
   readonly ownerId: Prisma.FieldRef<"Car", 'String'>
-  readonly name: Prisma.FieldRef<"Car", 'String'>
   readonly plate: Prisma.FieldRef<"Car", 'String'>
   readonly brand: Prisma.FieldRef<"Car", 'String'>
   readonly model: Prisma.FieldRef<"Car", 'String'>

@@ -85,6 +85,8 @@ export const UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   currency: 'currency',
+  distanceUnit: 'distanceUnit',
+  theme: 'theme',
   language: 'language',
   isVerified: 'isVerified',
   createdAt: 'createdAt',
@@ -97,7 +99,6 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const CarScalarFieldEnum = {
   id: 'id',
   ownerId: 'ownerId',
-  name: 'name',
   plate: 'plate',
   brand: 'brand',
   model: 'model',

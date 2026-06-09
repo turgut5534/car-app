@@ -4,20 +4,17 @@ import { User } from 'src/generated/prisma/client';
 import { Get } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto/create-user.dto';
 import { JwtAuthGuard } from 'src/middlewares/jwt-guard';
+import { UserId } from 'src/auth/decorators/current-user.decorator';
+import { CheckEmailDto } from '../auth/dto/check-email.dto';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
-  @Get()
+  @Get('me')
   @UseGuards(JwtAuthGuard)
-  async getUsers(): Promise<User[]> {
-    return this.userService.getUsers();
-  }
-
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<User> {
-    return this.userService.findOne(id);
+  async getProfile(@UserId() id: string): Promise<User> {
+    return this.userService.getProfile(id);
   }
 
   @Post()
