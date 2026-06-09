@@ -237,4 +237,5 @@ enum ReminderType {
   TIRE_ROTATION
   TAX
   CUSTOM
+  YES
 }

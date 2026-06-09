@@ -11,16 +11,19 @@ CREATE TYPE "FuelCardTransactionType" AS ENUM ('TOP_UP', 'SPEND');
 CREATE TYPE "DocumentType" AS ENUM ('REGISTRATION', 'INSURANCE', 'INSPECTION', 'INVOICE', 'SERVICE_REPORT', 'PURCHASE_INVOICE', 'ROADSIDE_ASSISTANCE', 'OTHER');
 
 -- CreateEnum
-CREATE TYPE "ReminderType" AS ENUM ('INSURANCE', 'INSPECTION', 'SERVICE', 'OIL_CHANGE', 'TIRE_ROTATION', 'TAX', 'CUSTOM');
+CREATE TYPE "ReminderType" AS ENUM ('INSURANCE', 'INSPECTION', 'SERVICE', 'OIL_CHANGE', 'TIRE_ROTATION', 'TAX', 'CUSTOM', 'YES');
 
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "name" TEXT,
     "email" TEXT NOT NULL,
-    "passwordHash" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "currency" TEXT NOT NULL DEFAULT 'PLN',
+    "distanceUnit" TEXT NOT NULL DEFAULT 'km',
+    "theme" TEXT NOT NULL DEFAULT 'system',
     "language" TEXT NOT NULL DEFAULT 'en',
+    "isVerified" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -31,7 +34,6 @@ CREATE TABLE "User" (
 CREATE TABLE "Car" (
     "id" TEXT NOT NULL,
     "ownerId" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
     "plate" TEXT,
     "brand" TEXT,
     "model" TEXT,
