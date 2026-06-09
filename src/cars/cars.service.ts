@@ -11,6 +11,7 @@ import * as bcrypt from 'bcrypt';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { unlink } from 'fs/promises';
 import { join } from 'path';
+import { CreateDocumentDto } from './dto/create-document.dto';
 
 @Injectable()
 export class CarsService {
@@ -42,6 +43,7 @@ export class CarsService {
       },
       include: {
         owner: true,
+        documents: true
       },
     });
 
@@ -88,7 +90,6 @@ export class CarsService {
       },
     });
 
-    return car;
   }
 
   update(id: number, updateCarDto: UpdateCarDto) {
@@ -137,6 +138,28 @@ export class CarsService {
           ...dto,
           imageUrl: file ? file.filename : undefined,
           ownerId: userId,
+        },
+      });
+    } catch (error) {
+      if (file) {
+        await unlink(file.path).catch(() => null);
+      }
+
+      throw error;
+    }
+  }
+
+    async addNewDocument(dto: CreateDocumentDto, userId: string, carId: string, file?: any) {
+    try {
+
+      console.log(file.filename)
+      return await this.prisma.document.create({
+        data: {
+          ...dto,
+          carId: carId,
+          fileUrl: file ? file.filename : undefined,
+          uploadedById: userId,
+          expiresAt: dto.expiresAt ? new Date(dto.expiresAt) : null,
         },
       });
     } catch (error) {

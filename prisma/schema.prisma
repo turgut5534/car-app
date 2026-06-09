@@ -87,6 +87,7 @@ model ServiceRecord {
   id          String   @id @default(uuid())
   carId       String
   createdById String?
+  category    ServiceCategory @default(OTHER)
   title       String
   description String?
   amount      Decimal  @db.Decimal(10, 2)
@@ -97,6 +98,21 @@ model ServiceRecord {
 
   car         Car   @relation(fields: [carId], references: [id], onDelete: Cascade)
   createdBy   User? @relation(fields: [createdById], references: [id])
+}
+
+enum ServiceCategory {
+  OIL_CHANGE
+  FILTER_CHANGE
+  BRAKE
+  TIRE
+  BATTERY
+  ENGINE
+  TRANSMISSION
+  SUSPENSION
+  AC
+  INSPECTION
+  WASH
+  OTHER
 }
 
 model FuelRecord {
@@ -194,7 +210,7 @@ model Document {
   uploadedById String?
   type        DocumentType
   title       String
-  fileUrl     String
+  fileUrl     String?
   expiresAt   DateTime?
   createdAt   DateTime @default(now())
 

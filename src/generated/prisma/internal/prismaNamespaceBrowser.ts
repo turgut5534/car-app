@@ -128,6 +128,7 @@ export const ServiceRecordScalarFieldEnum = {
   id: 'id',
   carId: 'carId',
   createdById: 'createdById',
+  category: 'category',
   title: 'title',
   description: 'description',
   amount: 'amount',

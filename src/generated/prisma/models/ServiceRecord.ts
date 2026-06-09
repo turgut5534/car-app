@@ -40,6 +40,7 @@ export type ServiceRecordMinAggregateOutputType = {
   id: string | null
   carId: string | null
   createdById: string | null
+  category: $Enums.ServiceCategory | null
   title: string | null
   description: string | null
   amount: runtime.Decimal | null
@@ -53,6 +54,7 @@ export type ServiceRecordMaxAggregateOutputType = {
   id: string | null
   carId: string | null
   createdById: string | null
+  category: $Enums.ServiceCategory | null
   title: string | null
   description: string | null
   amount: runtime.Decimal | null
@@ -66,6 +68,7 @@ export type ServiceRecordCountAggregateOutputType = {
   id: number
   carId: number
   createdById: number
+  category: number
   title: number
   description: number
   amount: number
@@ -91,6 +94,7 @@ export type ServiceRecordMinAggregateInputType = {
   id?: true
   carId?: true
   createdById?: true
+  category?: true
   title?: true
   description?: true
   amount?: true
@@ -104,6 +108,7 @@ export type ServiceRecordMaxAggregateInputType = {
   id?: true
   carId?: true
   createdById?: true
+  category?: true
   title?: true
   description?: true
   amount?: true
@@ -117,6 +122,7 @@ export type ServiceRecordCountAggregateInputType = {
   id?: true
   carId?: true
   createdById?: true
+  category?: true
   title?: true
   description?: true
   amount?: true
@@ -217,6 +223,7 @@ export type ServiceRecordGroupByOutputType = {
   id: string
   carId: string
   createdById: string | null
+  category: $Enums.ServiceCategory
   title: string
   description: string | null
   amount: runtime.Decimal
@@ -253,6 +260,7 @@ export type ServiceRecordWhereInput = {
   id?: Prisma.StringFilter<"ServiceRecord"> | string
   carId?: Prisma.StringFilter<"ServiceRecord"> | string
   createdById?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
+  category?: Prisma.EnumServiceCategoryFilter<"ServiceRecord"> | $Enums.ServiceCategory
   title?: Prisma.StringFilter<"ServiceRecord"> | string
   description?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
   amount?: Prisma.DecimalFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -268,6 +276,7 @@ export type ServiceRecordOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   carId?: Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrder
@@ -286,6 +295,7 @@ export type ServiceRecordWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ServiceRecordWhereInput | Prisma.ServiceRecordWhereInput[]
   carId?: Prisma.StringFilter<"ServiceRecord"> | string
   createdById?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
+  category?: Prisma.EnumServiceCategoryFilter<"ServiceRecord"> | $Enums.ServiceCategory
   title?: Prisma.StringFilter<"ServiceRecord"> | string
   description?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
   amount?: Prisma.DecimalFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -301,6 +311,7 @@ export type ServiceRecordOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   carId?: Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrder
@@ -322,6 +333,7 @@ export type ServiceRecordScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"ServiceRecord"> | string
   carId?: Prisma.StringWithAggregatesFilter<"ServiceRecord"> | string
   createdById?: Prisma.StringNullableWithAggregatesFilter<"ServiceRecord"> | string | null
+  category?: Prisma.EnumServiceCategoryWithAggregatesFilter<"ServiceRecord"> | $Enums.ServiceCategory
   title?: Prisma.StringWithAggregatesFilter<"ServiceRecord"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"ServiceRecord"> | string | null
   amount?: Prisma.DecimalWithAggregatesFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -333,6 +345,7 @@ export type ServiceRecordScalarWhereWithAggregatesInput = {
 
 export type ServiceRecordCreateInput = {
   id?: string
+  category?: $Enums.ServiceCategory
   title: string
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -348,6 +361,7 @@ export type ServiceRecordUncheckedCreateInput = {
   id?: string
   carId: string
   createdById?: string | null
+  category?: $Enums.ServiceCategory
   title: string
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -359,6 +373,7 @@ export type ServiceRecordUncheckedCreateInput = {
 
 export type ServiceRecordUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -374,6 +389,7 @@ export type ServiceRecordUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   carId?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -387,6 +403,7 @@ export type ServiceRecordCreateManyInput = {
   id?: string
   carId: string
   createdById?: string | null
+  category?: $Enums.ServiceCategory
   title: string
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -398,6 +415,7 @@ export type ServiceRecordCreateManyInput = {
 
 export type ServiceRecordUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -411,6 +429,7 @@ export type ServiceRecordUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   carId?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -434,6 +453,7 @@ export type ServiceRecordCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   carId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
@@ -452,6 +472,7 @@ export type ServiceRecordMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   carId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
@@ -465,6 +486,7 @@ export type ServiceRecordMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   carId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  category?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
@@ -563,6 +585,10 @@ export type ServiceRecordUncheckedUpdateManyWithoutCarNestedInput = {
   deleteMany?: Prisma.ServiceRecordScalarWhereInput | Prisma.ServiceRecordScalarWhereInput[]
 }
 
+export type EnumServiceCategoryFieldUpdateOperationsInput = {
+  set?: $Enums.ServiceCategory
+}
+
 export type DecimalFieldUpdateOperationsInput = {
   set?: runtime.Decimal | runtime.DecimalJsLike | number | string
   increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -573,6 +599,7 @@ export type DecimalFieldUpdateOperationsInput = {
 
 export type ServiceRecordCreateWithoutCreatedByInput = {
   id?: string
+  category?: $Enums.ServiceCategory
   title: string
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -586,6 +613,7 @@ export type ServiceRecordCreateWithoutCreatedByInput = {
 export type ServiceRecordUncheckedCreateWithoutCreatedByInput = {
   id?: string
   carId: string
+  category?: $Enums.ServiceCategory
   title: string
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -628,6 +656,7 @@ export type ServiceRecordScalarWhereInput = {
   id?: Prisma.StringFilter<"ServiceRecord"> | string
   carId?: Prisma.StringFilter<"ServiceRecord"> | string
   createdById?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
+  category?: Prisma.EnumServiceCategoryFilter<"ServiceRecord"> | $Enums.ServiceCategory
   title?: Prisma.StringFilter<"ServiceRecord"> | string
   description?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
   amount?: Prisma.DecimalFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -639,6 +668,7 @@ export type ServiceRecordScalarWhereInput = {
 
 export type ServiceRecordCreateWithoutCarInput = {
   id?: string
+  category?: $Enums.ServiceCategory
   title: string
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -652,6 +682,7 @@ export type ServiceRecordCreateWithoutCarInput = {
 export type ServiceRecordUncheckedCreateWithoutCarInput = {
   id?: string
   createdById?: string | null
+  category?: $Enums.ServiceCategory
   title: string
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -690,6 +721,7 @@ export type ServiceRecordUpdateManyWithWhereWithoutCarInput = {
 export type ServiceRecordCreateManyCreatedByInput = {
   id?: string
   carId: string
+  category?: $Enums.ServiceCategory
   title: string
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -701,6 +733,7 @@ export type ServiceRecordCreateManyCreatedByInput = {
 
 export type ServiceRecordUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -714,6 +747,7 @@ export type ServiceRecordUpdateWithoutCreatedByInput = {
 export type ServiceRecordUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   carId?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -726,6 +760,7 @@ export type ServiceRecordUncheckedUpdateWithoutCreatedByInput = {
 export type ServiceRecordUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   carId?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -738,6 +773,7 @@ export type ServiceRecordUncheckedUpdateManyWithoutCreatedByInput = {
 export type ServiceRecordCreateManyCarInput = {
   id?: string
   createdById?: string | null
+  category?: $Enums.ServiceCategory
   title: string
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -749,6 +785,7 @@ export type ServiceRecordCreateManyCarInput = {
 
 export type ServiceRecordUpdateWithoutCarInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -762,6 +799,7 @@ export type ServiceRecordUpdateWithoutCarInput = {
 export type ServiceRecordUncheckedUpdateWithoutCarInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -774,6 +812,7 @@ export type ServiceRecordUncheckedUpdateWithoutCarInput = {
 export type ServiceRecordUncheckedUpdateManyWithoutCarInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -789,6 +828,7 @@ export type ServiceRecordSelect<ExtArgs extends runtime.Types.Extensions.Interna
   id?: boolean
   carId?: boolean
   createdById?: boolean
+  category?: boolean
   title?: boolean
   description?: boolean
   amount?: boolean
@@ -804,6 +844,7 @@ export type ServiceRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   carId?: boolean
   createdById?: boolean
+  category?: boolean
   title?: boolean
   description?: boolean
   amount?: boolean
@@ -819,6 +860,7 @@ export type ServiceRecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   carId?: boolean
   createdById?: boolean
+  category?: boolean
   title?: boolean
   description?: boolean
   amount?: boolean
@@ -834,6 +876,7 @@ export type ServiceRecordSelectScalar = {
   id?: boolean
   carId?: boolean
   createdById?: boolean
+  category?: boolean
   title?: boolean
   description?: boolean
   amount?: boolean
@@ -843,7 +886,7 @@ export type ServiceRecordSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ServiceRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carId" | "createdById" | "title" | "description" | "amount" | "km" | "serviceDate" | "createdAt" | "updatedAt", ExtArgs["result"]["serviceRecord"]>
+export type ServiceRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carId" | "createdById" | "category" | "title" | "description" | "amount" | "km" | "serviceDate" | "createdAt" | "updatedAt", ExtArgs["result"]["serviceRecord"]>
 export type ServiceRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.ServiceRecord$createdByArgs<ExtArgs>
@@ -867,6 +910,7 @@ export type $ServiceRecordPayload<ExtArgs extends runtime.Types.Extensions.Inter
     id: string
     carId: string
     createdById: string | null
+    category: $Enums.ServiceCategory
     title: string
     description: string | null
     amount: runtime.Decimal
@@ -1302,6 +1346,7 @@ export interface ServiceRecordFieldRefs {
   readonly id: Prisma.FieldRef<"ServiceRecord", 'String'>
   readonly carId: Prisma.FieldRef<"ServiceRecord", 'String'>
   readonly createdById: Prisma.FieldRef<"ServiceRecord", 'String'>
+  readonly category: Prisma.FieldRef<"ServiceRecord", 'ServiceCategory'>
   readonly title: Prisma.FieldRef<"ServiceRecord", 'String'>
   readonly description: Prisma.FieldRef<"ServiceRecord", 'String'>
   readonly amount: Prisma.FieldRef<"ServiceRecord", 'Decimal'>

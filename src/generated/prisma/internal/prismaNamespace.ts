@@ -1241,6 +1241,7 @@ export const ServiceRecordScalarFieldEnum = {
   id: 'id',
   carId: 'carId',
   createdById: 'createdById',
+  category: 'category',
   title: 'title',
   description: 'description',
   amount: 'amount',
@@ -1439,6 +1440,20 @@ export type EnumCarRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMo
  * Reference to a field of type 'CarRole[]'
  */
 export type ListEnumCarRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CarRole[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ServiceCategory'
+ */
+export type EnumServiceCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'ServiceCategory[]'
+ */
+export type ListEnumServiceCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceCategory[]'>
     
 
 

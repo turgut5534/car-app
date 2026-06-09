@@ -19,6 +19,24 @@ export const CarRole = {
 export type CarRole = (typeof CarRole)[keyof typeof CarRole]
 
 
+export const ServiceCategory = {
+  OIL_CHANGE: 'OIL_CHANGE',
+  FILTER_CHANGE: 'FILTER_CHANGE',
+  BRAKE: 'BRAKE',
+  TIRE: 'TIRE',
+  BATTERY: 'BATTERY',
+  ENGINE: 'ENGINE',
+  TRANSMISSION: 'TRANSMISSION',
+  SUSPENSION: 'SUSPENSION',
+  AC: 'AC',
+  INSPECTION: 'INSPECTION',
+  WASH: 'WASH',
+  OTHER: 'OTHER'
+} as const
+
+export type ServiceCategory = (typeof ServiceCategory)[keyof typeof ServiceCategory]
+
+
 export const ExpenseCategory = {
   FUEL: 'FUEL',
   SERVICE: 'SERVICE',
@@ -64,7 +82,8 @@ export const ReminderType = {
   OIL_CHANGE: 'OIL_CHANGE',
   TIRE_ROTATION: 'TIRE_ROTATION',
   TAX: 'TAX',
-  CUSTOM: 'CUSTOM'
+  CUSTOM: 'CUSTOM',
+  YES: 'YES'
 } as const
 
 export type ReminderType = (typeof ReminderType)[keyof typeof ReminderType]

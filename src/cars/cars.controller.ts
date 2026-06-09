@@ -21,6 +21,7 @@ import type { Express } from 'express';
 import { UploadedFile } from '@nestjs/common';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { CreateDocumentDto } from './dto/create-document.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('cars')
@@ -93,5 +94,51 @@ export class CarsController {
     @Body() createServiceDto: CreateServiceDto,
   ) {
     return this.carsService.saveService(id, userId, createServiceDto);
+  }
+
+  @Post(':id/documents')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './uploads/documents',
+        filename: (req, file, cb) => {
+          const uniqueName = `${Date.now()}-${Math.round(
+            Math.random() * 1e9,
+          )}${extname(file.originalname)}`;
+
+          cb(null, uniqueName);
+        },
+      }),
+      fileFilter: (req, file, cb) => {
+        const allowedMimeTypes = [
+          'application/pdf',
+          'application/msword',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          'image/jpeg',
+          'image/png',
+          'image/webp',
+        ];
+
+        if (!allowedMimeTypes.includes(file.mimetype)) {
+          return cb(
+            new Error('Only PDF, Word, or image files are allowed'),
+            false,
+          );
+        }
+
+        cb(null, true);
+      },
+      limits: {
+        fileSize: 5 * 1024 * 1024,
+      },
+    }),
+  )
+  addNewDocument(
+    @UploadedFile() file: Express.Multer.File,
+    @Param('id') carId: string,
+    @UserId() userId: string,
+    @Body() createDocumentDto: CreateDocumentDto,
+  ) {
+    return this.carsService.addNewDocument(createDocumentDto, userId, carId, file);
   }
 }

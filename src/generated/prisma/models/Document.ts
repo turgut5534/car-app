@@ -171,7 +171,7 @@ export type DocumentGroupByOutputType = {
   uploadedById: string | null
   type: $Enums.DocumentType
   title: string
-  fileUrl: string
+  fileUrl: string | null
   expiresAt: Date | null
   createdAt: Date
   _count: DocumentCountAggregateOutputType | null
@@ -203,7 +203,7 @@ export type DocumentWhereInput = {
   uploadedById?: Prisma.StringNullableFilter<"Document"> | string | null
   type?: Prisma.EnumDocumentTypeFilter<"Document"> | $Enums.DocumentType
   title?: Prisma.StringFilter<"Document"> | string
-  fileUrl?: Prisma.StringFilter<"Document"> | string
+  fileUrl?: Prisma.StringNullableFilter<"Document"> | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   car?: Prisma.XOR<Prisma.CarScalarRelationFilter, Prisma.CarWhereInput>
@@ -216,7 +216,7 @@ export type DocumentOrderByWithRelationInput = {
   uploadedById?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  fileUrl?: Prisma.SortOrder
+  fileUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   car?: Prisma.CarOrderByWithRelationInput
@@ -232,7 +232,7 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   uploadedById?: Prisma.StringNullableFilter<"Document"> | string | null
   type?: Prisma.EnumDocumentTypeFilter<"Document"> | $Enums.DocumentType
   title?: Prisma.StringFilter<"Document"> | string
-  fileUrl?: Prisma.StringFilter<"Document"> | string
+  fileUrl?: Prisma.StringNullableFilter<"Document"> | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   car?: Prisma.XOR<Prisma.CarScalarRelationFilter, Prisma.CarWhereInput>
@@ -245,7 +245,7 @@ export type DocumentOrderByWithAggregationInput = {
   uploadedById?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  fileUrl?: Prisma.SortOrder
+  fileUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.DocumentCountOrderByAggregateInput
@@ -262,7 +262,7 @@ export type DocumentScalarWhereWithAggregatesInput = {
   uploadedById?: Prisma.StringNullableWithAggregatesFilter<"Document"> | string | null
   type?: Prisma.EnumDocumentTypeWithAggregatesFilter<"Document"> | $Enums.DocumentType
   title?: Prisma.StringWithAggregatesFilter<"Document"> | string
-  fileUrl?: Prisma.StringWithAggregatesFilter<"Document"> | string
+  fileUrl?: Prisma.StringNullableWithAggregatesFilter<"Document"> | string | null
   expiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Document"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Document"> | Date | string
 }
@@ -271,7 +271,7 @@ export type DocumentCreateInput = {
   id?: string
   type: $Enums.DocumentType
   title: string
-  fileUrl: string
+  fileUrl?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
   car: Prisma.CarCreateNestedOneWithoutDocumentsInput
@@ -284,7 +284,7 @@ export type DocumentUncheckedCreateInput = {
   uploadedById?: string | null
   type: $Enums.DocumentType
   title: string
-  fileUrl: string
+  fileUrl?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
 }
@@ -293,7 +293,7 @@ export type DocumentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   car?: Prisma.CarUpdateOneRequiredWithoutDocumentsNestedInput
@@ -306,7 +306,7 @@ export type DocumentUncheckedUpdateInput = {
   uploadedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -317,7 +317,7 @@ export type DocumentCreateManyInput = {
   uploadedById?: string | null
   type: $Enums.DocumentType
   title: string
-  fileUrl: string
+  fileUrl?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
 }
@@ -326,7 +326,7 @@ export type DocumentUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -337,7 +337,7 @@ export type DocumentUncheckedUpdateManyInput = {
   uploadedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -481,7 +481,7 @@ export type DocumentCreateWithoutUploadedByInput = {
   id?: string
   type: $Enums.DocumentType
   title: string
-  fileUrl: string
+  fileUrl?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
   car: Prisma.CarCreateNestedOneWithoutDocumentsInput
@@ -492,7 +492,7 @@ export type DocumentUncheckedCreateWithoutUploadedByInput = {
   carId: string
   type: $Enums.DocumentType
   title: string
-  fileUrl: string
+  fileUrl?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
 }
@@ -532,7 +532,7 @@ export type DocumentScalarWhereInput = {
   uploadedById?: Prisma.StringNullableFilter<"Document"> | string | null
   type?: Prisma.EnumDocumentTypeFilter<"Document"> | $Enums.DocumentType
   title?: Prisma.StringFilter<"Document"> | string
-  fileUrl?: Prisma.StringFilter<"Document"> | string
+  fileUrl?: Prisma.StringNullableFilter<"Document"> | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
 }
@@ -541,7 +541,7 @@ export type DocumentCreateWithoutCarInput = {
   id?: string
   type: $Enums.DocumentType
   title: string
-  fileUrl: string
+  fileUrl?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
   uploadedBy?: Prisma.UserCreateNestedOneWithoutUploadedDocumentsInput
@@ -552,7 +552,7 @@ export type DocumentUncheckedCreateWithoutCarInput = {
   uploadedById?: string | null
   type: $Enums.DocumentType
   title: string
-  fileUrl: string
+  fileUrl?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
 }
@@ -588,7 +588,7 @@ export type DocumentCreateManyUploadedByInput = {
   carId: string
   type: $Enums.DocumentType
   title: string
-  fileUrl: string
+  fileUrl?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
 }
@@ -597,7 +597,7 @@ export type DocumentUpdateWithoutUploadedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   car?: Prisma.CarUpdateOneRequiredWithoutDocumentsNestedInput
@@ -608,7 +608,7 @@ export type DocumentUncheckedUpdateWithoutUploadedByInput = {
   carId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -618,7 +618,7 @@ export type DocumentUncheckedUpdateManyWithoutUploadedByInput = {
   carId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -628,7 +628,7 @@ export type DocumentCreateManyCarInput = {
   uploadedById?: string | null
   type: $Enums.DocumentType
   title: string
-  fileUrl: string
+  fileUrl?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
 }
@@ -637,7 +637,7 @@ export type DocumentUpdateWithoutCarInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   uploadedBy?: Prisma.UserUpdateOneWithoutUploadedDocumentsNestedInput
@@ -648,7 +648,7 @@ export type DocumentUncheckedUpdateWithoutCarInput = {
   uploadedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -658,7 +658,7 @@ export type DocumentUncheckedUpdateManyWithoutCarInput = {
   uploadedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -741,7 +741,7 @@ export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     uploadedById: string | null
     type: $Enums.DocumentType
     title: string
-    fileUrl: string
+    fileUrl: string | null
     expiresAt: Date | null
     createdAt: Date
   }, ExtArgs["result"]["document"]>
