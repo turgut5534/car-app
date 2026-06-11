@@ -12,7 +12,7 @@ export class DashboardController {
 
   @Get('home')
   @UseGuards(JwtAuthGuard)
-  async getDashboard(@UserId() userId : string) : Promise<User> {
+  async getDashboard(@UserId() userId : string) {
     return this.dashboardService.getDashboard(userId)
   }
 

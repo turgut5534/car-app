@@ -1264,6 +1264,7 @@ export const FuelRecordScalarFieldEnum = {
   pricePerLiter: 'pricePerLiter',
   totalAmount: 'totalAmount',
   km: 'km',
+  consumption: 'consumption',
   fuelDate: 'fuelDate',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1426,6 +1427,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'FuelType'
+ */
+export type EnumFuelTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FuelType'>
+    
+
+
+/**
+ * Reference to a field of type 'FuelType[]'
+ */
+export type ListEnumFuelTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FuelType[]'>
     
 
 

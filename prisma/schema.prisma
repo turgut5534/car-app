@@ -46,8 +46,8 @@ model Car {
   brand       String?
   model       String?
   year        Int?
-  fuelType    String?
-  currentKm   Int?
+  fuelType    FuelType  @default(PETROL)
+  currentKm   Int @default(0)
   imageUrl    String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -81,6 +81,13 @@ enum CarRole {
   ADMIN
   MEMBER
   VIEWER
+}
+
+enum FuelType {
+  PETROL
+  DIESEL
+  LPG
+  ELECTRIC
 }
 
 model ServiceRecord {
@@ -124,9 +131,10 @@ model FuelRecord {
 
   station     String?
   liters      Decimal? @db.Decimal(10, 2)
-  pricePerLiter Decimal? @db.Decimal(10, 2)
+  pricePerLiter Decimal @db.Decimal(10, 2)
   totalAmount Decimal  @db.Decimal(10, 2)
-  km          Int?
+  km          Int     @default(0)
+  consumption Decimal? @db.Decimal(10, 2) @default(0)
   fuelDate    DateTime
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

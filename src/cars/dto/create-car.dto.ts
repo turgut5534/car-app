@@ -1,10 +1,18 @@
 import { Type } from 'class-transformer';
 import {
+  IsEnum,
   IsInt,
   IsOptional,
   IsString,
   Min,
 } from 'class-validator';
+
+export enum FuelType {
+  PETROL = 'PETROL',
+  DIESEL = 'DIESEL',
+  LPG = 'LPG',
+  ELECTRIC = 'ELECTRIC',
+}
 
 export class CreateCarDto {
   @IsOptional()
@@ -26,8 +34,8 @@ export class CreateCarDto {
   year?: number;
 
   @IsOptional()
-  @IsString()
-  fuelType?: string;
+  @IsEnum(FuelType)
+  fuelType?: FuelType;
 
   @IsOptional()
   @Type(() => Number)

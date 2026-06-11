@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -7,11 +8,11 @@ import {
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 import { PrismaService } from 'src/prisma.service';
-import * as bcrypt from 'bcrypt';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { unlink } from 'fs/promises';
 import { join } from 'path';
 import { CreateDocumentDto } from './dto/create-document.dto';
+import { CreateFuelDto } from './dto/create-fuel.dto';
 
 @Injectable()
 export class CarsService {
@@ -43,32 +44,65 @@ export class CarsService {
       },
       include: {
         owner: true,
-        documents: true
-      },
-    });
-
-    return cars;
-  }
-
-  async findOne(carId: string, userId: string) {
-    const car = await this.prisma.car.findFirst({
-      where: {
-        id: carId,
-        ownerId: userId,
-      },
-      include: {
-        owner: true,
-        services: true,
-        fuels: true,
-        expenses: true,
         documents: true,
-        reminders: true,
+        fuels: {
+          orderBy: {
+            fuelDate: 'desc',
+          },
+          take: 1,
+          select: {
+            id: true,
+            pricePerLiter: true,
+            fuelDate: true,
+            liters: true,
+            totalAmount: true,
+            km: true,
+          },
+        },
       },
     });
 
-    console.log(carId);
-    return car;
+    return cars.map((car) => ({
+      ...car,
+      lastFuelPricePerLiter: car.fuels[0]?.pricePerLiter ?? null,
+      lastFuel: car.fuels[0] ?? null,
+    }));
   }
+
+async findOne(carId: string, userId: string) {
+  const car = await this.prisma.car.findFirst({
+    where: {
+      id: carId,
+      ownerId: userId,
+    },
+    include: {
+      owner: true,
+      services: true,
+      fuels: true,
+      expenses: true,
+      documents: true,
+      reminders: true,
+    },
+  });
+
+  if (!car) return null;
+
+  const fuelStats = await this.prisma.fuelRecord.aggregate({
+    where: {
+      carId,
+    },
+    _avg: {
+      consumption: true,
+      pricePerLiter: true,
+    }
+  });
+
+  return {
+    ...car,
+    averageFuelConsumption: Number(fuelStats._avg.consumption ?? 0),
+    averageFuelPrice: Number(fuelStats._avg.pricePerLiter ?? 0),
+  };
+}
 
   async saveService(carId: string, userId: string, dto: CreateServiceDto) {
     const car = await this.prisma.car.findFirst({
@@ -82,7 +116,14 @@ export class CarsService {
       throw new NotFoundException('Car not found');
     }
 
-    return this.prisma.serviceRecord.create({
+    const mileage = car.currentKm;
+
+    if (dto.km < mileage) {
+      throw new BadRequestException(
+        'New milaage must be greater than current mileage',
+      );
+    }
+    const newService = this.prisma.serviceRecord.create({
       data: {
         ...dto,
         carId: carId,
@@ -90,6 +131,81 @@ export class CarsService {
       },
     });
 
+    await this.prisma.car.update({
+      where: {
+        id: carId,
+      },
+      data: {
+        currentKm: dto.km,
+      },
+    });
+
+    return newService;
+  }
+
+  async saveFuel(carId: string, userId: string, dto: CreateFuelDto) {
+    const car = await this.prisma.car.findFirst({
+      where: {
+        id: carId,
+        ownerId: userId,
+      },
+    });
+
+    if (!car) {
+      throw new NotFoundException('Car not found');
+    }
+
+    const mileage = car.currentKm;
+
+    if (dto.km <= mileage) {
+      throw new BadRequestException(
+        'New milaage must be greater than current mileage',
+      );
+    }
+
+    const liters = dto.totalAmount / dto.pricePerLiter;
+
+    const previousRecord = await this.prisma.fuelRecord.findFirst({
+      where: {
+        carId,
+      },
+      orderBy: {
+        fuelDate: 'desc',
+      },
+    });
+
+    let consumption: number;
+    let kmDif: number;
+
+    if (!previousRecord) {
+      kmDif = dto.km - car.currentKm;
+    } else {
+      kmDif = dto.km - previousRecord.km;
+    }
+
+    consumption = (liters * 100) / kmDif;
+
+    const newRecord = this.prisma.fuelRecord.create({
+      data: {
+        ...dto,
+        carId: carId,
+        createdById: userId,
+        fuelDate: new Date(),
+        liters,
+        consumption,
+      },
+    });
+
+    await this.prisma.car.update({
+      where: {
+        id: carId,
+      },
+      data: {
+        currentKm: dto.km,
+      },
+    });
+
+    return newRecord;
   }
 
   update(id: number, updateCarDto: UpdateCarDto) {
@@ -97,8 +213,6 @@ export class CarsService {
   }
 
   async remove(carId: string, userId: string, password: string) {
-
-
     const user = await this.prisma.user.findUnique({ where: { id: userId } });
 
     if (!user) {
@@ -149,10 +263,13 @@ export class CarsService {
     }
   }
 
-    async addNewDocument(dto: CreateDocumentDto, userId: string, carId: string, file?: any) {
+  async addNewDocument(
+    dto: CreateDocumentDto,
+    userId: string,
+    carId: string,
+    file?: any,
+  ) {
     try {
-
-      console.log(file.filename)
       return await this.prisma.document.create({
         data: {
           ...dto,

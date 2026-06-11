@@ -22,6 +22,7 @@ import { UploadedFile } from '@nestjs/common';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { CreateDocumentDto } from './dto/create-document.dto';
+import { CreateFuelDto } from './dto/create-fuel.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('cars')
@@ -139,6 +140,20 @@ export class CarsController {
     @UserId() userId: string,
     @Body() createDocumentDto: CreateDocumentDto,
   ) {
-    return this.carsService.addNewDocument(createDocumentDto, userId, carId, file);
+    return this.carsService.addNewDocument(
+      createDocumentDto,
+      userId,
+      carId,
+      file,
+    );
+  }
+
+  @Post(':id/fuels')
+  saveFuel(
+    @Param('id') id: string,
+    @UserId() userId: string,
+    @Body() createFuelDto: CreateFuelDto,
+  ) {
+    return this.carsService.saveFuel(id, userId, createFuelDto);
   }
 }

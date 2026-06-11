@@ -19,6 +19,16 @@ export const CarRole = {
 export type CarRole = (typeof CarRole)[keyof typeof CarRole]
 
 
+export const FuelType = {
+  PETROL: 'PETROL',
+  DIESEL: 'DIESEL',
+  LPG: 'LPG',
+  ELECTRIC: 'ELECTRIC'
+} as const
+
+export type FuelType = (typeof FuelType)[keyof typeof FuelType]
+
+
 export const ServiceCategory = {
   OIL_CHANGE: 'OIL_CHANGE',
   FILTER_CHANGE: 'FILTER_CHANGE',

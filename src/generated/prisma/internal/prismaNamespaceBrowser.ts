@@ -151,6 +151,7 @@ export const FuelRecordScalarFieldEnum = {
   pricePerLiter: 'pricePerLiter',
   totalAmount: 'totalAmount',
   km: 'km',
+  consumption: 'consumption',
   fuelDate: 'fuelDate',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

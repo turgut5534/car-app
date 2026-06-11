@@ -19,9 +19,9 @@ export class CreateServiceDto {
   @IsNumber()
   amount!: number;
 
-  @IsOptional()
+  @IsNotEmpty()
   @IsInt()
-  km?: number;
+  km!: number;
 
   @IsDateString()
   serviceDate!: string;

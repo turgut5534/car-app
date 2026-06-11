@@ -31,6 +31,7 @@ export type FuelRecordAvgAggregateOutputType = {
   pricePerLiter: runtime.Decimal | null
   totalAmount: runtime.Decimal | null
   km: number | null
+  consumption: runtime.Decimal | null
 }
 
 export type FuelRecordSumAggregateOutputType = {
@@ -38,6 +39,7 @@ export type FuelRecordSumAggregateOutputType = {
   pricePerLiter: runtime.Decimal | null
   totalAmount: runtime.Decimal | null
   km: number | null
+  consumption: runtime.Decimal | null
 }
 
 export type FuelRecordMinAggregateOutputType = {
@@ -50,6 +52,7 @@ export type FuelRecordMinAggregateOutputType = {
   pricePerLiter: runtime.Decimal | null
   totalAmount: runtime.Decimal | null
   km: number | null
+  consumption: runtime.Decimal | null
   fuelDate: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -65,6 +68,7 @@ export type FuelRecordMaxAggregateOutputType = {
   pricePerLiter: runtime.Decimal | null
   totalAmount: runtime.Decimal | null
   km: number | null
+  consumption: runtime.Decimal | null
   fuelDate: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -80,6 +84,7 @@ export type FuelRecordCountAggregateOutputType = {
   pricePerLiter: number
   totalAmount: number
   km: number
+  consumption: number
   fuelDate: number
   createdAt: number
   updatedAt: number
@@ -92,6 +97,7 @@ export type FuelRecordAvgAggregateInputType = {
   pricePerLiter?: true
   totalAmount?: true
   km?: true
+  consumption?: true
 }
 
 export type FuelRecordSumAggregateInputType = {
@@ -99,6 +105,7 @@ export type FuelRecordSumAggregateInputType = {
   pricePerLiter?: true
   totalAmount?: true
   km?: true
+  consumption?: true
 }
 
 export type FuelRecordMinAggregateInputType = {
@@ -111,6 +118,7 @@ export type FuelRecordMinAggregateInputType = {
   pricePerLiter?: true
   totalAmount?: true
   km?: true
+  consumption?: true
   fuelDate?: true
   createdAt?: true
   updatedAt?: true
@@ -126,6 +134,7 @@ export type FuelRecordMaxAggregateInputType = {
   pricePerLiter?: true
   totalAmount?: true
   km?: true
+  consumption?: true
   fuelDate?: true
   createdAt?: true
   updatedAt?: true
@@ -141,6 +150,7 @@ export type FuelRecordCountAggregateInputType = {
   pricePerLiter?: true
   totalAmount?: true
   km?: true
+  consumption?: true
   fuelDate?: true
   createdAt?: true
   updatedAt?: true
@@ -240,9 +250,10 @@ export type FuelRecordGroupByOutputType = {
   fuelCardTransactionId: string | null
   station: string | null
   liters: runtime.Decimal | null
-  pricePerLiter: runtime.Decimal | null
+  pricePerLiter: runtime.Decimal
   totalAmount: runtime.Decimal
-  km: number | null
+  km: number
+  consumption: runtime.Decimal | null
   fuelDate: Date
   createdAt: Date
   updatedAt: Date
@@ -278,9 +289,10 @@ export type FuelRecordWhereInput = {
   fuelCardTransactionId?: Prisma.StringNullableFilter<"FuelRecord"> | string | null
   station?: Prisma.StringNullableFilter<"FuelRecord"> | string | null
   liters?: Prisma.DecimalNullableFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.DecimalNullableFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.IntNullableFilter<"FuelRecord"> | number | null
+  km?: Prisma.IntFilter<"FuelRecord"> | number
+  consumption?: Prisma.DecimalNullableFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
@@ -296,9 +308,10 @@ export type FuelRecordOrderByWithRelationInput = {
   fuelCardTransactionId?: Prisma.SortOrderInput | Prisma.SortOrder
   station?: Prisma.SortOrderInput | Prisma.SortOrder
   liters?: Prisma.SortOrderInput | Prisma.SortOrder
-  pricePerLiter?: Prisma.SortOrderInput | Prisma.SortOrder
+  pricePerLiter?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
-  km?: Prisma.SortOrderInput | Prisma.SortOrder
+  km?: Prisma.SortOrder
+  consumption?: Prisma.SortOrderInput | Prisma.SortOrder
   fuelDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -317,9 +330,10 @@ export type FuelRecordWhereUniqueInput = Prisma.AtLeast<{
   createdById?: Prisma.StringNullableFilter<"FuelRecord"> | string | null
   station?: Prisma.StringNullableFilter<"FuelRecord"> | string | null
   liters?: Prisma.DecimalNullableFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.DecimalNullableFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.IntNullableFilter<"FuelRecord"> | number | null
+  km?: Prisma.IntFilter<"FuelRecord"> | number
+  consumption?: Prisma.DecimalNullableFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
@@ -335,9 +349,10 @@ export type FuelRecordOrderByWithAggregationInput = {
   fuelCardTransactionId?: Prisma.SortOrderInput | Prisma.SortOrder
   station?: Prisma.SortOrderInput | Prisma.SortOrder
   liters?: Prisma.SortOrderInput | Prisma.SortOrder
-  pricePerLiter?: Prisma.SortOrderInput | Prisma.SortOrder
+  pricePerLiter?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
-  km?: Prisma.SortOrderInput | Prisma.SortOrder
+  km?: Prisma.SortOrder
+  consumption?: Prisma.SortOrderInput | Prisma.SortOrder
   fuelDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -358,9 +373,10 @@ export type FuelRecordScalarWhereWithAggregatesInput = {
   fuelCardTransactionId?: Prisma.StringNullableWithAggregatesFilter<"FuelRecord"> | string | null
   station?: Prisma.StringNullableWithAggregatesFilter<"FuelRecord"> | string | null
   liters?: Prisma.DecimalNullableWithAggregatesFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.DecimalNullableWithAggregatesFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalWithAggregatesFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalWithAggregatesFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.IntNullableWithAggregatesFilter<"FuelRecord"> | number | null
+  km?: Prisma.IntWithAggregatesFilter<"FuelRecord"> | number
+  consumption?: Prisma.DecimalNullableWithAggregatesFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeWithAggregatesFilter<"FuelRecord"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"FuelRecord"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"FuelRecord"> | Date | string
@@ -370,9 +386,10 @@ export type FuelRecordCreateInput = {
   id?: string
   station?: string | null
   liters?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  km?: number
+  consumption?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -388,9 +405,10 @@ export type FuelRecordUncheckedCreateInput = {
   fuelCardTransactionId?: string | null
   station?: string | null
   liters?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  km?: number
+  consumption?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -400,9 +418,10 @@ export type FuelRecordUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   station?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liters?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  consumption?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -418,9 +437,10 @@ export type FuelRecordUncheckedUpdateInput = {
   fuelCardTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   station?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liters?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  consumption?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -433,9 +453,10 @@ export type FuelRecordCreateManyInput = {
   fuelCardTransactionId?: string | null
   station?: string | null
   liters?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  km?: number
+  consumption?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -445,9 +466,10 @@ export type FuelRecordUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   station?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liters?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  consumption?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -460,9 +482,10 @@ export type FuelRecordUncheckedUpdateManyInput = {
   fuelCardTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   station?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liters?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  consumption?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -488,6 +511,7 @@ export type FuelRecordCountOrderByAggregateInput = {
   pricePerLiter?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   km?: Prisma.SortOrder
+  consumption?: Prisma.SortOrder
   fuelDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -498,6 +522,7 @@ export type FuelRecordAvgOrderByAggregateInput = {
   pricePerLiter?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   km?: Prisma.SortOrder
+  consumption?: Prisma.SortOrder
 }
 
 export type FuelRecordMaxOrderByAggregateInput = {
@@ -510,6 +535,7 @@ export type FuelRecordMaxOrderByAggregateInput = {
   pricePerLiter?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   km?: Prisma.SortOrder
+  consumption?: Prisma.SortOrder
   fuelDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -525,6 +551,7 @@ export type FuelRecordMinOrderByAggregateInput = {
   pricePerLiter?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   km?: Prisma.SortOrder
+  consumption?: Prisma.SortOrder
   fuelDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -535,6 +562,7 @@ export type FuelRecordSumOrderByAggregateInput = {
   pricePerLiter?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   km?: Prisma.SortOrder
+  consumption?: Prisma.SortOrder
 }
 
 export type FuelRecordNullableScalarRelationFilter = {
@@ -670,9 +698,10 @@ export type FuelRecordCreateWithoutCreatedByInput = {
   id?: string
   station?: string | null
   liters?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  km?: number
+  consumption?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -686,9 +715,10 @@ export type FuelRecordUncheckedCreateWithoutCreatedByInput = {
   fuelCardTransactionId?: string | null
   station?: string | null
   liters?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  km?: number
+  consumption?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -730,9 +760,10 @@ export type FuelRecordScalarWhereInput = {
   fuelCardTransactionId?: Prisma.StringNullableFilter<"FuelRecord"> | string | null
   station?: Prisma.StringNullableFilter<"FuelRecord"> | string | null
   liters?: Prisma.DecimalNullableFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.DecimalNullableFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.IntNullableFilter<"FuelRecord"> | number | null
+  km?: Prisma.IntFilter<"FuelRecord"> | number
+  consumption?: Prisma.DecimalNullableFilter<"FuelRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
@@ -742,9 +773,10 @@ export type FuelRecordCreateWithoutCarInput = {
   id?: string
   station?: string | null
   liters?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  km?: number
+  consumption?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -758,9 +790,10 @@ export type FuelRecordUncheckedCreateWithoutCarInput = {
   fuelCardTransactionId?: string | null
   station?: string | null
   liters?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  km?: number
+  consumption?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -796,9 +829,10 @@ export type FuelRecordCreateWithoutCardTransactionInput = {
   id?: string
   station?: string | null
   liters?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  km?: number
+  consumption?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -812,9 +846,10 @@ export type FuelRecordUncheckedCreateWithoutCardTransactionInput = {
   createdById?: string | null
   station?: string | null
   liters?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  km?: number
+  consumption?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -840,9 +875,10 @@ export type FuelRecordUpdateWithoutCardTransactionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   station?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liters?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  consumption?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -856,9 +892,10 @@ export type FuelRecordUncheckedUpdateWithoutCardTransactionInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   station?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liters?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  consumption?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -870,9 +907,10 @@ export type FuelRecordCreateManyCreatedByInput = {
   fuelCardTransactionId?: string | null
   station?: string | null
   liters?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  km?: number
+  consumption?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -882,9 +920,10 @@ export type FuelRecordUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   station?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liters?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  consumption?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -898,9 +937,10 @@ export type FuelRecordUncheckedUpdateWithoutCreatedByInput = {
   fuelCardTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   station?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liters?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  consumption?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -912,9 +952,10 @@ export type FuelRecordUncheckedUpdateManyWithoutCreatedByInput = {
   fuelCardTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   station?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liters?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  consumption?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -926,9 +967,10 @@ export type FuelRecordCreateManyCarInput = {
   fuelCardTransactionId?: string | null
   station?: string | null
   liters?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  km?: number
+  consumption?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -938,9 +980,10 @@ export type FuelRecordUpdateWithoutCarInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   station?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liters?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  consumption?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -954,9 +997,10 @@ export type FuelRecordUncheckedUpdateWithoutCarInput = {
   fuelCardTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   station?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liters?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  consumption?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -968,9 +1012,10 @@ export type FuelRecordUncheckedUpdateManyWithoutCarInput = {
   fuelCardTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   station?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   liters?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  pricePerLiter?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  consumption?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -988,6 +1033,7 @@ export type FuelRecordSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   pricePerLiter?: boolean
   totalAmount?: boolean
   km?: boolean
+  consumption?: boolean
   fuelDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1006,6 +1052,7 @@ export type FuelRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   pricePerLiter?: boolean
   totalAmount?: boolean
   km?: boolean
+  consumption?: boolean
   fuelDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1024,6 +1071,7 @@ export type FuelRecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   pricePerLiter?: boolean
   totalAmount?: boolean
   km?: boolean
+  consumption?: boolean
   fuelDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1042,12 +1090,13 @@ export type FuelRecordSelectScalar = {
   pricePerLiter?: boolean
   totalAmount?: boolean
   km?: boolean
+  consumption?: boolean
   fuelDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type FuelRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carId" | "createdById" | "fuelCardTransactionId" | "station" | "liters" | "pricePerLiter" | "totalAmount" | "km" | "fuelDate" | "createdAt" | "updatedAt", ExtArgs["result"]["fuelRecord"]>
+export type FuelRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carId" | "createdById" | "fuelCardTransactionId" | "station" | "liters" | "pricePerLiter" | "totalAmount" | "km" | "consumption" | "fuelDate" | "createdAt" | "updatedAt", ExtArgs["result"]["fuelRecord"]>
 export type FuelRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.FuelRecord$createdByArgs<ExtArgs>
@@ -1078,9 +1127,10 @@ export type $FuelRecordPayload<ExtArgs extends runtime.Types.Extensions.Internal
     fuelCardTransactionId: string | null
     station: string | null
     liters: runtime.Decimal | null
-    pricePerLiter: runtime.Decimal | null
+    pricePerLiter: runtime.Decimal
     totalAmount: runtime.Decimal
-    km: number | null
+    km: number
+    consumption: runtime.Decimal | null
     fuelDate: Date
     createdAt: Date
     updatedAt: Date
@@ -1519,6 +1569,7 @@ export interface FuelRecordFieldRefs {
   readonly pricePerLiter: Prisma.FieldRef<"FuelRecord", 'Decimal'>
   readonly totalAmount: Prisma.FieldRef<"FuelRecord", 'Decimal'>
   readonly km: Prisma.FieldRef<"FuelRecord", 'Int'>
+  readonly consumption: Prisma.FieldRef<"FuelRecord", 'Decimal'>
   readonly fuelDate: Prisma.FieldRef<"FuelRecord", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"FuelRecord", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"FuelRecord", 'DateTime'>
