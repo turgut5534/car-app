@@ -55,34 +55,28 @@ async findOne(carId: string, userId: string) {
     where: {
       id: carId,
       ownerId: userId,
-    },
-    include: {
-      owner: true,
-      services: true,
-      fuels: true,
-      expenses: true,
-      documents: true,
-      reminders: true,
-    },
+    }
   });
 
   if (!car) return null;
 
-  const fuelStats = await this.prisma.fuelRecord.aggregate({
-    where: {
-      carId,
-    },
-    _avg: {
-      consumption: true,
-      pricePerLiter: true,
-    }
-  });
+  // const fuelStats = await this.prisma.fuelRecord.aggregate({
+  //   where: {
+  //     carId,
+  //   },
+  //   _avg: {
+  //     consumption: true,
+  //     pricePerLiter: true,
+  //   }
+  // });
 
-  return {
-    ...car,
-    averageFuelConsumption: Number(fuelStats._avg.consumption ?? 0),
-    averageFuelPrice: Number(fuelStats._avg.pricePerLiter ?? 0),
-  };
+  // return {
+  //   ...car,
+  //   averageFuelConsumption: Number(fuelStats._avg.consumption ?? 0),
+  //   averageFuelPrice: Number(fuelStats._avg.pricePerLiter ?? 0),
+  // };
+
+  return car
 }
 
 

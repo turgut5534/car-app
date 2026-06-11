@@ -6,22 +6,23 @@ import { unlink } from 'fs/promises';
 
 @Injectable()
 export class DocumentsService {
-  
   constructor(private readonly prisma: PrismaService) {}
 
-  findAll() {
-    return `This action returns all documents`;
+  async findAll(carId: string) {
+    const documents = await this.prisma.document.findMany({
+      where: {
+        carId,
+      },
+    });
+
+    return documents;
   }
 
-  findOne(id: number) {
+  findOne(id: string, userId: string) {
     return `This action returns a #${id} document`;
   }
 
-  async create(
-    dto: CreateDocumentDto,
-    userId: string,
-    file?: any,
-  ) {
+  async create(dto: CreateDocumentDto, userId: string, file?: any) {
     try {
       return await this.prisma.document.create({
         data: {

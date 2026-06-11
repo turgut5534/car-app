@@ -9,6 +9,7 @@ import {
   UseInterceptors,
   UploadedFile,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { DocumentsService } from './documents.service';
 import { CreateDocumentDto } from './dto/create-document.dto';
@@ -25,13 +26,13 @@ export class DocumentsController {
   constructor(private readonly documentsService: DocumentsService) {}
 
   @Get()
-  findAll() {
-    return this.documentsService.findAll();
+  findAll(@Query('carId') carId: string) {
+    return this.documentsService.findAll(carId);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.documentsService.findOne(+id);
+  findOne(@Param('id') id: string, @UserId() userId: string) {
+    return this.documentsService.findOne(id, userId);
   }
 
   @Post()

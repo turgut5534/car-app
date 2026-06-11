@@ -11,8 +11,14 @@ import { PrismaService } from 'src/prisma.service';
 export class FuelsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  findAll() {
-    return `This action returns all fuels`;
+  async findAll(carId: string) {
+    const fuels = await this.prisma.fuelRecord.findMany({
+      where: {
+        carId,
+      },
+    });
+
+    return fuels;
   }
 
   findOne(id: number) {

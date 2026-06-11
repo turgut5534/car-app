@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { FuelsService } from './fuels.service';
 import { CreateFuelDto } from './dto/create-fuel.dto';
@@ -20,8 +21,8 @@ export class FuelsController {
   constructor(private readonly fuelsService: FuelsService) {}
 
   @Get()
-  findAll() {
-    return this.fuelsService.findAll();
+  findAll(@Query('carId') carId: string) {
+    return this.fuelsService.findAll(carId);
   }
 
   @Get(':id')

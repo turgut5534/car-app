@@ -26,6 +26,7 @@ export class ServicesService {
   }
 
   async findAll(carId: string): Promise<Service[]> {
+    
     const services = await this.prisma.serviceRecord.findMany({
       where: {
         carId,
