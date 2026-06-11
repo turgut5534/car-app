@@ -2,11 +2,12 @@ import { Module } from '@nestjs/common';
 import { FuelsService } from './fuels.service';
 import { FuelsController } from './fuels.controller';
 import { AuthModule } from 'src/auth/auth.module';
+import { PrismaService } from 'src/prisma.service';
 
 @Module({
   imports: [AuthModule],
   controllers: [FuelsController],
-  providers: [FuelsService],
+  providers: [FuelsService, PrismaService],
   exports: [FuelsService],
 })
 export class FuelsModule {}

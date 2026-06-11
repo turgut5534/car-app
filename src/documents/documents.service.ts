@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
+import { PrismaService } from 'src/prisma.service';
+import { unlink } from 'fs/promises';
 
 @Injectable()
 export class DocumentsService {
-  create(createDocumentDto: CreateDocumentDto) {
-    return 'This action adds a new document';
-  }
+  
+  constructor(private readonly prisma: PrismaService) {}
 
   findAll() {
     return `This action returns all documents`;
@@ -14,6 +15,30 @@ export class DocumentsService {
 
   findOne(id: number) {
     return `This action returns a #${id} document`;
+  }
+
+  async create(
+    dto: CreateDocumentDto,
+    userId: string,
+    file?: any,
+  ) {
+    try {
+      return await this.prisma.document.create({
+        data: {
+          ...dto,
+          carId: dto.carId,
+          fileUrl: file ? file.filename : undefined,
+          uploadedById: userId,
+          expiresAt: dto.expiresAt ? new Date(dto.expiresAt) : null,
+        },
+      });
+    } catch (error) {
+      if (file) {
+        await unlink(file.path).catch(() => null);
+      }
+
+      throw error;
+    }
   }
 
   update(id: number, updateDocumentDto: UpdateDocumentDto) {

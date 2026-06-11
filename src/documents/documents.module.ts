@@ -8,5 +8,6 @@ import { PrismaService } from 'src/prisma.service';
   imports: [AuthModule],
   controllers: [DocumentsController],
   providers: [DocumentsService, PrismaService],
+  exports: [DocumentsService]
 })
 export class DocumentsModule {}
