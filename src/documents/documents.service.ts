@@ -13,6 +13,9 @@ export class DocumentsService {
       where: {
         carId,
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
 
     return documents;

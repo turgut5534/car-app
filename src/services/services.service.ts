@@ -40,6 +40,9 @@ export class ServicesService {
       include: {
         createdBy: true,
       },
+      orderBy: {
+        createdAt: 'desc'
+      }
     });
 
     return services;

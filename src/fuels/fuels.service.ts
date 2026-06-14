@@ -16,6 +16,9 @@ export class FuelsService {
       where: {
         carId,
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
 
     return fuels;
