@@ -8,13 +8,17 @@ import { User } from 'src/generated/prisma/client';
 import { PrismaService } from 'src/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
+import { AuthResponse } from './dto/return-user.dto';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly jwt: JwtService,
+  ) {}
 
   async getProfile(id: string): Promise<User> {
-
     const user = await this.prisma.user.findUnique({
       where: { id },
     });
@@ -26,7 +30,7 @@ export class UsersService {
     return user;
   }
 
-  async saveUser(data: CreateUserDto): Promise<User> {
+  async saveUser(data: CreateUserDto): Promise<AuthResponse> {
     try {
       const hashedPassword = await bcrypt.hash(data.password, 12);
 
@@ -42,6 +46,7 @@ export class UsersService {
         }
         throw new ConflictException('Email already exists');
       }
+
       const user = await this.prisma.user.create({
         data: {
           email: data.email,
@@ -49,7 +54,16 @@ export class UsersService {
         },
       });
 
-      return user;
+      const accessToken = await this.jwt.signAsync({
+        sub: user.id,
+        email: user.email,
+      });
+
+      return {
+        user,
+        accessToken,
+      };
+
     } catch (error) {
       if (error.code === 'P2002') {
         throw new BadRequestException('An error occurred');

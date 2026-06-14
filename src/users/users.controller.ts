@@ -6,6 +6,7 @@ import { CreateUserDto } from './dto/create-user.dto/create-user.dto';
 import { JwtAuthGuard } from 'src/middlewares/jwt-guard';
 import { UserId } from 'src/auth/decorators/current-user.decorator';
 import { CheckEmailDto } from '../auth/dto/check-email.dto';
+import { AuthResponse } from './dto/return-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -18,7 +19,7 @@ export class UsersController {
   }
 
   @Post()
-  async saveUser(@Body() dto: CreateUserDto): Promise<User> {
+  async saveUser(@Body() dto: CreateUserDto): Promise<AuthResponse> {
     return this.userService.saveUser(dto);
   }
 }

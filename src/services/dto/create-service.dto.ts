@@ -5,28 +5,34 @@ import {
   IsNumber,
   IsInt,
   IsDateString,
+  IsEnum,
 } from 'class-validator';
+import { ServiceCategory } from 'src/generated/prisma/enums';
 
 export class CreateServiceDto {
   @IsString()
   @IsNotEmpty()
   carId!: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  title!: string;
+  title?: string;
 
   @IsOptional()
   @IsString()
   description?: string;
 
-  @IsNumber()
-  amount!: number;
+  @IsOptional()
+  @IsString()
+  amount?: string;
 
   @IsNotEmpty()
-  @IsInt()
-  km!: number;
+  @IsString()
+  km!: string;
 
   @IsDateString()
   serviceDate!: string;
+
+  @IsEnum(ServiceCategory)
+  category!: ServiceCategory;
 }

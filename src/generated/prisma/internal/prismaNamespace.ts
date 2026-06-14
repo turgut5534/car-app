@@ -388,6 +388,7 @@ export const ModelName = {
   Car: 'Car',
   CarMember: 'CarMember',
   ServiceRecord: 'ServiceRecord',
+  ServiceAttachment: 'ServiceAttachment',
   FuelRecord: 'FuelRecord',
   Expense: 'Expense',
   FuelCard: 'FuelCard',
@@ -409,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "car" | "carMember" | "serviceRecord" | "fuelRecord" | "expense" | "fuelCard" | "fuelCardTransaction" | "document" | "reminder"
+    modelProps: "user" | "car" | "carMember" | "serviceRecord" | "serviceAttachment" | "fuelRecord" | "expense" | "fuelCard" | "fuelCardTransaction" | "document" | "reminder"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -706,6 +707,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ServiceRecordCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ServiceRecordCountAggregateOutputType> | number
+        }
+      }
+    }
+    ServiceAttachment: {
+      payload: Prisma.$ServiceAttachmentPayload<ExtArgs>
+      fields: Prisma.ServiceAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ServiceAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ServiceAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.ServiceAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ServiceAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.ServiceAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.ServiceAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.ServiceAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ServiceAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.ServiceAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAttachmentPayload>
+        }
+        update: {
+          args: Prisma.ServiceAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.ServiceAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ServiceAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ServiceAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.ServiceAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.ServiceAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateServiceAttachment>
+        }
+        groupBy: {
+          args: Prisma.ServiceAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ServiceAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceAttachmentCountAggregateOutputType> | number
         }
       }
     }
@@ -1254,6 +1329,18 @@ export const ServiceRecordScalarFieldEnum = {
 export type ServiceRecordScalarFieldEnum = (typeof ServiceRecordScalarFieldEnum)[keyof typeof ServiceRecordScalarFieldEnum]
 
 
+export const ServiceAttachmentScalarFieldEnum = {
+  id: 'id',
+  serviceRecordId: 'serviceRecordId',
+  url: 'url',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  createdAt: 'createdAt'
+} as const
+
+export type ServiceAttachmentScalarFieldEnum = (typeof ServiceAttachmentScalarFieldEnum)[keyof typeof ServiceAttachmentScalarFieldEnum]
+
+
 export const FuelRecordScalarFieldEnum = {
   id: 'id',
   carId: 'carId',
@@ -1669,6 +1756,7 @@ export type GlobalOmitConfig = {
   car?: Prisma.CarOmit
   carMember?: Prisma.CarMemberOmit
   serviceRecord?: Prisma.ServiceRecordOmit
+  serviceAttachment?: Prisma.ServiceAttachmentOmit
   fuelRecord?: Prisma.FuelRecordOmit
   expense?: Prisma.ExpenseOmit
   fuelCard?: Prisma.FuelCardOmit

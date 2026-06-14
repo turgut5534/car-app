@@ -95,16 +95,18 @@ model ServiceRecord {
   carId       String
   createdById String?
   category    ServiceCategory @default(OTHER)
-  title       String
+  title       String?
   description String?
-  amount      Decimal  @db.Decimal(10, 2)
-  km          Int?
+  amount      Decimal?  @db.Decimal(10, 2) 
+  km          Int
   serviceDate DateTime
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   car         Car   @relation(fields: [carId], references: [id], onDelete: Cascade)
   createdBy   User? @relation(fields: [createdById], references: [id])
+
+  attachments ServiceAttachment[]
 }
 
 enum ServiceCategory {
@@ -120,6 +122,17 @@ enum ServiceCategory {
   INSPECTION
   WASH
   OTHER
+}
+
+model ServiceAttachment {
+  id              String   @id @default(uuid())
+  serviceRecordId String
+  url             String
+  fileName        String?
+  mimeType        String?
+  createdAt       DateTime @default(now())
+
+  serviceRecord   ServiceRecord @relation(fields: [serviceRecordId], references: [id], onDelete: Cascade)
 }
 
 model FuelRecord {

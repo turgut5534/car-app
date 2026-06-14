@@ -38,6 +38,11 @@ export type CarMember = Prisma.CarMemberModel
  */
 export type ServiceRecord = Prisma.ServiceRecordModel
 /**
+ * Model ServiceAttachment
+ * 
+ */
+export type ServiceAttachment = Prisma.ServiceAttachmentModel
+/**
  * Model FuelRecord
  * 
  */

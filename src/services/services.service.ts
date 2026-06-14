@@ -7,6 +7,8 @@ import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
 import { PrismaService } from 'src/prisma.service';
 import { Service } from './entities/service.entity';
+import { Decimal } from '@prisma/client/runtime/client';
+import { unlink } from 'fs/promises';
 
 @Injectable()
 export class ServicesService {
@@ -17,6 +19,11 @@ export class ServicesService {
       where: {
         id,
       },
+      include: {
+        createdBy: true,
+        car: true,
+        attachments: true,
+      },
     });
 
     if (!service) {
@@ -26,17 +33,23 @@ export class ServicesService {
   }
 
   async findAll(carId: string): Promise<Service[]> {
-    
     const services = await this.prisma.serviceRecord.findMany({
       where: {
         carId,
+      },
+      include: {
+        createdBy: true,
       },
     });
 
     return services;
   }
 
-  async create(userId: string, dto: CreateServiceDto) {
+  async create(
+    userId: string,
+    dto: CreateServiceDto,
+    files: Express.Multer.File[],
+  ) {
     const car = await this.prisma.car.findFirst({
       where: {
         id: dto.carId,
@@ -48,33 +61,56 @@ export class ServicesService {
       throw new NotFoundException('Car not found');
     }
 
-    if (dto.km < car.currentKm) {
+    if (Number(dto.km) < car.currentKm) {
       throw new BadRequestException(
         'New mileage must be greater than or equal to current mileage',
       );
     }
 
     return this.prisma.$transaction(async (tx) => {
-      const newService = await tx.serviceRecord.create({
-        data: {
-          carId: dto.carId,
-          title: dto.title,
-          km: dto.km,
-          amount: dto.amount,
-          serviceDate: new Date(dto.serviceDate),
-        },
-      });
+      try {
+        console.log(dto);
+        console.log(files);
+        const newService = await tx.serviceRecord.create({
+          data: {
+            carId: dto.carId,
+            createdById: userId,
+            title: dto.title,
+            description: dto.description,
+            category: dto.category,
+            km: Number(dto.km),
+            amount: dto.amount ? Number(dto.amount) : 0,
+            serviceDate: new Date(dto.serviceDate),
+            attachments: {
+              create: files.map((file) => ({
+                url: file.path,
+                fileName: file.filename,
+                mimeType: file.mimetype,
+              })),
+            },
+          },
+        });
 
-      await tx.car.update({
-        where: {
-          id: dto.carId,
-        },
-        data: {
-          currentKm: dto.km,
-        },
-      });
+        await tx.car.update({
+          where: {
+            id: dto.carId,
+          },
+          data: {
+            currentKm: Number(dto.km),
+          },
+        });
 
-      return newService;
+        return newService;
+      } catch (error) {
+        console.log(error);
+        for (const file of files ?? []) {
+          try {
+            await unlink(file.path);
+          } catch (err) {
+            // ignore delete error
+          }
+        }
+      }
     });
   }
 

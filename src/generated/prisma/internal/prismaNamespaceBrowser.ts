@@ -55,6 +55,7 @@ export const ModelName = {
   Car: 'Car',
   CarMember: 'CarMember',
   ServiceRecord: 'ServiceRecord',
+  ServiceAttachment: 'ServiceAttachment',
   FuelRecord: 'FuelRecord',
   Expense: 'Expense',
   FuelCard: 'FuelCard',
@@ -139,6 +140,18 @@ export const ServiceRecordScalarFieldEnum = {
 } as const
 
 export type ServiceRecordScalarFieldEnum = (typeof ServiceRecordScalarFieldEnum)[keyof typeof ServiceRecordScalarFieldEnum]
+
+
+export const ServiceAttachmentScalarFieldEnum = {
+  id: 'id',
+  serviceRecordId: 'serviceRecordId',
+  url: 'url',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  createdAt: 'createdAt'
+} as const
+
+export type ServiceAttachmentScalarFieldEnum = (typeof ServiceAttachmentScalarFieldEnum)[keyof typeof ServiceAttachmentScalarFieldEnum]
 
 
 export const FuelRecordScalarFieldEnum = {

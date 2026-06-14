@@ -224,10 +224,10 @@ export type ServiceRecordGroupByOutputType = {
   carId: string
   createdById: string | null
   category: $Enums.ServiceCategory
-  title: string
+  title: string | null
   description: string | null
-  amount: runtime.Decimal
-  km: number | null
+  amount: runtime.Decimal | null
+  km: number
   serviceDate: Date
   createdAt: Date
   updatedAt: Date
@@ -261,15 +261,16 @@ export type ServiceRecordWhereInput = {
   carId?: Prisma.StringFilter<"ServiceRecord"> | string
   createdById?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
   category?: Prisma.EnumServiceCategoryFilter<"ServiceRecord"> | $Enums.ServiceCategory
-  title?: Prisma.StringFilter<"ServiceRecord"> | string
+  title?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
   description?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
-  amount?: Prisma.DecimalFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.IntNullableFilter<"ServiceRecord"> | number | null
+  amount?: Prisma.DecimalNullableFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntFilter<"ServiceRecord"> | number
   serviceDate?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   car?: Prisma.XOR<Prisma.CarScalarRelationFilter, Prisma.CarWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  attachments?: Prisma.ServiceAttachmentListRelationFilter
 }
 
 export type ServiceRecordOrderByWithRelationInput = {
@@ -277,15 +278,16 @@ export type ServiceRecordOrderByWithRelationInput = {
   carId?: Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   category?: Prisma.SortOrder
-  title?: Prisma.SortOrder
+  title?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  amount?: Prisma.SortOrder
-  km?: Prisma.SortOrderInput | Prisma.SortOrder
+  amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  km?: Prisma.SortOrder
   serviceDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   car?: Prisma.CarOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
+  attachments?: Prisma.ServiceAttachmentOrderByRelationAggregateInput
 }
 
 export type ServiceRecordWhereUniqueInput = Prisma.AtLeast<{
@@ -296,15 +298,16 @@ export type ServiceRecordWhereUniqueInput = Prisma.AtLeast<{
   carId?: Prisma.StringFilter<"ServiceRecord"> | string
   createdById?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
   category?: Prisma.EnumServiceCategoryFilter<"ServiceRecord"> | $Enums.ServiceCategory
-  title?: Prisma.StringFilter<"ServiceRecord"> | string
+  title?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
   description?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
-  amount?: Prisma.DecimalFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.IntNullableFilter<"ServiceRecord"> | number | null
+  amount?: Prisma.DecimalNullableFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntFilter<"ServiceRecord"> | number
   serviceDate?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   car?: Prisma.XOR<Prisma.CarScalarRelationFilter, Prisma.CarWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  attachments?: Prisma.ServiceAttachmentListRelationFilter
 }, "id">
 
 export type ServiceRecordOrderByWithAggregationInput = {
@@ -312,10 +315,10 @@ export type ServiceRecordOrderByWithAggregationInput = {
   carId?: Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   category?: Prisma.SortOrder
-  title?: Prisma.SortOrder
+  title?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  amount?: Prisma.SortOrder
-  km?: Prisma.SortOrderInput | Prisma.SortOrder
+  amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  km?: Prisma.SortOrder
   serviceDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -334,10 +337,10 @@ export type ServiceRecordScalarWhereWithAggregatesInput = {
   carId?: Prisma.StringWithAggregatesFilter<"ServiceRecord"> | string
   createdById?: Prisma.StringNullableWithAggregatesFilter<"ServiceRecord"> | string | null
   category?: Prisma.EnumServiceCategoryWithAggregatesFilter<"ServiceRecord"> | $Enums.ServiceCategory
-  title?: Prisma.StringWithAggregatesFilter<"ServiceRecord"> | string
+  title?: Prisma.StringNullableWithAggregatesFilter<"ServiceRecord"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"ServiceRecord"> | string | null
-  amount?: Prisma.DecimalWithAggregatesFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.IntNullableWithAggregatesFilter<"ServiceRecord"> | number | null
+  amount?: Prisma.DecimalNullableWithAggregatesFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntWithAggregatesFilter<"ServiceRecord"> | number
   serviceDate?: Prisma.DateTimeWithAggregatesFilter<"ServiceRecord"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ServiceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ServiceRecord"> | Date | string
@@ -346,15 +349,16 @@ export type ServiceRecordScalarWhereWithAggregatesInput = {
 export type ServiceRecordCreateInput = {
   id?: string
   category?: $Enums.ServiceCategory
-  title: string
+  title?: string | null
   description?: string | null
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km: number
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   car: Prisma.CarCreateNestedOneWithoutServicesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedServicesInput
+  attachments?: Prisma.ServiceAttachmentCreateNestedManyWithoutServiceRecordInput
 }
 
 export type ServiceRecordUncheckedCreateInput = {
@@ -362,27 +366,29 @@ export type ServiceRecordUncheckedCreateInput = {
   carId: string
   createdById?: string | null
   category?: $Enums.ServiceCategory
-  title: string
+  title?: string | null
   description?: string | null
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km: number
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  attachments?: Prisma.ServiceAttachmentUncheckedCreateNestedManyWithoutServiceRecordInput
 }
 
 export type ServiceRecordUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   car?: Prisma.CarUpdateOneRequiredWithoutServicesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedServicesNestedInput
+  attachments?: Prisma.ServiceAttachmentUpdateManyWithoutServiceRecordNestedInput
 }
 
 export type ServiceRecordUncheckedUpdateInput = {
@@ -390,13 +396,14 @@ export type ServiceRecordUncheckedUpdateInput = {
   carId?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.ServiceAttachmentUncheckedUpdateManyWithoutServiceRecordNestedInput
 }
 
 export type ServiceRecordCreateManyInput = {
@@ -404,10 +411,10 @@ export type ServiceRecordCreateManyInput = {
   carId: string
   createdById?: string | null
   category?: $Enums.ServiceCategory
-  title: string
+  title?: string | null
   description?: string | null
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km: number
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -416,10 +423,10 @@ export type ServiceRecordCreateManyInput = {
 export type ServiceRecordUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -430,10 +437,10 @@ export type ServiceRecordUncheckedUpdateManyInput = {
   carId?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -499,6 +506,11 @@ export type ServiceRecordMinOrderByAggregateInput = {
 export type ServiceRecordSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
   km?: Prisma.SortOrder
+}
+
+export type ServiceRecordScalarRelationFilter = {
+  is?: Prisma.ServiceRecordWhereInput
+  isNot?: Prisma.ServiceRecordWhereInput
 }
 
 export type ServiceRecordCreateNestedManyWithoutCreatedByInput = {
@@ -589,38 +601,54 @@ export type EnumServiceCategoryFieldUpdateOperationsInput = {
   set?: $Enums.ServiceCategory
 }
 
-export type DecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
   decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
   multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type ServiceRecordCreateNestedOneWithoutAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.ServiceRecordCreateWithoutAttachmentsInput, Prisma.ServiceRecordUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.ServiceRecordCreateOrConnectWithoutAttachmentsInput
+  connect?: Prisma.ServiceRecordWhereUniqueInput
+}
+
+export type ServiceRecordUpdateOneRequiredWithoutAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.ServiceRecordCreateWithoutAttachmentsInput, Prisma.ServiceRecordUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.ServiceRecordCreateOrConnectWithoutAttachmentsInput
+  upsert?: Prisma.ServiceRecordUpsertWithoutAttachmentsInput
+  connect?: Prisma.ServiceRecordWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ServiceRecordUpdateToOneWithWhereWithoutAttachmentsInput, Prisma.ServiceRecordUpdateWithoutAttachmentsInput>, Prisma.ServiceRecordUncheckedUpdateWithoutAttachmentsInput>
+}
+
 export type ServiceRecordCreateWithoutCreatedByInput = {
   id?: string
   category?: $Enums.ServiceCategory
-  title: string
+  title?: string | null
   description?: string | null
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km: number
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   car: Prisma.CarCreateNestedOneWithoutServicesInput
+  attachments?: Prisma.ServiceAttachmentCreateNestedManyWithoutServiceRecordInput
 }
 
 export type ServiceRecordUncheckedCreateWithoutCreatedByInput = {
   id?: string
   carId: string
   category?: $Enums.ServiceCategory
-  title: string
+  title?: string | null
   description?: string | null
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km: number
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  attachments?: Prisma.ServiceAttachmentUncheckedCreateNestedManyWithoutServiceRecordInput
 }
 
 export type ServiceRecordCreateOrConnectWithoutCreatedByInput = {
@@ -657,10 +685,10 @@ export type ServiceRecordScalarWhereInput = {
   carId?: Prisma.StringFilter<"ServiceRecord"> | string
   createdById?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
   category?: Prisma.EnumServiceCategoryFilter<"ServiceRecord"> | $Enums.ServiceCategory
-  title?: Prisma.StringFilter<"ServiceRecord"> | string
+  title?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
   description?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
-  amount?: Prisma.DecimalFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.IntNullableFilter<"ServiceRecord"> | number | null
+  amount?: Prisma.DecimalNullableFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntFilter<"ServiceRecord"> | number
   serviceDate?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
@@ -669,27 +697,29 @@ export type ServiceRecordScalarWhereInput = {
 export type ServiceRecordCreateWithoutCarInput = {
   id?: string
   category?: $Enums.ServiceCategory
-  title: string
+  title?: string | null
   description?: string | null
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km: number
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedServicesInput
+  attachments?: Prisma.ServiceAttachmentCreateNestedManyWithoutServiceRecordInput
 }
 
 export type ServiceRecordUncheckedCreateWithoutCarInput = {
   id?: string
   createdById?: string | null
   category?: $Enums.ServiceCategory
-  title: string
+  title?: string | null
   description?: string | null
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km: number
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  attachments?: Prisma.ServiceAttachmentUncheckedCreateNestedManyWithoutServiceRecordInput
 }
 
 export type ServiceRecordCreateOrConnectWithoutCarInput = {
@@ -718,14 +748,86 @@ export type ServiceRecordUpdateManyWithWhereWithoutCarInput = {
   data: Prisma.XOR<Prisma.ServiceRecordUpdateManyMutationInput, Prisma.ServiceRecordUncheckedUpdateManyWithoutCarInput>
 }
 
+export type ServiceRecordCreateWithoutAttachmentsInput = {
+  id?: string
+  category?: $Enums.ServiceCategory
+  title?: string | null
+  description?: string | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km: number
+  serviceDate: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  car: Prisma.CarCreateNestedOneWithoutServicesInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedServicesInput
+}
+
+export type ServiceRecordUncheckedCreateWithoutAttachmentsInput = {
+  id?: string
+  carId: string
+  createdById?: string | null
+  category?: $Enums.ServiceCategory
+  title?: string | null
+  description?: string | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km: number
+  serviceDate: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ServiceRecordCreateOrConnectWithoutAttachmentsInput = {
+  where: Prisma.ServiceRecordWhereUniqueInput
+  create: Prisma.XOR<Prisma.ServiceRecordCreateWithoutAttachmentsInput, Prisma.ServiceRecordUncheckedCreateWithoutAttachmentsInput>
+}
+
+export type ServiceRecordUpsertWithoutAttachmentsInput = {
+  update: Prisma.XOR<Prisma.ServiceRecordUpdateWithoutAttachmentsInput, Prisma.ServiceRecordUncheckedUpdateWithoutAttachmentsInput>
+  create: Prisma.XOR<Prisma.ServiceRecordCreateWithoutAttachmentsInput, Prisma.ServiceRecordUncheckedCreateWithoutAttachmentsInput>
+  where?: Prisma.ServiceRecordWhereInput
+}
+
+export type ServiceRecordUpdateToOneWithWhereWithoutAttachmentsInput = {
+  where?: Prisma.ServiceRecordWhereInput
+  data: Prisma.XOR<Prisma.ServiceRecordUpdateWithoutAttachmentsInput, Prisma.ServiceRecordUncheckedUpdateWithoutAttachmentsInput>
+}
+
+export type ServiceRecordUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  car?: Prisma.CarUpdateOneRequiredWithoutServicesNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedServicesNestedInput
+}
+
+export type ServiceRecordUncheckedUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  carId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type ServiceRecordCreateManyCreatedByInput = {
   id?: string
   carId: string
   category?: $Enums.ServiceCategory
-  title: string
+  title?: string | null
   description?: string | null
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km: number
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -734,37 +836,39 @@ export type ServiceRecordCreateManyCreatedByInput = {
 export type ServiceRecordUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   car?: Prisma.CarUpdateOneRequiredWithoutServicesNestedInput
+  attachments?: Prisma.ServiceAttachmentUpdateManyWithoutServiceRecordNestedInput
 }
 
 export type ServiceRecordUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   carId?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.ServiceAttachmentUncheckedUpdateManyWithoutServiceRecordNestedInput
 }
 
 export type ServiceRecordUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   carId?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -774,10 +878,10 @@ export type ServiceRecordCreateManyCarInput = {
   id?: string
   createdById?: string | null
   category?: $Enums.ServiceCategory
-  title: string
+  title?: string | null
   description?: string | null
-  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: number | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km: number
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -786,42 +890,73 @@ export type ServiceRecordCreateManyCarInput = {
 export type ServiceRecordUpdateWithoutCarInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserUpdateOneWithoutCreatedServicesNestedInput
+  attachments?: Prisma.ServiceAttachmentUpdateManyWithoutServiceRecordNestedInput
 }
 
 export type ServiceRecordUncheckedUpdateWithoutCarInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.ServiceAttachmentUncheckedUpdateManyWithoutServiceRecordNestedInput
 }
 
 export type ServiceRecordUncheckedUpdateManyWithoutCarInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
-  title?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  km?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  km?: Prisma.IntFieldUpdateOperationsInput | number
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type ServiceRecordCountOutputType
+ */
+
+export type ServiceRecordCountOutputType = {
+  attachments: number
+}
+
+export type ServiceRecordCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  attachments?: boolean | ServiceRecordCountOutputTypeCountAttachmentsArgs
+}
+
+/**
+ * ServiceRecordCountOutputType without action
+ */
+export type ServiceRecordCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ServiceRecordCountOutputType
+   */
+  select?: Prisma.ServiceRecordCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ServiceRecordCountOutputType without action
+ */
+export type ServiceRecordCountOutputTypeCountAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ServiceAttachmentWhereInput
+}
 
 
 export type ServiceRecordSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -838,6 +973,8 @@ export type ServiceRecordSelect<ExtArgs extends runtime.Types.Extensions.Interna
   updatedAt?: boolean
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.ServiceRecord$createdByArgs<ExtArgs>
+  attachments?: boolean | Prisma.ServiceRecord$attachmentsArgs<ExtArgs>
+  _count?: boolean | Prisma.ServiceRecordCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["serviceRecord"]>
 
 export type ServiceRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -890,6 +1027,8 @@ export type ServiceRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalA
 export type ServiceRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.ServiceRecord$createdByArgs<ExtArgs>
+  attachments?: boolean | Prisma.ServiceRecord$attachmentsArgs<ExtArgs>
+  _count?: boolean | Prisma.ServiceRecordCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ServiceRecordIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
@@ -905,16 +1044,17 @@ export type $ServiceRecordPayload<ExtArgs extends runtime.Types.Extensions.Inter
   objects: {
     car: Prisma.$CarPayload<ExtArgs>
     createdBy: Prisma.$UserPayload<ExtArgs> | null
+    attachments: Prisma.$ServiceAttachmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     carId: string
     createdById: string | null
     category: $Enums.ServiceCategory
-    title: string
+    title: string | null
     description: string | null
-    amount: runtime.Decimal
-    km: number | null
+    amount: runtime.Decimal | null
+    km: number
     serviceDate: Date
     createdAt: Date
     updatedAt: Date
@@ -1314,6 +1454,7 @@ export interface Prisma__ServiceRecordClient<T, Null = never, ExtArgs extends ru
   readonly [Symbol.toStringTag]: "PrismaPromise"
   car<T extends Prisma.CarDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarDefaultArgs<ExtArgs>>): Prisma.Prisma__CarClient<runtime.Types.Result.GetResult<Prisma.$CarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.ServiceRecord$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ServiceRecord$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  attachments<T extends Prisma.ServiceRecord$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ServiceRecord$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1771,6 +1912,30 @@ export type ServiceRecord$createdByArgs<ExtArgs extends runtime.Types.Extensions
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
+}
+
+/**
+ * ServiceRecord.attachments
+ */
+export type ServiceRecord$attachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ServiceAttachment
+   */
+  select?: Prisma.ServiceAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ServiceAttachment
+   */
+  omit?: Prisma.ServiceAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ServiceAttachmentInclude<ExtArgs> | null
+  where?: Prisma.ServiceAttachmentWhereInput
+  orderBy?: Prisma.ServiceAttachmentOrderByWithRelationInput | Prisma.ServiceAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.ServiceAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ServiceAttachmentScalarFieldEnum | Prisma.ServiceAttachmentScalarFieldEnum[]
 }
 
 /**
