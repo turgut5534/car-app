@@ -39,7 +39,12 @@ export class ServicesService {
         carId,
       },
       include: {
-        createdBy: true,
+        createdBy: {
+          select: {
+            currency: true
+          }
+        },
+        car: true
       },
       orderBy: {
         createdAt: 'desc',

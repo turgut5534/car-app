@@ -16,12 +16,33 @@ export class FuelsService {
       where: {
         carId,
       },
+      include: {
+        createdBy: {
+          select: {
+            currency: true,
+          },
+        },
+      },
       orderBy: {
         createdAt: 'desc',
       },
     });
 
-    return fuels;
+    const fuelStats = await this.prisma.fuelRecord.aggregate({
+      where: {
+        carId,
+      },
+      _avg: {
+        consumption: true,
+        pricePerLiter: true,
+      },
+    });
+
+    return {
+      fuels,
+      averageFuelConsumption: Number(fuelStats._avg.consumption ?? 0),
+      averageFuelPrice: Number(fuelStats._avg.pricePerLiter ?? 0),
+    };
   }
 
   findOne(id: number) {
@@ -46,7 +67,7 @@ export class FuelsService {
 
     const mileage = car.currentKm;
 
-    if (Number(dto.km)  <= mileage) {
+    if (Number(dto.km) <= mileage) {
       throw new BadRequestException(
         'New milaage must be greater than current mileage',
       );
@@ -69,7 +90,7 @@ export class FuelsService {
     if (!previousRecord) {
       kmDif = Number(dto.km) - car.currentKm;
     } else {
-      kmDif = Number(dto.km)  - previousRecord.km;
+      kmDif = Number(dto.km) - previousRecord.km;
     }
 
     consumption = (liters * 100) / kmDif;
@@ -83,6 +104,7 @@ export class FuelsService {
           pricePerLiter: Number(dto.pricePerLiter),
           liters,
           consumption,
+          km: Number(dto.km),
           totalAmount: Number(dto.totalAmount),
           attachments: {
             create: files.map((file) => ({
