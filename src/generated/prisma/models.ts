@@ -10,10 +10,12 @@
  */
 export type * from './models/User.js'
 export type * from './models/Car.js'
+export type * from './models/CarPhotos.js'
 export type * from './models/CarMember.js'
 export type * from './models/ServiceRecord.js'
 export type * from './models/ServiceAttachment.js'
 export type * from './models/FuelRecord.js'
+export type * from './models/FuelAttachment.js'
 export type * from './models/Expense.js'
 export type * from './models/FuelCard.js'
 export type * from './models/FuelCardTransaction.js'

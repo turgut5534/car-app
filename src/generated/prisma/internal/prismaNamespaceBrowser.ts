@@ -53,10 +53,12 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Car: 'Car',
+  CarPhotos: 'CarPhotos',
   CarMember: 'CarMember',
   ServiceRecord: 'ServiceRecord',
   ServiceAttachment: 'ServiceAttachment',
   FuelRecord: 'FuelRecord',
+  FuelAttachment: 'FuelAttachment',
   Expense: 'Expense',
   FuelCard: 'FuelCard',
   FuelCardTransaction: 'FuelCardTransaction',
@@ -112,6 +114,18 @@ export const CarScalarFieldEnum = {
 } as const
 
 export type CarScalarFieldEnum = (typeof CarScalarFieldEnum)[keyof typeof CarScalarFieldEnum]
+
+
+export const CarPhotosScalarFieldEnum = {
+  id: 'id',
+  carId: 'carId',
+  url: 'url',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  createdAt: 'createdAt'
+} as const
+
+export type CarPhotosScalarFieldEnum = (typeof CarPhotosScalarFieldEnum)[keyof typeof CarPhotosScalarFieldEnum]
 
 
 export const CarMemberScalarFieldEnum = {
@@ -171,6 +185,18 @@ export const FuelRecordScalarFieldEnum = {
 } as const
 
 export type FuelRecordScalarFieldEnum = (typeof FuelRecordScalarFieldEnum)[keyof typeof FuelRecordScalarFieldEnum]
+
+
+export const FuelAttachmentScalarFieldEnum = {
+  id: 'id',
+  fuelRecordId: 'fuelRecordId',
+  url: 'url',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  createdAt: 'createdAt'
+} as const
+
+export type FuelAttachmentScalarFieldEnum = (typeof FuelAttachmentScalarFieldEnum)[keyof typeof FuelAttachmentScalarFieldEnum]
 
 
 export const ExpenseScalarFieldEnum = {

@@ -28,7 +28,11 @@ export class FuelsService {
     return `This action returns a #${id} fuel`;
   }
 
-  async create(userId: string, dto: CreateFuelDto) {
+  async create(
+    userId: string,
+    dto: CreateFuelDto,
+    files: Express.Multer.File[],
+  ) {
     const car = await this.prisma.car.findFirst({
       where: {
         id: dto.carId,
@@ -42,13 +46,13 @@ export class FuelsService {
 
     const mileage = car.currentKm;
 
-    if (dto.km <= mileage) {
+    if (Number(dto.km)  <= mileage) {
       throw new BadRequestException(
         'New milaage must be greater than current mileage',
       );
     }
 
-    const liters = dto.totalAmount / dto.pricePerLiter;
+    const liters: number = Number(dto.totalAmount) / Number(dto.pricePerLiter);
 
     const previousRecord = await this.prisma.fuelRecord.findFirst({
       where: {
@@ -63,9 +67,9 @@ export class FuelsService {
     let kmDif: number;
 
     if (!previousRecord) {
-      kmDif = dto.km - car.currentKm;
+      kmDif = Number(dto.km) - car.currentKm;
     } else {
-      kmDif = dto.km - previousRecord.km;
+      kmDif = Number(dto.km)  - previousRecord.km;
     }
 
     consumption = (liters * 100) / kmDif;
@@ -73,12 +77,20 @@ export class FuelsService {
     return this.prisma.$transaction(async (tx) => {
       const newRecord = await tx.fuelRecord.create({
         data: {
-          ...dto,
           carId: dto.carId,
           createdById: userId,
           fuelDate: new Date(),
+          pricePerLiter: Number(dto.pricePerLiter),
           liters,
           consumption,
+          totalAmount: Number(dto.totalAmount),
+          attachments: {
+            create: files.map((file) => ({
+              url: file.path,
+              fileName: file.filename,
+              mimeType: file.mimetype,
+            })),
+          },
         },
       });
 
@@ -87,7 +99,7 @@ export class FuelsService {
           id: dto.carId,
         },
         data: {
-          currentKm: dto.km,
+          currentKm: Number(dto.km),
         },
       });
 

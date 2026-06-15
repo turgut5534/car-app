@@ -55,6 +55,9 @@ async findOne(carId: string, userId: string) {
     where: {
       id: carId,
       ownerId: userId,
+    },
+    include: {
+      
     }
   });
 

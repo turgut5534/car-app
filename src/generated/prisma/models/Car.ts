@@ -276,6 +276,7 @@ export type CarWhereInput = {
   documents?: Prisma.DocumentListRelationFilter
   reminders?: Prisma.ReminderListRelationFilter
   cardTransactions?: Prisma.FuelCardTransactionListRelationFilter
+  photos?: Prisma.CarPhotosListRelationFilter
 }
 
 export type CarOrderByWithRelationInput = {
@@ -298,6 +299,7 @@ export type CarOrderByWithRelationInput = {
   documents?: Prisma.DocumentOrderByRelationAggregateInput
   reminders?: Prisma.ReminderOrderByRelationAggregateInput
   cardTransactions?: Prisma.FuelCardTransactionOrderByRelationAggregateInput
+  photos?: Prisma.CarPhotosOrderByRelationAggregateInput
 }
 
 export type CarWhereUniqueInput = Prisma.AtLeast<{
@@ -323,6 +325,7 @@ export type CarWhereUniqueInput = Prisma.AtLeast<{
   documents?: Prisma.DocumentListRelationFilter
   reminders?: Prisma.ReminderListRelationFilter
   cardTransactions?: Prisma.FuelCardTransactionListRelationFilter
+  photos?: Prisma.CarPhotosListRelationFilter
 }, "id">
 
 export type CarOrderByWithAggregationInput = {
@@ -380,6 +383,7 @@ export type CarCreateInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateInput = {
@@ -401,6 +405,7 @@ export type CarUncheckedCreateInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarUpdateInput = {
@@ -422,6 +427,7 @@ export type CarUpdateInput = {
   documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateInput = {
@@ -443,6 +449,7 @@ export type CarUncheckedUpdateInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateManyInput = {
@@ -620,6 +627,20 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type CarCreateNestedOneWithoutPhotosInput = {
+  create?: Prisma.XOR<Prisma.CarCreateWithoutPhotosInput, Prisma.CarUncheckedCreateWithoutPhotosInput>
+  connectOrCreate?: Prisma.CarCreateOrConnectWithoutPhotosInput
+  connect?: Prisma.CarWhereUniqueInput
+}
+
+export type CarUpdateOneRequiredWithoutPhotosNestedInput = {
+  create?: Prisma.XOR<Prisma.CarCreateWithoutPhotosInput, Prisma.CarUncheckedCreateWithoutPhotosInput>
+  connectOrCreate?: Prisma.CarCreateOrConnectWithoutPhotosInput
+  upsert?: Prisma.CarUpsertWithoutPhotosInput
+  connect?: Prisma.CarWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CarUpdateToOneWithWhereWithoutPhotosInput, Prisma.CarUpdateWithoutPhotosInput>, Prisma.CarUncheckedUpdateWithoutPhotosInput>
+}
+
 export type CarCreateNestedOneWithoutMembersInput = {
   create?: Prisma.XOR<Prisma.CarCreateWithoutMembersInput, Prisma.CarUncheckedCreateWithoutMembersInput>
   connectOrCreate?: Prisma.CarCreateOrConnectWithoutMembersInput
@@ -740,6 +761,7 @@ export type CarCreateWithoutOwnerInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutOwnerInput = {
@@ -760,6 +782,7 @@ export type CarUncheckedCreateWithoutOwnerInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutOwnerInput = {
@@ -805,6 +828,106 @@ export type CarScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Car"> | Date | string
 }
 
+export type CarCreateWithoutPhotosInput = {
+  id?: string
+  plate?: string | null
+  brand?: string | null
+  model?: string | null
+  year?: number | null
+  fuelType?: $Enums.FuelType
+  currentKm?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutOwnedCarsInput
+  members?: Prisma.CarMemberCreateNestedManyWithoutCarInput
+  services?: Prisma.ServiceRecordCreateNestedManyWithoutCarInput
+  fuels?: Prisma.FuelRecordCreateNestedManyWithoutCarInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCarInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
+  cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
+}
+
+export type CarUncheckedCreateWithoutPhotosInput = {
+  id?: string
+  ownerId: string
+  plate?: string | null
+  brand?: string | null
+  model?: string | null
+  year?: number | null
+  fuelType?: $Enums.FuelType
+  currentKm?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.CarMemberUncheckedCreateNestedManyWithoutCarInput
+  services?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutCarInput
+  fuels?: Prisma.FuelRecordUncheckedCreateNestedManyWithoutCarInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCarInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
+  cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
+}
+
+export type CarCreateOrConnectWithoutPhotosInput = {
+  where: Prisma.CarWhereUniqueInput
+  create: Prisma.XOR<Prisma.CarCreateWithoutPhotosInput, Prisma.CarUncheckedCreateWithoutPhotosInput>
+}
+
+export type CarUpsertWithoutPhotosInput = {
+  update: Prisma.XOR<Prisma.CarUpdateWithoutPhotosInput, Prisma.CarUncheckedUpdateWithoutPhotosInput>
+  create: Prisma.XOR<Prisma.CarCreateWithoutPhotosInput, Prisma.CarUncheckedCreateWithoutPhotosInput>
+  where?: Prisma.CarWhereInput
+}
+
+export type CarUpdateToOneWithWhereWithoutPhotosInput = {
+  where?: Prisma.CarWhereInput
+  data: Prisma.XOR<Prisma.CarUpdateWithoutPhotosInput, Prisma.CarUncheckedUpdateWithoutPhotosInput>
+}
+
+export type CarUpdateWithoutPhotosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fuelType?: Prisma.EnumFuelTypeFieldUpdateOperationsInput | $Enums.FuelType
+  currentKm?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedCarsNestedInput
+  members?: Prisma.CarMemberUpdateManyWithoutCarNestedInput
+  services?: Prisma.ServiceRecordUpdateManyWithoutCarNestedInput
+  fuels?: Prisma.FuelRecordUpdateManyWithoutCarNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCarNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
+  cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
+}
+
+export type CarUncheckedUpdateWithoutPhotosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fuelType?: Prisma.EnumFuelTypeFieldUpdateOperationsInput | $Enums.FuelType
+  currentKm?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.CarMemberUncheckedUpdateManyWithoutCarNestedInput
+  services?: Prisma.ServiceRecordUncheckedUpdateManyWithoutCarNestedInput
+  fuels?: Prisma.FuelRecordUncheckedUpdateManyWithoutCarNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCarNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
+  cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
+}
+
 export type CarCreateWithoutMembersInput = {
   id?: string
   plate?: string | null
@@ -823,6 +946,7 @@ export type CarCreateWithoutMembersInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutMembersInput = {
@@ -843,6 +967,7 @@ export type CarUncheckedCreateWithoutMembersInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutMembersInput = {
@@ -879,6 +1004,7 @@ export type CarUpdateWithoutMembersInput = {
   documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutMembersInput = {
@@ -899,6 +1025,7 @@ export type CarUncheckedUpdateWithoutMembersInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateWithoutServicesInput = {
@@ -919,6 +1046,7 @@ export type CarCreateWithoutServicesInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutServicesInput = {
@@ -939,6 +1067,7 @@ export type CarUncheckedCreateWithoutServicesInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutServicesInput = {
@@ -975,6 +1104,7 @@ export type CarUpdateWithoutServicesInput = {
   documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutServicesInput = {
@@ -995,6 +1125,7 @@ export type CarUncheckedUpdateWithoutServicesInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateWithoutFuelsInput = {
@@ -1015,6 +1146,7 @@ export type CarCreateWithoutFuelsInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutFuelsInput = {
@@ -1035,6 +1167,7 @@ export type CarUncheckedCreateWithoutFuelsInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutFuelsInput = {
@@ -1071,6 +1204,7 @@ export type CarUpdateWithoutFuelsInput = {
   documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutFuelsInput = {
@@ -1091,6 +1225,7 @@ export type CarUncheckedUpdateWithoutFuelsInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateWithoutExpensesInput = {
@@ -1111,6 +1246,7 @@ export type CarCreateWithoutExpensesInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutExpensesInput = {
@@ -1131,6 +1267,7 @@ export type CarUncheckedCreateWithoutExpensesInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutExpensesInput = {
@@ -1167,6 +1304,7 @@ export type CarUpdateWithoutExpensesInput = {
   documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutExpensesInput = {
@@ -1187,6 +1325,7 @@ export type CarUncheckedUpdateWithoutExpensesInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateWithoutCardTransactionsInput = {
@@ -1207,6 +1346,7 @@ export type CarCreateWithoutCardTransactionsInput = {
   expenses?: Prisma.ExpenseCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutCardTransactionsInput = {
@@ -1227,6 +1367,7 @@ export type CarUncheckedCreateWithoutCardTransactionsInput = {
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutCardTransactionsInput = {
@@ -1263,6 +1404,7 @@ export type CarUpdateWithoutCardTransactionsInput = {
   expenses?: Prisma.ExpenseUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutCardTransactionsInput = {
@@ -1283,6 +1425,7 @@ export type CarUncheckedUpdateWithoutCardTransactionsInput = {
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateWithoutDocumentsInput = {
@@ -1303,6 +1446,7 @@ export type CarCreateWithoutDocumentsInput = {
   expenses?: Prisma.ExpenseCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutDocumentsInput = {
@@ -1323,6 +1467,7 @@ export type CarUncheckedCreateWithoutDocumentsInput = {
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutDocumentsInput = {
@@ -1359,6 +1504,7 @@ export type CarUpdateWithoutDocumentsInput = {
   expenses?: Prisma.ExpenseUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutDocumentsInput = {
@@ -1379,6 +1525,7 @@ export type CarUncheckedUpdateWithoutDocumentsInput = {
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateWithoutRemindersInput = {
@@ -1399,6 +1546,7 @@ export type CarCreateWithoutRemindersInput = {
   expenses?: Prisma.ExpenseCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutRemindersInput = {
@@ -1419,6 +1567,7 @@ export type CarUncheckedCreateWithoutRemindersInput = {
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutRemindersInput = {
@@ -1455,6 +1604,7 @@ export type CarUpdateWithoutRemindersInput = {
   expenses?: Prisma.ExpenseUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutRemindersInput = {
@@ -1475,6 +1625,7 @@ export type CarUncheckedUpdateWithoutRemindersInput = {
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateManyOwnerInput = {
@@ -1508,6 +1659,7 @@ export type CarUpdateWithoutOwnerInput = {
   documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutOwnerInput = {
@@ -1528,6 +1680,7 @@ export type CarUncheckedUpdateWithoutOwnerInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateManyWithoutOwnerInput = {
@@ -1556,6 +1709,7 @@ export type CarCountOutputType = {
   documents: number
   reminders: number
   cardTransactions: number
+  photos: number
 }
 
 export type CarCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1566,6 +1720,7 @@ export type CarCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.In
   documents?: boolean | CarCountOutputTypeCountDocumentsArgs
   reminders?: boolean | CarCountOutputTypeCountRemindersArgs
   cardTransactions?: boolean | CarCountOutputTypeCountCardTransactionsArgs
+  photos?: boolean | CarCountOutputTypeCountPhotosArgs
 }
 
 /**
@@ -1627,6 +1782,13 @@ export type CarCountOutputTypeCountCardTransactionsArgs<ExtArgs extends runtime.
   where?: Prisma.FuelCardTransactionWhereInput
 }
 
+/**
+ * CarCountOutputType without action
+ */
+export type CarCountOutputTypeCountPhotosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CarPhotosWhereInput
+}
+
 
 export type CarSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1648,6 +1810,7 @@ export type CarSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   documents?: boolean | Prisma.Car$documentsArgs<ExtArgs>
   reminders?: boolean | Prisma.Car$remindersArgs<ExtArgs>
   cardTransactions?: boolean | Prisma.Car$cardTransactionsArgs<ExtArgs>
+  photos?: boolean | Prisma.Car$photosArgs<ExtArgs>
   _count?: boolean | Prisma.CarCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["car"]>
 
@@ -1705,6 +1868,7 @@ export type CarInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   documents?: boolean | Prisma.Car$documentsArgs<ExtArgs>
   reminders?: boolean | Prisma.Car$remindersArgs<ExtArgs>
   cardTransactions?: boolean | Prisma.Car$cardTransactionsArgs<ExtArgs>
+  photos?: boolean | Prisma.Car$photosArgs<ExtArgs>
   _count?: boolean | Prisma.CarCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CarIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1725,6 +1889,7 @@ export type $CarPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     documents: Prisma.$DocumentPayload<ExtArgs>[]
     reminders: Prisma.$ReminderPayload<ExtArgs>[]
     cardTransactions: Prisma.$FuelCardTransactionPayload<ExtArgs>[]
+    photos: Prisma.$CarPhotosPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2140,6 +2305,7 @@ export interface Prisma__CarClient<T, Null = never, ExtArgs extends runtime.Type
   documents<T extends Prisma.Car$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reminders<T extends Prisma.Car$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cardTransactions<T extends Prisma.Car$cardTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$cardTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FuelCardTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  photos<T extends Prisma.Car$photosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$photosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarPhotosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2746,6 +2912,30 @@ export type Car$cardTransactionsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.FuelCardTransactionScalarFieldEnum | Prisma.FuelCardTransactionScalarFieldEnum[]
+}
+
+/**
+ * Car.photos
+ */
+export type Car$photosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CarPhotos
+   */
+  select?: Prisma.CarPhotosSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CarPhotos
+   */
+  omit?: Prisma.CarPhotosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CarPhotosInclude<ExtArgs> | null
+  where?: Prisma.CarPhotosWhereInput
+  orderBy?: Prisma.CarPhotosOrderByWithRelationInput | Prisma.CarPhotosOrderByWithRelationInput[]
+  cursor?: Prisma.CarPhotosWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CarPhotosScalarFieldEnum | Prisma.CarPhotosScalarFieldEnum[]
 }
 
 /**

@@ -386,10 +386,12 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   Car: 'Car',
+  CarPhotos: 'CarPhotos',
   CarMember: 'CarMember',
   ServiceRecord: 'ServiceRecord',
   ServiceAttachment: 'ServiceAttachment',
   FuelRecord: 'FuelRecord',
+  FuelAttachment: 'FuelAttachment',
   Expense: 'Expense',
   FuelCard: 'FuelCard',
   FuelCardTransaction: 'FuelCardTransaction',
@@ -410,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "car" | "carMember" | "serviceRecord" | "serviceAttachment" | "fuelRecord" | "expense" | "fuelCard" | "fuelCardTransaction" | "document" | "reminder"
+    modelProps: "user" | "car" | "carPhotos" | "carMember" | "serviceRecord" | "serviceAttachment" | "fuelRecord" | "fuelAttachment" | "expense" | "fuelCard" | "fuelCardTransaction" | "document" | "reminder"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -559,6 +561,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CarCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CarCountAggregateOutputType> | number
+        }
+      }
+    }
+    CarPhotos: {
+      payload: Prisma.$CarPhotosPayload<ExtArgs>
+      fields: Prisma.CarPhotosFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CarPhotosFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarPhotosPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CarPhotosFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarPhotosPayload>
+        }
+        findFirst: {
+          args: Prisma.CarPhotosFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarPhotosPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CarPhotosFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarPhotosPayload>
+        }
+        findMany: {
+          args: Prisma.CarPhotosFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarPhotosPayload>[]
+        }
+        create: {
+          args: Prisma.CarPhotosCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarPhotosPayload>
+        }
+        createMany: {
+          args: Prisma.CarPhotosCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CarPhotosCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarPhotosPayload>[]
+        }
+        delete: {
+          args: Prisma.CarPhotosDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarPhotosPayload>
+        }
+        update: {
+          args: Prisma.CarPhotosUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarPhotosPayload>
+        }
+        deleteMany: {
+          args: Prisma.CarPhotosDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CarPhotosUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CarPhotosUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarPhotosPayload>[]
+        }
+        upsert: {
+          args: Prisma.CarPhotosUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarPhotosPayload>
+        }
+        aggregate: {
+          args: Prisma.CarPhotosAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCarPhotos>
+        }
+        groupBy: {
+          args: Prisma.CarPhotosGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CarPhotosGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CarPhotosCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CarPhotosCountAggregateOutputType> | number
         }
       }
     }
@@ -855,6 +931,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.FuelRecordCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.FuelRecordCountAggregateOutputType> | number
+        }
+      }
+    }
+    FuelAttachment: {
+      payload: Prisma.$FuelAttachmentPayload<ExtArgs>
+      fields: Prisma.FuelAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FuelAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FuelAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.FuelAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FuelAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.FuelAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.FuelAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.FuelAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FuelAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.FuelAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelAttachmentPayload>
+        }
+        update: {
+          args: Prisma.FuelAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.FuelAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FuelAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FuelAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.FuelAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuelAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.FuelAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFuelAttachment>
+        }
+        groupBy: {
+          args: Prisma.FuelAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FuelAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FuelAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FuelAttachmentCountAggregateOutputType> | number
         }
       }
     }
@@ -1301,6 +1451,18 @@ export const CarScalarFieldEnum = {
 export type CarScalarFieldEnum = (typeof CarScalarFieldEnum)[keyof typeof CarScalarFieldEnum]
 
 
+export const CarPhotosScalarFieldEnum = {
+  id: 'id',
+  carId: 'carId',
+  url: 'url',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  createdAt: 'createdAt'
+} as const
+
+export type CarPhotosScalarFieldEnum = (typeof CarPhotosScalarFieldEnum)[keyof typeof CarPhotosScalarFieldEnum]
+
+
 export const CarMemberScalarFieldEnum = {
   id: 'id',
   carId: 'carId',
@@ -1358,6 +1520,18 @@ export const FuelRecordScalarFieldEnum = {
 } as const
 
 export type FuelRecordScalarFieldEnum = (typeof FuelRecordScalarFieldEnum)[keyof typeof FuelRecordScalarFieldEnum]
+
+
+export const FuelAttachmentScalarFieldEnum = {
+  id: 'id',
+  fuelRecordId: 'fuelRecordId',
+  url: 'url',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  createdAt: 'createdAt'
+} as const
+
+export type FuelAttachmentScalarFieldEnum = (typeof FuelAttachmentScalarFieldEnum)[keyof typeof FuelAttachmentScalarFieldEnum]
 
 
 export const ExpenseScalarFieldEnum = {
@@ -1754,10 +1928,12 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   car?: Prisma.CarOmit
+  carPhotos?: Prisma.CarPhotosOmit
   carMember?: Prisma.CarMemberOmit
   serviceRecord?: Prisma.ServiceRecordOmit
   serviceAttachment?: Prisma.ServiceAttachmentOmit
   fuelRecord?: Prisma.FuelRecordOmit
+  fuelAttachment?: Prisma.FuelAttachmentOmit
   expense?: Prisma.ExpenseOmit
   fuelCard?: Prisma.FuelCardOmit
   fuelCardTransaction?: Prisma.FuelCardTransactionOmit

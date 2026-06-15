@@ -9,6 +9,7 @@ import { PrismaService } from 'src/prisma.service';
 import { Service } from './entities/service.entity';
 import { Decimal } from '@prisma/client/runtime/client';
 import { unlink } from 'fs/promises';
+import { join } from 'path';
 
 @Injectable()
 export class ServicesService {
@@ -41,8 +42,8 @@ export class ServicesService {
         createdBy: true,
       },
       orderBy: {
-        createdAt: 'desc'
-      }
+        createdAt: 'desc',
+      },
     });
 
     return services;
@@ -72,8 +73,7 @@ export class ServicesService {
 
     return this.prisma.$transaction(async (tx) => {
       try {
-        console.log(dto);
-        console.log(files);
+
         const newService = await tx.serviceRecord.create({
           data: {
             carId: dto.carId,
@@ -121,7 +121,43 @@ export class ServicesService {
     return `This action updates a #${id} service`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} service`;
+  async remove(id: string) {
+    const service = await this.prisma.serviceRecord.findUnique({
+      where: { id },
+      include: { attachments: true },
+    });
+
+    if (!service) {
+      throw new NotFoundException('Service not found');
+    }
+
+    const files = service.attachments;
+
+    // 1. Delete physical files
+    for (const file of files) {
+      try {
+        const filePath = join(
+          process.cwd(),
+          'uploads/services',
+          file.fileName,
+        );
+
+        await unlink(filePath);
+      } catch (err) {
+        console.log('File delete error:', err);
+      }
+    }
+
+    // 2. Delete DB records (attachments first if no cascade)
+    await this.prisma.serviceAttachment.deleteMany({
+      where: { serviceRecordId: id },
+    });
+
+    // 3. Delete service itself
+    await this.prisma.serviceRecord.delete({
+      where: { id },
+    });
+
+    return { success: true };
   }
 }

@@ -299,6 +299,7 @@ export type FuelRecordWhereInput = {
   car?: Prisma.XOR<Prisma.CarScalarRelationFilter, Prisma.CarWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   cardTransaction?: Prisma.XOR<Prisma.FuelCardTransactionNullableScalarRelationFilter, Prisma.FuelCardTransactionWhereInput> | null
+  attachments?: Prisma.FuelAttachmentListRelationFilter
 }
 
 export type FuelRecordOrderByWithRelationInput = {
@@ -318,6 +319,7 @@ export type FuelRecordOrderByWithRelationInput = {
   car?: Prisma.CarOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   cardTransaction?: Prisma.FuelCardTransactionOrderByWithRelationInput
+  attachments?: Prisma.FuelAttachmentOrderByRelationAggregateInput
 }
 
 export type FuelRecordWhereUniqueInput = Prisma.AtLeast<{
@@ -340,6 +342,7 @@ export type FuelRecordWhereUniqueInput = Prisma.AtLeast<{
   car?: Prisma.XOR<Prisma.CarScalarRelationFilter, Prisma.CarWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   cardTransaction?: Prisma.XOR<Prisma.FuelCardTransactionNullableScalarRelationFilter, Prisma.FuelCardTransactionWhereInput> | null
+  attachments?: Prisma.FuelAttachmentListRelationFilter
 }, "id" | "fuelCardTransactionId">
 
 export type FuelRecordOrderByWithAggregationInput = {
@@ -396,6 +399,7 @@ export type FuelRecordCreateInput = {
   car: Prisma.CarCreateNestedOneWithoutFuelsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedFuelRecordsInput
   cardTransaction?: Prisma.FuelCardTransactionCreateNestedOneWithoutFuelRecordInput
+  attachments?: Prisma.FuelAttachmentCreateNestedManyWithoutFuelRecordInput
 }
 
 export type FuelRecordUncheckedCreateInput = {
@@ -412,6 +416,7 @@ export type FuelRecordUncheckedCreateInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  attachments?: Prisma.FuelAttachmentUncheckedCreateNestedManyWithoutFuelRecordInput
 }
 
 export type FuelRecordUpdateInput = {
@@ -428,6 +433,7 @@ export type FuelRecordUpdateInput = {
   car?: Prisma.CarUpdateOneRequiredWithoutFuelsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedFuelRecordsNestedInput
   cardTransaction?: Prisma.FuelCardTransactionUpdateOneWithoutFuelRecordNestedInput
+  attachments?: Prisma.FuelAttachmentUpdateManyWithoutFuelRecordNestedInput
 }
 
 export type FuelRecordUncheckedUpdateInput = {
@@ -444,6 +450,7 @@ export type FuelRecordUncheckedUpdateInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.FuelAttachmentUncheckedUpdateManyWithoutFuelRecordNestedInput
 }
 
 export type FuelRecordCreateManyInput = {
@@ -565,6 +572,11 @@ export type FuelRecordSumOrderByAggregateInput = {
   consumption?: Prisma.SortOrder
 }
 
+export type FuelRecordScalarRelationFilter = {
+  is?: Prisma.FuelRecordWhereInput
+  isNot?: Prisma.FuelRecordWhereInput
+}
+
 export type FuelRecordNullableScalarRelationFilter = {
   is?: Prisma.FuelRecordWhereInput | null
   isNot?: Prisma.FuelRecordWhereInput | null
@@ -662,6 +674,20 @@ export type DecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type FuelRecordCreateNestedOneWithoutAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.FuelRecordCreateWithoutAttachmentsInput, Prisma.FuelRecordUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.FuelRecordCreateOrConnectWithoutAttachmentsInput
+  connect?: Prisma.FuelRecordWhereUniqueInput
+}
+
+export type FuelRecordUpdateOneRequiredWithoutAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.FuelRecordCreateWithoutAttachmentsInput, Prisma.FuelRecordUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.FuelRecordCreateOrConnectWithoutAttachmentsInput
+  upsert?: Prisma.FuelRecordUpsertWithoutAttachmentsInput
+  connect?: Prisma.FuelRecordWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FuelRecordUpdateToOneWithWhereWithoutAttachmentsInput, Prisma.FuelRecordUpdateWithoutAttachmentsInput>, Prisma.FuelRecordUncheckedUpdateWithoutAttachmentsInput>
+}
+
 export type FuelRecordCreateNestedOneWithoutCardTransactionInput = {
   create?: Prisma.XOR<Prisma.FuelRecordCreateWithoutCardTransactionInput, Prisma.FuelRecordUncheckedCreateWithoutCardTransactionInput>
   connectOrCreate?: Prisma.FuelRecordCreateOrConnectWithoutCardTransactionInput
@@ -707,6 +733,7 @@ export type FuelRecordCreateWithoutCreatedByInput = {
   updatedAt?: Date | string
   car: Prisma.CarCreateNestedOneWithoutFuelsInput
   cardTransaction?: Prisma.FuelCardTransactionCreateNestedOneWithoutFuelRecordInput
+  attachments?: Prisma.FuelAttachmentCreateNestedManyWithoutFuelRecordInput
 }
 
 export type FuelRecordUncheckedCreateWithoutCreatedByInput = {
@@ -722,6 +749,7 @@ export type FuelRecordUncheckedCreateWithoutCreatedByInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  attachments?: Prisma.FuelAttachmentUncheckedCreateNestedManyWithoutFuelRecordInput
 }
 
 export type FuelRecordCreateOrConnectWithoutCreatedByInput = {
@@ -782,6 +810,7 @@ export type FuelRecordCreateWithoutCarInput = {
   updatedAt?: Date | string
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedFuelRecordsInput
   cardTransaction?: Prisma.FuelCardTransactionCreateNestedOneWithoutFuelRecordInput
+  attachments?: Prisma.FuelAttachmentCreateNestedManyWithoutFuelRecordInput
 }
 
 export type FuelRecordUncheckedCreateWithoutCarInput = {
@@ -797,6 +826,7 @@ export type FuelRecordUncheckedCreateWithoutCarInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  attachments?: Prisma.FuelAttachmentUncheckedCreateNestedManyWithoutFuelRecordInput
 }
 
 export type FuelRecordCreateOrConnectWithoutCarInput = {
@@ -825,6 +855,86 @@ export type FuelRecordUpdateManyWithWhereWithoutCarInput = {
   data: Prisma.XOR<Prisma.FuelRecordUpdateManyMutationInput, Prisma.FuelRecordUncheckedUpdateManyWithoutCarInput>
 }
 
+export type FuelRecordCreateWithoutAttachmentsInput = {
+  id?: string
+  station?: string | null
+  liters?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  km?: number
+  consumption?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelDate: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  car: Prisma.CarCreateNestedOneWithoutFuelsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedFuelRecordsInput
+  cardTransaction?: Prisma.FuelCardTransactionCreateNestedOneWithoutFuelRecordInput
+}
+
+export type FuelRecordUncheckedCreateWithoutAttachmentsInput = {
+  id?: string
+  carId: string
+  createdById?: string | null
+  fuelCardTransactionId?: string | null
+  station?: string | null
+  liters?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  km?: number
+  consumption?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelDate: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type FuelRecordCreateOrConnectWithoutAttachmentsInput = {
+  where: Prisma.FuelRecordWhereUniqueInput
+  create: Prisma.XOR<Prisma.FuelRecordCreateWithoutAttachmentsInput, Prisma.FuelRecordUncheckedCreateWithoutAttachmentsInput>
+}
+
+export type FuelRecordUpsertWithoutAttachmentsInput = {
+  update: Prisma.XOR<Prisma.FuelRecordUpdateWithoutAttachmentsInput, Prisma.FuelRecordUncheckedUpdateWithoutAttachmentsInput>
+  create: Prisma.XOR<Prisma.FuelRecordCreateWithoutAttachmentsInput, Prisma.FuelRecordUncheckedCreateWithoutAttachmentsInput>
+  where?: Prisma.FuelRecordWhereInput
+}
+
+export type FuelRecordUpdateToOneWithWhereWithoutAttachmentsInput = {
+  where?: Prisma.FuelRecordWhereInput
+  data: Prisma.XOR<Prisma.FuelRecordUpdateWithoutAttachmentsInput, Prisma.FuelRecordUncheckedUpdateWithoutAttachmentsInput>
+}
+
+export type FuelRecordUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  station?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liters?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  consumption?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  car?: Prisma.CarUpdateOneRequiredWithoutFuelsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedFuelRecordsNestedInput
+  cardTransaction?: Prisma.FuelCardTransactionUpdateOneWithoutFuelRecordNestedInput
+}
+
+export type FuelRecordUncheckedUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  carId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fuelCardTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  station?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liters?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pricePerLiter?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  km?: Prisma.IntFieldUpdateOperationsInput | number
+  consumption?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type FuelRecordCreateWithoutCardTransactionInput = {
   id?: string
   station?: string | null
@@ -838,6 +948,7 @@ export type FuelRecordCreateWithoutCardTransactionInput = {
   updatedAt?: Date | string
   car: Prisma.CarCreateNestedOneWithoutFuelsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedFuelRecordsInput
+  attachments?: Prisma.FuelAttachmentCreateNestedManyWithoutFuelRecordInput
 }
 
 export type FuelRecordUncheckedCreateWithoutCardTransactionInput = {
@@ -853,6 +964,7 @@ export type FuelRecordUncheckedCreateWithoutCardTransactionInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  attachments?: Prisma.FuelAttachmentUncheckedCreateNestedManyWithoutFuelRecordInput
 }
 
 export type FuelRecordCreateOrConnectWithoutCardTransactionInput = {
@@ -884,6 +996,7 @@ export type FuelRecordUpdateWithoutCardTransactionInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   car?: Prisma.CarUpdateOneRequiredWithoutFuelsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedFuelRecordsNestedInput
+  attachments?: Prisma.FuelAttachmentUpdateManyWithoutFuelRecordNestedInput
 }
 
 export type FuelRecordUncheckedUpdateWithoutCardTransactionInput = {
@@ -899,6 +1012,7 @@ export type FuelRecordUncheckedUpdateWithoutCardTransactionInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.FuelAttachmentUncheckedUpdateManyWithoutFuelRecordNestedInput
 }
 
 export type FuelRecordCreateManyCreatedByInput = {
@@ -929,6 +1043,7 @@ export type FuelRecordUpdateWithoutCreatedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   car?: Prisma.CarUpdateOneRequiredWithoutFuelsNestedInput
   cardTransaction?: Prisma.FuelCardTransactionUpdateOneWithoutFuelRecordNestedInput
+  attachments?: Prisma.FuelAttachmentUpdateManyWithoutFuelRecordNestedInput
 }
 
 export type FuelRecordUncheckedUpdateWithoutCreatedByInput = {
@@ -944,6 +1059,7 @@ export type FuelRecordUncheckedUpdateWithoutCreatedByInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.FuelAttachmentUncheckedUpdateManyWithoutFuelRecordNestedInput
 }
 
 export type FuelRecordUncheckedUpdateManyWithoutCreatedByInput = {
@@ -989,6 +1105,7 @@ export type FuelRecordUpdateWithoutCarInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserUpdateOneWithoutCreatedFuelRecordsNestedInput
   cardTransaction?: Prisma.FuelCardTransactionUpdateOneWithoutFuelRecordNestedInput
+  attachments?: Prisma.FuelAttachmentUpdateManyWithoutFuelRecordNestedInput
 }
 
 export type FuelRecordUncheckedUpdateWithoutCarInput = {
@@ -1004,6 +1121,7 @@ export type FuelRecordUncheckedUpdateWithoutCarInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.FuelAttachmentUncheckedUpdateManyWithoutFuelRecordNestedInput
 }
 
 export type FuelRecordUncheckedUpdateManyWithoutCarInput = {
@@ -1021,6 +1139,35 @@ export type FuelRecordUncheckedUpdateManyWithoutCarInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type FuelRecordCountOutputType
+ */
+
+export type FuelRecordCountOutputType = {
+  attachments: number
+}
+
+export type FuelRecordCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  attachments?: boolean | FuelRecordCountOutputTypeCountAttachmentsArgs
+}
+
+/**
+ * FuelRecordCountOutputType without action
+ */
+export type FuelRecordCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FuelRecordCountOutputType
+   */
+  select?: Prisma.FuelRecordCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * FuelRecordCountOutputType without action
+ */
+export type FuelRecordCountOutputTypeCountAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FuelAttachmentWhereInput
+}
 
 
 export type FuelRecordSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1040,6 +1187,8 @@ export type FuelRecordSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.FuelRecord$createdByArgs<ExtArgs>
   cardTransaction?: boolean | Prisma.FuelRecord$cardTransactionArgs<ExtArgs>
+  attachments?: boolean | Prisma.FuelRecord$attachmentsArgs<ExtArgs>
+  _count?: boolean | Prisma.FuelRecordCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fuelRecord"]>
 
 export type FuelRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1101,6 +1250,8 @@ export type FuelRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.FuelRecord$createdByArgs<ExtArgs>
   cardTransaction?: boolean | Prisma.FuelRecord$cardTransactionArgs<ExtArgs>
+  attachments?: boolean | Prisma.FuelRecord$attachmentsArgs<ExtArgs>
+  _count?: boolean | Prisma.FuelRecordCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FuelRecordIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
@@ -1119,6 +1270,7 @@ export type $FuelRecordPayload<ExtArgs extends runtime.Types.Extensions.Internal
     car: Prisma.$CarPayload<ExtArgs>
     createdBy: Prisma.$UserPayload<ExtArgs> | null
     cardTransaction: Prisma.$FuelCardTransactionPayload<ExtArgs> | null
+    attachments: Prisma.$FuelAttachmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1531,6 +1683,7 @@ export interface Prisma__FuelRecordClient<T, Null = never, ExtArgs extends runti
   car<T extends Prisma.CarDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarDefaultArgs<ExtArgs>>): Prisma.Prisma__CarClient<runtime.Types.Result.GetResult<Prisma.$CarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.FuelRecord$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FuelRecord$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   cardTransaction<T extends Prisma.FuelRecord$cardTransactionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FuelRecord$cardTransactionArgs<ExtArgs>>): Prisma.Prisma__FuelCardTransactionClient<runtime.Types.Result.GetResult<Prisma.$FuelCardTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  attachments<T extends Prisma.FuelRecord$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FuelRecord$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FuelAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2009,6 +2162,30 @@ export type FuelRecord$cardTransactionArgs<ExtArgs extends runtime.Types.Extensi
    */
   include?: Prisma.FuelCardTransactionInclude<ExtArgs> | null
   where?: Prisma.FuelCardTransactionWhereInput
+}
+
+/**
+ * FuelRecord.attachments
+ */
+export type FuelRecord$attachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FuelAttachment
+   */
+  select?: Prisma.FuelAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FuelAttachment
+   */
+  omit?: Prisma.FuelAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FuelAttachmentInclude<ExtArgs> | null
+  where?: Prisma.FuelAttachmentWhereInput
+  orderBy?: Prisma.FuelAttachmentOrderByWithRelationInput | Prisma.FuelAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.FuelAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FuelAttachmentScalarFieldEnum | Prisma.FuelAttachmentScalarFieldEnum[]
 }
 
 /**

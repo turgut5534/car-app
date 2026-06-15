@@ -61,6 +61,18 @@ model Car {
   documents   Document[]
   reminders   Reminder[]
   cardTransactions FuelCardTransaction[]
+  photos  CarPhotos[]
+}
+
+model CarPhotos {
+  id              String   @id @default(uuid())
+  carId           String
+  url             String?
+  fileName        String
+  mimeType        String?
+  createdAt       DateTime @default(now())
+
+  car   Car @relation(fields: [carId], references: [id], onDelete: Cascade)
 }
 
 model CarMember {
@@ -128,7 +140,7 @@ model ServiceAttachment {
   id              String   @id @default(uuid())
   serviceRecordId String
   url             String
-  fileName        String?
+  fileName        String
   mimeType        String?
   createdAt       DateTime @default(now())
 
@@ -155,6 +167,19 @@ model FuelRecord {
   car             Car @relation(fields: [carId], references: [id], onDelete: Cascade)
   createdBy       User? @relation(fields: [createdById], references: [id])
   cardTransaction FuelCardTransaction? @relation(fields: [fuelCardTransactionId], references: [id])
+
+  attachments FuelAttachment[]
+}
+
+model FuelAttachment {
+  id              String   @id @default(uuid())
+  fuelRecordId    String
+  url             String?
+  fileName        String
+  mimeType        String?
+  createdAt       DateTime @default(now())
+
+  fuelRecord   FuelRecord @relation(fields: [fuelRecordId], references: [id], onDelete: Cascade)
 }
 
 model Expense {
@@ -230,7 +255,7 @@ model Document {
   carId       String
   uploadedById String?
   type        DocumentType
-  title       String
+  title       String?
   fileUrl     String?
   expiresAt   DateTime?
   createdAt   DateTime @default(now())

@@ -21,24 +21,18 @@ export class CreateFuelDto {
 
   @IsOptional()
   @Type(() => Number)
-  @IsNumber({ maxDecimalPlaces: 2 })
+  @IsString()
   @Min(0)
-  liters?: number;
+  liters?: string;
 
-  @Type(() => Number)
-  @IsNumber({ maxDecimalPlaces: 2 })
-  @Min(0)
-  pricePerLiter!: number;
+  @IsString()
+  pricePerLiter!: string;
 
-  @Type(() => Number)
-  @IsNumber({ maxDecimalPlaces: 2 })
-  @Min(0)
-  totalAmount!: number;
+  @IsString()
+  totalAmount!: string;
 
-  @Type(() => Number)
-  @IsInt()
-  @Min(0)
-  km!: number;
+  @IsString()
+  km!: string;
 
   @IsOptional()
   @IsUUID()

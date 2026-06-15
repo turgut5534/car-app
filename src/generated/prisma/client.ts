@@ -50,6 +50,11 @@ export type User = Prisma.UserModel
  */
 export type Car = Prisma.CarModel
 /**
+ * Model CarPhotos
+ * 
+ */
+export type CarPhotos = Prisma.CarPhotosModel
+/**
  * Model CarMember
  * 
  */
@@ -69,6 +74,11 @@ export type ServiceAttachment = Prisma.ServiceAttachmentModel
  * 
  */
 export type FuelRecord = Prisma.FuelRecordModel
+/**
+ * Model FuelAttachment
+ * 
+ */
+export type FuelAttachment = Prisma.FuelAttachmentModel
 /**
  * Model Expense
  * 

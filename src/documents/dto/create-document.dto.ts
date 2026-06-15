@@ -14,7 +14,7 @@ export class CreateDocumentDto {
   type!: DocumentType;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   title!: string;
 
   @IsOptional()

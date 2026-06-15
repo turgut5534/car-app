@@ -157,7 +157,7 @@ export type ServiceAttachmentGroupByOutputType = {
   id: string
   serviceRecordId: string
   url: string
-  fileName: string | null
+  fileName: string
   mimeType: string | null
   createdAt: Date
   _count: ServiceAttachmentCountAggregateOutputType | null
@@ -187,7 +187,7 @@ export type ServiceAttachmentWhereInput = {
   id?: Prisma.StringFilter<"ServiceAttachment"> | string
   serviceRecordId?: Prisma.StringFilter<"ServiceAttachment"> | string
   url?: Prisma.StringFilter<"ServiceAttachment"> | string
-  fileName?: Prisma.StringNullableFilter<"ServiceAttachment"> | string | null
+  fileName?: Prisma.StringFilter<"ServiceAttachment"> | string
   mimeType?: Prisma.StringNullableFilter<"ServiceAttachment"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ServiceAttachment"> | Date | string
   serviceRecord?: Prisma.XOR<Prisma.ServiceRecordScalarRelationFilter, Prisma.ServiceRecordWhereInput>
@@ -197,7 +197,7 @@ export type ServiceAttachmentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   serviceRecordId?: Prisma.SortOrder
   url?: Prisma.SortOrder
-  fileName?: Prisma.SortOrderInput | Prisma.SortOrder
+  fileName?: Prisma.SortOrder
   mimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   serviceRecord?: Prisma.ServiceRecordOrderByWithRelationInput
@@ -210,7 +210,7 @@ export type ServiceAttachmentWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ServiceAttachmentWhereInput | Prisma.ServiceAttachmentWhereInput[]
   serviceRecordId?: Prisma.StringFilter<"ServiceAttachment"> | string
   url?: Prisma.StringFilter<"ServiceAttachment"> | string
-  fileName?: Prisma.StringNullableFilter<"ServiceAttachment"> | string | null
+  fileName?: Prisma.StringFilter<"ServiceAttachment"> | string
   mimeType?: Prisma.StringNullableFilter<"ServiceAttachment"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ServiceAttachment"> | Date | string
   serviceRecord?: Prisma.XOR<Prisma.ServiceRecordScalarRelationFilter, Prisma.ServiceRecordWhereInput>
@@ -220,7 +220,7 @@ export type ServiceAttachmentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   serviceRecordId?: Prisma.SortOrder
   url?: Prisma.SortOrder
-  fileName?: Prisma.SortOrderInput | Prisma.SortOrder
+  fileName?: Prisma.SortOrder
   mimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ServiceAttachmentCountOrderByAggregateInput
@@ -235,7 +235,7 @@ export type ServiceAttachmentScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"ServiceAttachment"> | string
   serviceRecordId?: Prisma.StringWithAggregatesFilter<"ServiceAttachment"> | string
   url?: Prisma.StringWithAggregatesFilter<"ServiceAttachment"> | string
-  fileName?: Prisma.StringNullableWithAggregatesFilter<"ServiceAttachment"> | string | null
+  fileName?: Prisma.StringWithAggregatesFilter<"ServiceAttachment"> | string
   mimeType?: Prisma.StringNullableWithAggregatesFilter<"ServiceAttachment"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ServiceAttachment"> | Date | string
 }
@@ -243,7 +243,7 @@ export type ServiceAttachmentScalarWhereWithAggregatesInput = {
 export type ServiceAttachmentCreateInput = {
   id?: string
   url: string
-  fileName?: string | null
+  fileName: string
   mimeType?: string | null
   createdAt?: Date | string
   serviceRecord: Prisma.ServiceRecordCreateNestedOneWithoutAttachmentsInput
@@ -253,7 +253,7 @@ export type ServiceAttachmentUncheckedCreateInput = {
   id?: string
   serviceRecordId: string
   url: string
-  fileName?: string | null
+  fileName: string
   mimeType?: string | null
   createdAt?: Date | string
 }
@@ -261,7 +261,7 @@ export type ServiceAttachmentUncheckedCreateInput = {
 export type ServiceAttachmentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   serviceRecord?: Prisma.ServiceRecordUpdateOneRequiredWithoutAttachmentsNestedInput
@@ -271,7 +271,7 @@ export type ServiceAttachmentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   serviceRecordId?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -280,7 +280,7 @@ export type ServiceAttachmentCreateManyInput = {
   id?: string
   serviceRecordId: string
   url: string
-  fileName?: string | null
+  fileName: string
   mimeType?: string | null
   createdAt?: Date | string
 }
@@ -288,7 +288,7 @@ export type ServiceAttachmentCreateManyInput = {
 export type ServiceAttachmentUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -297,7 +297,7 @@ export type ServiceAttachmentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   serviceRecordId?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -384,7 +384,7 @@ export type ServiceAttachmentUncheckedUpdateManyWithoutServiceRecordNestedInput 
 export type ServiceAttachmentCreateWithoutServiceRecordInput = {
   id?: string
   url: string
-  fileName?: string | null
+  fileName: string
   mimeType?: string | null
   createdAt?: Date | string
 }
@@ -392,7 +392,7 @@ export type ServiceAttachmentCreateWithoutServiceRecordInput = {
 export type ServiceAttachmentUncheckedCreateWithoutServiceRecordInput = {
   id?: string
   url: string
-  fileName?: string | null
+  fileName: string
   mimeType?: string | null
   createdAt?: Date | string
 }
@@ -430,7 +430,7 @@ export type ServiceAttachmentScalarWhereInput = {
   id?: Prisma.StringFilter<"ServiceAttachment"> | string
   serviceRecordId?: Prisma.StringFilter<"ServiceAttachment"> | string
   url?: Prisma.StringFilter<"ServiceAttachment"> | string
-  fileName?: Prisma.StringNullableFilter<"ServiceAttachment"> | string | null
+  fileName?: Prisma.StringFilter<"ServiceAttachment"> | string
   mimeType?: Prisma.StringNullableFilter<"ServiceAttachment"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ServiceAttachment"> | Date | string
 }
@@ -438,7 +438,7 @@ export type ServiceAttachmentScalarWhereInput = {
 export type ServiceAttachmentCreateManyServiceRecordInput = {
   id?: string
   url: string
-  fileName?: string | null
+  fileName: string
   mimeType?: string | null
   createdAt?: Date | string
 }
@@ -446,7 +446,7 @@ export type ServiceAttachmentCreateManyServiceRecordInput = {
 export type ServiceAttachmentUpdateWithoutServiceRecordInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -454,7 +454,7 @@ export type ServiceAttachmentUpdateWithoutServiceRecordInput = {
 export type ServiceAttachmentUncheckedUpdateWithoutServiceRecordInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -462,7 +462,7 @@ export type ServiceAttachmentUncheckedUpdateWithoutServiceRecordInput = {
 export type ServiceAttachmentUncheckedUpdateManyWithoutServiceRecordInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  fileName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -528,7 +528,7 @@ export type $ServiceAttachmentPayload<ExtArgs extends runtime.Types.Extensions.I
     id: string
     serviceRecordId: string
     url: string
-    fileName: string | null
+    fileName: string
     mimeType: string | null
     createdAt: Date
   }, ExtArgs["result"]["serviceAttachment"]>
