@@ -28,8 +28,12 @@ export class ServicesController {
   constructor(private readonly servicesService: ServicesService) {}
 
   @Get()
-  findAll(@Query('carId') carId: string): Promise<Service[]> {
-    return this.servicesService.findAll(carId);
+  findAll(
+    @Query('carId') carId: string,
+    @Query('page') page = '1',
+    @Query('limit') limit = '20',
+  ) {
+    return this.servicesService.findAll(carId, Number(page), Number(limit));
   }
 
   @Get(':id')

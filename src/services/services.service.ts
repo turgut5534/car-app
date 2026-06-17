@@ -39,25 +39,42 @@ export class ServicesService {
     return service;
   }
 
-  async findAll(carId: string): Promise<Service[]> {
-    const services = await this.prisma.serviceRecord.findMany({
-      where: {
-        carId,
-      },
-      include: {
-        createdBy: {
-          select: {
-            currency: true,
-          },
-        },
-        car: true,
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
-    });
+  async findAll(carId: string, page = 1, limit = 20) {
+    const skip = (page - 1) * limit;
 
-    return services;
+    const [services, total] = await Promise.all([
+      this.prisma.serviceRecord.findMany({
+        where: {
+          carId,
+        },
+        include: {
+          createdBy: {
+            select: {
+              currency: true,
+            },
+          },
+          car: true,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
+        skip,
+        take: limit,
+      }),
+      this.prisma.serviceRecord.count({
+        where: {
+          carId,
+        },
+      }),
+    ]);
+
+    return {
+      items: services,
+      page,
+      limit,
+      total,
+      hasMore: skip + services.length < total,
+    };
   }
 
   async create(
