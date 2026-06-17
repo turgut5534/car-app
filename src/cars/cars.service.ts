@@ -68,22 +68,6 @@ export class CarsService {
 
     if (!car) return null;
 
-    // const fuelStats = await this.prisma.fuelRecord.aggregate({
-    //   where: {
-    //     carId,
-    //   },
-    //   _avg: {
-    //     consumption: true,
-    //     pricePerLiter: true,
-    //   }
-    // });
-
-    // return {
-    //   ...car,
-    //   averageFuelConsumption: Number(fuelStats._avg.consumption ?? 0),
-    //   averageFuelPrice: Number(fuelStats._avg.pricePerLiter ?? 0),
-    // };
-
     return car;
   }
 
@@ -253,60 +237,65 @@ export class CarsService {
     ]);
   }
 
-  // async overviewData(userId: string, carId: string) {
+  async overviewData(userId: string, carId: string) {
+    const car = await this.prisma.car.findFirst({
+      where: {
+        id: carId,
+        ownerId: userId,
+      },
+      include: {
+        expenses: true,
+        services: true,
+        fuels: true,
+      },
+    });
 
-  //   const car = await this.prisma.car.findFirst({
-  //     where: {
-  //       id: carId,
-  //       ownerId: userId,
-  //     },
-  //     include: {
-  //       expenses: true,
-  //       services: true,
-  //       fuels: true,
-  //     },
-  //   });
+    if (!car) {
+      throw new NotFoundException('Car not found');
+    }
 
-  //   if (!car) {
-  //     throw new NotFoundException('Car not found');
-  //   }
+    const totalExpenses = car.expenses.reduce((s, e) => s + e.amount.toNumber(), 0);
 
-  //   const totalExpenses = car.expenses.reduce((s, e) => s + e.amount, 0);
+    const last30Days = new Date();
+    last30Days.setDate(last30Days.getDate() - 30);
 
-  //   const last30Days = new Date();
-  //   last30Days.setDate(last30Days.getDate() - 30);
+    const monthlyExpenses = car.expenses
+      .filter((e) => new Date(e.createdAt) >= last30Days)
+      .reduce((s, e) => s + e.amount.toNumber(), 0);
 
-  //   const monthlyExpenses = car.expenses
-  //     .filter((e) => new Date(e.createdAt) >= last30Days)
-  //     .reduce((s, e) => s + e.amount, 0);
+    const lastService =
+      [...car.services].sort(
+        (a, b) =>
+          new Date(b.serviceDate).getTime() - new Date(a.serviceDate).getTime(),
+      )[0] || null;
 
-  //   const lastService =
-  //     [...car.services].sort(
-  //       (a, b) =>
-  //         new Date(b.serviceDate).getTime() - new Date(a.serviceDate).getTime(),
-  //     )[0] || null;
+    const lastFuel =
+      [...car.fuels].sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+      )[0] || null;
 
-  //   const lastFuel =
-  //     [...car.fuels].sort(
-  //       (a, b) =>
-  //         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-  //     )[0] || null;
+    const fuelStats = await this.prisma.fuelRecord.aggregate({
+      where: {
+        carId,
+      },
+      _avg: {
+        consumption: true,
+        pricePerLiter: true,
+      }
+    });
 
-  //   const totalFuel = car.fuels.reduce((s, f) => s + f.liters, 0);
 
-  //   const averageFuelConsumption =
-  //     car.currentKm > 0 ? (totalFuel / car.currentKm) * 100 : 0;
+    const costPerKilometer =
+      car.currentKm > 0 ? totalExpenses / car.currentKm : 0;
 
-  //   const costPerKilometer =
-  //     car.currentKm > 0 ? totalExpenses / car.currentKm : 0;
-
-  //   return {
-  //     monthlyExpenses,
-  //     totalExpenses,
-  //     lastService,
-  //     averageFuelConsumption,
-  //     lastFuel,
-  //     costPerKilometer,
-  //   };
-  // }
+    return {
+      monthlyExpenses,
+      totalExpenses,
+      lastService,
+      averageFuelConsumption: fuelStats._avg.consumption ?? 0,
+      lastFuel,
+      costPerKilometer,
+    };
+  }
 }

@@ -137,9 +137,9 @@ export class CarsController {
     return this.carsService.setCoverPhoto(id, carId, userId);
   }
 
-  // @Get('overview')
-  // @UseGuards(JwtAuthGuard)
-  // async overviewData(@UserId() userId: string, @Param('carId') carId) {
-  //   return this.carsService.overviewData(userId, carId);
-  // }
+  @Get('overview/:carId')
+  @UseGuards(JwtAuthGuard)
+  async overviewData(@UserId() userId: string, @Param('carId') carId) {
+    return this.carsService.overviewData(userId, carId);
+  }
 }
