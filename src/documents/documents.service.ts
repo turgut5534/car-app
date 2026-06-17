@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
 import { PrismaService } from 'src/prisma.service';
@@ -21,8 +21,27 @@ export class DocumentsService {
     return documents;
   }
 
-  findOne(id: string, userId: string) {
-    return `This action returns a #${id} document`;
+  async findOne(id: string, userId: string) {
+    const document = this.prisma.document.findFirst({
+      where: {
+        id,
+      },
+      include: {
+        car: {
+          include: {
+            photos: {
+              orderBy: [{ is_cover: 'desc' }, { createdAt: 'asc' }],
+            },
+          },
+        },
+      },
+    });
+
+    if (!document) {
+      throw new NotFoundException('Document not found');
+    }
+
+    return document;
   }
 
   async create(dto: CreateDocumentDto, userId: string, file?: any) {

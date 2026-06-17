@@ -68,6 +68,7 @@ model CarPhotos {
   id              String   @id @default(uuid())
   carId           String
   url             String?
+  is_cover        Boolean  @default(false)
   fileName        String
   mimeType        String?
   createdAt       DateTime @default(now())

@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   UseInterceptors,
+  UploadedFiles,
 } from '@nestjs/common';
 import { CarsService } from './cars.service';
 import { CreateCarDto } from './dto/create-car.dto';
@@ -15,7 +16,7 @@ import { UpdateCarDto } from './dto/update-car.dto';
 import { JwtAuthGuard } from 'src/middlewares/jwt-guard';
 import { UserId } from 'src/auth/decorators/current-user.decorator';
 
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import type { Express } from 'express';
 import { UploadedFile } from '@nestjs/common';
 import { diskStorage } from 'multer';
@@ -73,10 +74,51 @@ export class CarsController {
     return this.carsService.create(createCarDto, userId, file);
   }
 
-  //Update a car
+  // Update a car
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCarDto: UpdateCarDto) {
-    return this.carsService.update(+id, updateCarDto);
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './uploads/cars',
+        filename: (req, file, cb) => {
+          const uniqueName = `${Date.now()}-${Math.round(
+            Math.random() * 1e9,
+          )}${extname(file.originalname)}`;
+
+          cb(null, uniqueName);
+        },
+      }),
+      fileFilter: (req, file, cb) => {
+        const allowedMimeTypes = [
+          'application/pdf',
+          'application/msword',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          'image/jpeg',
+          'image/png',
+          'image/webp',
+        ];
+
+        if (!allowedMimeTypes.includes(file.mimetype)) {
+          return cb(
+            new Error('Only PDF, Word, or image files are allowed'),
+            false,
+          );
+        }
+
+        cb(null, true);
+      },
+      limits: {
+        fileSize: 5 * 1024 * 1024,
+      },
+    }),
+  )
+  update(
+    @Param('id') carId: string,
+    @UploadedFile() file: Express.Multer.File, // 👈 değişti
+    @UserId() userId: string,
+    @Body() createCarDto: UpdateCarDto,
+  ) {
+    return this.carsService.update(createCarDto, carId, userId, file);
   }
 
   //Delete car
@@ -84,4 +126,20 @@ export class CarsController {
   remove(@Param('id') id: string, @UserId() userId, @Body() body) {
     return this.carsService.remove(id, userId, body);
   }
+
+  @Delete('photos/:id')
+  removePhoto(@Param('id') id: string, @UserId() userId) {
+    return this.carsService.removePhoto(id, userId);
+  }
+
+  @Patch(':carId/cover/:id')
+  setCoverPhoto(@Param('id') id: string, @Param('carId') carId: string, @UserId() userId) {
+    return this.carsService.setCoverPhoto(id, carId, userId);
+  }
+
+  // @Get('overview')
+  // @UseGuards(JwtAuthGuard)
+  // async overviewData(@UserId() userId: string, @Param('carId') carId) {
+  //   return this.carsService.overviewData(userId, carId);
+  // }
 }

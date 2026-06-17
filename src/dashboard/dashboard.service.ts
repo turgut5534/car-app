@@ -29,6 +29,9 @@ export class DashboardService {
                 amount: true,
               },
             },
+            photos: {
+              orderBy: [{ is_cover: 'desc' }, { createdAt: 'asc' }],
+            },
           },
         },
         reminders: true,

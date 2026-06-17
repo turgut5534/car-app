@@ -28,6 +28,7 @@ export type CarPhotosMinAggregateOutputType = {
   id: string | null
   carId: string | null
   url: string | null
+  is_cover: boolean | null
   fileName: string | null
   mimeType: string | null
   createdAt: Date | null
@@ -37,6 +38,7 @@ export type CarPhotosMaxAggregateOutputType = {
   id: string | null
   carId: string | null
   url: string | null
+  is_cover: boolean | null
   fileName: string | null
   mimeType: string | null
   createdAt: Date | null
@@ -46,6 +48,7 @@ export type CarPhotosCountAggregateOutputType = {
   id: number
   carId: number
   url: number
+  is_cover: number
   fileName: number
   mimeType: number
   createdAt: number
@@ -57,6 +60,7 @@ export type CarPhotosMinAggregateInputType = {
   id?: true
   carId?: true
   url?: true
+  is_cover?: true
   fileName?: true
   mimeType?: true
   createdAt?: true
@@ -66,6 +70,7 @@ export type CarPhotosMaxAggregateInputType = {
   id?: true
   carId?: true
   url?: true
+  is_cover?: true
   fileName?: true
   mimeType?: true
   createdAt?: true
@@ -75,6 +80,7 @@ export type CarPhotosCountAggregateInputType = {
   id?: true
   carId?: true
   url?: true
+  is_cover?: true
   fileName?: true
   mimeType?: true
   createdAt?: true
@@ -157,6 +163,7 @@ export type CarPhotosGroupByOutputType = {
   id: string
   carId: string
   url: string | null
+  is_cover: boolean
   fileName: string
   mimeType: string | null
   createdAt: Date
@@ -187,6 +194,7 @@ export type CarPhotosWhereInput = {
   id?: Prisma.StringFilter<"CarPhotos"> | string
   carId?: Prisma.StringFilter<"CarPhotos"> | string
   url?: Prisma.StringNullableFilter<"CarPhotos"> | string | null
+  is_cover?: Prisma.BoolFilter<"CarPhotos"> | boolean
   fileName?: Prisma.StringFilter<"CarPhotos"> | string
   mimeType?: Prisma.StringNullableFilter<"CarPhotos"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CarPhotos"> | Date | string
@@ -197,6 +205,7 @@ export type CarPhotosOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   carId?: Prisma.SortOrder
   url?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_cover?: Prisma.SortOrder
   fileName?: Prisma.SortOrder
   mimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -210,6 +219,7 @@ export type CarPhotosWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CarPhotosWhereInput | Prisma.CarPhotosWhereInput[]
   carId?: Prisma.StringFilter<"CarPhotos"> | string
   url?: Prisma.StringNullableFilter<"CarPhotos"> | string | null
+  is_cover?: Prisma.BoolFilter<"CarPhotos"> | boolean
   fileName?: Prisma.StringFilter<"CarPhotos"> | string
   mimeType?: Prisma.StringNullableFilter<"CarPhotos"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CarPhotos"> | Date | string
@@ -220,6 +230,7 @@ export type CarPhotosOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   carId?: Prisma.SortOrder
   url?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_cover?: Prisma.SortOrder
   fileName?: Prisma.SortOrder
   mimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -235,6 +246,7 @@ export type CarPhotosScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"CarPhotos"> | string
   carId?: Prisma.StringWithAggregatesFilter<"CarPhotos"> | string
   url?: Prisma.StringNullableWithAggregatesFilter<"CarPhotos"> | string | null
+  is_cover?: Prisma.BoolWithAggregatesFilter<"CarPhotos"> | boolean
   fileName?: Prisma.StringWithAggregatesFilter<"CarPhotos"> | string
   mimeType?: Prisma.StringNullableWithAggregatesFilter<"CarPhotos"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CarPhotos"> | Date | string
@@ -243,6 +255,7 @@ export type CarPhotosScalarWhereWithAggregatesInput = {
 export type CarPhotosCreateInput = {
   id?: string
   url?: string | null
+  is_cover?: boolean
   fileName: string
   mimeType?: string | null
   createdAt?: Date | string
@@ -253,6 +266,7 @@ export type CarPhotosUncheckedCreateInput = {
   id?: string
   carId: string
   url?: string | null
+  is_cover?: boolean
   fileName: string
   mimeType?: string | null
   createdAt?: Date | string
@@ -261,6 +275,7 @@ export type CarPhotosUncheckedCreateInput = {
 export type CarPhotosUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_cover?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -271,6 +286,7 @@ export type CarPhotosUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   carId?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_cover?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -280,6 +296,7 @@ export type CarPhotosCreateManyInput = {
   id?: string
   carId: string
   url?: string | null
+  is_cover?: boolean
   fileName: string
   mimeType?: string | null
   createdAt?: Date | string
@@ -288,6 +305,7 @@ export type CarPhotosCreateManyInput = {
 export type CarPhotosUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_cover?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -297,6 +315,7 @@ export type CarPhotosUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   carId?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_cover?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -316,6 +335,7 @@ export type CarPhotosCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   carId?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  is_cover?: Prisma.SortOrder
   fileName?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -325,6 +345,7 @@ export type CarPhotosMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   carId?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  is_cover?: Prisma.SortOrder
   fileName?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -334,6 +355,7 @@ export type CarPhotosMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   carId?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  is_cover?: Prisma.SortOrder
   fileName?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -384,6 +406,7 @@ export type CarPhotosUncheckedUpdateManyWithoutCarNestedInput = {
 export type CarPhotosCreateWithoutCarInput = {
   id?: string
   url?: string | null
+  is_cover?: boolean
   fileName: string
   mimeType?: string | null
   createdAt?: Date | string
@@ -392,6 +415,7 @@ export type CarPhotosCreateWithoutCarInput = {
 export type CarPhotosUncheckedCreateWithoutCarInput = {
   id?: string
   url?: string | null
+  is_cover?: boolean
   fileName: string
   mimeType?: string | null
   createdAt?: Date | string
@@ -430,6 +454,7 @@ export type CarPhotosScalarWhereInput = {
   id?: Prisma.StringFilter<"CarPhotos"> | string
   carId?: Prisma.StringFilter<"CarPhotos"> | string
   url?: Prisma.StringNullableFilter<"CarPhotos"> | string | null
+  is_cover?: Prisma.BoolFilter<"CarPhotos"> | boolean
   fileName?: Prisma.StringFilter<"CarPhotos"> | string
   mimeType?: Prisma.StringNullableFilter<"CarPhotos"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CarPhotos"> | Date | string
@@ -438,6 +463,7 @@ export type CarPhotosScalarWhereInput = {
 export type CarPhotosCreateManyCarInput = {
   id?: string
   url?: string | null
+  is_cover?: boolean
   fileName: string
   mimeType?: string | null
   createdAt?: Date | string
@@ -446,6 +472,7 @@ export type CarPhotosCreateManyCarInput = {
 export type CarPhotosUpdateWithoutCarInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_cover?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -454,6 +481,7 @@ export type CarPhotosUpdateWithoutCarInput = {
 export type CarPhotosUncheckedUpdateWithoutCarInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_cover?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -462,6 +490,7 @@ export type CarPhotosUncheckedUpdateWithoutCarInput = {
 export type CarPhotosUncheckedUpdateManyWithoutCarInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_cover?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -473,6 +502,7 @@ export type CarPhotosSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   id?: boolean
   carId?: boolean
   url?: boolean
+  is_cover?: boolean
   fileName?: boolean
   mimeType?: boolean
   createdAt?: boolean
@@ -483,6 +513,7 @@ export type CarPhotosSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   carId?: boolean
   url?: boolean
+  is_cover?: boolean
   fileName?: boolean
   mimeType?: boolean
   createdAt?: boolean
@@ -493,6 +524,7 @@ export type CarPhotosSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   carId?: boolean
   url?: boolean
+  is_cover?: boolean
   fileName?: boolean
   mimeType?: boolean
   createdAt?: boolean
@@ -503,12 +535,13 @@ export type CarPhotosSelectScalar = {
   id?: boolean
   carId?: boolean
   url?: boolean
+  is_cover?: boolean
   fileName?: boolean
   mimeType?: boolean
   createdAt?: boolean
 }
 
-export type CarPhotosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carId" | "url" | "fileName" | "mimeType" | "createdAt", ExtArgs["result"]["carPhotos"]>
+export type CarPhotosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carId" | "url" | "is_cover" | "fileName" | "mimeType" | "createdAt", ExtArgs["result"]["carPhotos"]>
 export type CarPhotosInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
 }
@@ -528,6 +561,7 @@ export type $CarPhotosPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     id: string
     carId: string
     url: string | null
+    is_cover: boolean
     fileName: string
     mimeType: string | null
     createdAt: Date
@@ -958,6 +992,7 @@ export interface CarPhotosFieldRefs {
   readonly id: Prisma.FieldRef<"CarPhotos", 'String'>
   readonly carId: Prisma.FieldRef<"CarPhotos", 'String'>
   readonly url: Prisma.FieldRef<"CarPhotos", 'String'>
+  readonly is_cover: Prisma.FieldRef<"CarPhotos", 'Boolean'>
   readonly fileName: Prisma.FieldRef<"CarPhotos", 'String'>
   readonly mimeType: Prisma.FieldRef<"CarPhotos", 'String'>
   readonly createdAt: Prisma.FieldRef<"CarPhotos", 'DateTime'>

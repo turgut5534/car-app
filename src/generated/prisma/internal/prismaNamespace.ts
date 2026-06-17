@@ -1455,6 +1455,7 @@ export const CarPhotosScalarFieldEnum = {
   id: 'id',
   carId: 'carId',
   url: 'url',
+  is_cover: 'is_cover',
   fileName: 'fileName',
   mimeType: 'mimeType',
   createdAt: 'createdAt'

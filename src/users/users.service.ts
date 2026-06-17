@@ -6,10 +6,11 @@ import {
 } from '@nestjs/common';
 import { User } from 'src/generated/prisma/client';
 import { PrismaService } from 'src/prisma.service';
-import { CreateUserDto } from './dto/create-user.dto/create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { AuthResponse } from './dto/return-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -63,12 +64,23 @@ export class UsersService {
         user,
         accessToken,
       };
-
     } catch (error) {
       if (error.code === 'P2002') {
         throw new BadRequestException('An error occurred');
       }
       throw error;
     }
+  }
+
+  async updateProfile(id: string, dto: UpdateUserDto): Promise<User> {
+
+    const user = await this.prisma.user.update({
+      where: { id },
+      data:{
+        ...dto
+      }
+    });
+
+    return user;
   }
 }

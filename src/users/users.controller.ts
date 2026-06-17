@@ -1,12 +1,14 @@
-import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Param, Patch, Post, UseGuards, UseInterceptors } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from 'src/generated/prisma/client';
 import { Get } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto/create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { JwtAuthGuard } from 'src/middlewares/jwt-guard';
 import { UserId } from 'src/auth/decorators/current-user.decorator';
 import { CheckEmailDto } from '../auth/dto/check-email.dto';
 import { AuthResponse } from './dto/return-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('users')
 export class UsersController {
@@ -21,5 +23,12 @@ export class UsersController {
   @Post()
   async saveUser(@Body() dto: CreateUserDto): Promise<AuthResponse> {
     return this.userService.saveUser(dto);
+  }
+
+  @Patch()
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(FileInterceptor('file'))
+  async udpateProfile(@UserId() id: string, @Body() dto: UpdateUserDto): Promise<User> {
+    return this.userService.updateProfile(id, dto);
   }
 }

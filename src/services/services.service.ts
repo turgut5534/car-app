@@ -22,7 +22,13 @@ export class ServicesService {
       },
       include: {
         createdBy: true,
-        car: true,
+        car: {
+          include: {
+            photos: {
+              orderBy: [{ is_cover: 'desc' }, { createdAt: 'asc' }],
+            },
+          },
+        },
         attachments: true,
       },
     });
@@ -41,10 +47,10 @@ export class ServicesService {
       include: {
         createdBy: {
           select: {
-            currency: true
-          }
+            currency: true,
+          },
         },
-        car: true
+        car: true,
       },
       orderBy: {
         createdAt: 'desc',
@@ -78,7 +84,6 @@ export class ServicesService {
 
     return this.prisma.$transaction(async (tx) => {
       try {
-
         const newService = await tx.serviceRecord.create({
           data: {
             carId: dto.carId,
@@ -141,11 +146,7 @@ export class ServicesService {
     // 1. Delete physical files
     for (const file of files) {
       try {
-        const filePath = join(
-          process.cwd(),
-          'uploads/services',
-          file.fileName,
-        );
+        const filePath = join(process.cwd(), 'uploads/services', file.fileName);
 
         await unlink(filePath);
       } catch (err) {

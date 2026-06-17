@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   ConflictException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -24,6 +25,9 @@ export class CarsService {
       include: {
         owner: true,
         documents: true,
+        photos: {
+          orderBy: [{ is_cover: 'desc' }, { createdAt: 'asc' }],
+        },
         fuels: {
           orderBy: {
             fuelDate: 'desc',
@@ -48,43 +52,39 @@ export class CarsService {
     }));
   }
 
-
   //Find a car
-async findOne(carId: string, userId: string) {
-  const car = await this.prisma.car.findFirst({
-    where: {
-      id: carId,
-      ownerId: userId,
-    },
-    include: {
-      
-    }
-  });
+  async findOne(carId: string, userId: string) {
+    const car = await this.prisma.car.findFirst({
+      where: {
+        id: carId,
+        ownerId: userId,
+      },
+      include: {
+        photos: {
+          orderBy: [{ is_cover: 'desc' }, { createdAt: 'asc' }],
+        },
+      },
+    });
 
-  if (!car) return null;
+    if (!car) return null;
 
-  // const fuelStats = await this.prisma.fuelRecord.aggregate({
-  //   where: {
-  //     carId,
-  //   },
-  //   _avg: {
-  //     consumption: true,
-  //     pricePerLiter: true,
-  //   }
-  // });
+    // const fuelStats = await this.prisma.fuelRecord.aggregate({
+    //   where: {
+    //     carId,
+    //   },
+    //   _avg: {
+    //     consumption: true,
+    //     pricePerLiter: true,
+    //   }
+    // });
 
-  // return {
-  //   ...car,
-  //   averageFuelConsumption: Number(fuelStats._avg.consumption ?? 0),
-  //   averageFuelPrice: Number(fuelStats._avg.pricePerLiter ?? 0),
-  // };
+    // return {
+    //   ...car,
+    //   averageFuelConsumption: Number(fuelStats._avg.consumption ?? 0),
+    //   averageFuelPrice: Number(fuelStats._avg.pricePerLiter ?? 0),
+    // };
 
-  return car
-}
-
-
-  update(id: number, updateCarDto: UpdateCarDto) {
-    return `This action updates a #${id} car`;
+    return car;
   }
 
   async remove(carId: string, userId: string, password: string) {
@@ -125,8 +125,17 @@ async findOne(carId: string, userId: string) {
       return await this.prisma.car.create({
         data: {
           ...dto,
-          imageUrl: file ? file.filename : undefined,
           ownerId: userId,
+          photos: file
+            ? {
+                create: {
+                  url: file.path,
+                  is_cover: true,
+                  fileName: file.filename,
+                  mimeType: file.mimetype,
+                },
+              }
+            : undefined,
         },
       });
     } catch (error) {
@@ -138,5 +147,166 @@ async findOne(carId: string, userId: string) {
     }
   }
 
+  async update(dto: UpdateCarDto, carId: string, userId: string, file) {
+    const car = this.prisma.car.findFirst({
+      where: {
+        id: carId,
+      },
+    });
 
+    if (!car) {
+      throw new NotFoundException('Vehicle not found');
+    }
+
+    return this.prisma.$transaction(async (tx) => {
+      const updatedCar = await tx.car.update({
+        where: { id: carId },
+        data: {
+          ...dto,
+        },
+      });
+
+      if (file) {
+        await tx.carPhotos.create({
+          data: {
+            carId: carId,
+            url: file.filename,
+            fileName: file.filename,
+            mimeType: file.mimetype,
+          },
+        });
+      }
+
+      return tx.car.findUnique({
+        where: { id: carId },
+        include: {
+          photos: {
+            orderBy: {
+              createdAt: 'asc',
+            },
+          },
+        },
+      });
+    });
+  }
+
+  async removePhoto(id: string, userId: string) {
+    const photo = await this.prisma.carPhotos.findUnique({
+      where: { id },
+      include: {
+        car: true,
+      },
+    });
+
+    if (!photo) {
+      throw new NotFoundException('Photo not found');
+    }
+
+    if (photo.car.ownerId !== userId) {
+      throw new ForbiddenException('You cannot delete this photo');
+    }
+
+    if (photo.is_cover) {
+      throw new ForbiddenException('You need to set a cover photo first');
+    }
+
+    const filePath = `./uploads/cars/${photo.fileName}`;
+
+    await unlink(filePath).catch(() => null);
+
+    await this.prisma.carPhotos.delete({
+      where: { id },
+    });
+  }
+
+  async setCoverPhoto(id: string, carId: string, userId: string) {
+    const photo = await this.prisma.carPhotos.findUnique({
+      where: { id },
+    });
+
+    if (!photo) {
+      throw new NotFoundException('Photo not found');
+    }
+
+    if (photo.carId !== carId) {
+      throw new ForbiddenException('You cannot update this photo');
+    }
+
+    if (photo.is_cover) {
+      throw new BadRequestException('This photo is already your cover photo');
+    }
+
+    await this.prisma.$transaction([
+      this.prisma.carPhotos.updateMany({
+        where: {
+          carId,
+          is_cover: true,
+        },
+        data: {
+          is_cover: false,
+        },
+      }),
+      this.prisma.carPhotos.update({
+        where: { id },
+        data: { is_cover: true },
+      }),
+    ]);
+  }
+
+  // async overviewData(userId: string, carId: string) {
+
+  //   const car = await this.prisma.car.findFirst({
+  //     where: {
+  //       id: carId,
+  //       ownerId: userId,
+  //     },
+  //     include: {
+  //       expenses: true,
+  //       services: true,
+  //       fuels: true,
+  //     },
+  //   });
+
+  //   if (!car) {
+  //     throw new NotFoundException('Car not found');
+  //   }
+
+  //   const totalExpenses = car.expenses.reduce((s, e) => s + e.amount, 0);
+
+  //   const last30Days = new Date();
+  //   last30Days.setDate(last30Days.getDate() - 30);
+
+  //   const monthlyExpenses = car.expenses
+  //     .filter((e) => new Date(e.createdAt) >= last30Days)
+  //     .reduce((s, e) => s + e.amount, 0);
+
+  //   const lastService =
+  //     [...car.services].sort(
+  //       (a, b) =>
+  //         new Date(b.serviceDate).getTime() - new Date(a.serviceDate).getTime(),
+  //     )[0] || null;
+
+  //   const lastFuel =
+  //     [...car.fuels].sort(
+  //       (a, b) =>
+  //         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  //     )[0] || null;
+
+  //   const totalFuel = car.fuels.reduce((s, f) => s + f.liters, 0);
+
+  //   const averageFuelConsumption =
+  //     car.currentKm > 0 ? (totalFuel / car.currentKm) * 100 : 0;
+
+  //   const costPerKilometer =
+  //     car.currentKm > 0 ? totalExpenses / car.currentKm : 0;
+
+  //   return {
+  //     monthlyExpenses,
+  //     totalExpenses,
+  //     lastService,
+  //     averageFuelConsumption,
+  //     lastFuel,
+  //     costPerKilometer,
+  //   };
+  // }
 }
