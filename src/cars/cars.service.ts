@@ -245,8 +245,17 @@ export class CarsService {
       },
       include: {
         expenses: true,
-        services: true,
+        services: {
+          orderBy: {
+            createdAt: 'desc',
+          },
+        },
         fuels: true,
+        owner: {
+          select: {
+            currency: true,
+          },
+        },
       },
     });
 
@@ -254,7 +263,10 @@ export class CarsService {
       throw new NotFoundException('Car not found');
     }
 
-    const totalExpenses = car.expenses.reduce((s, e) => s + e.amount.toNumber(), 0);
+    const totalExpenses = car.services.reduce(
+      (s, e) => s + (e.amount ? e.amount.toNumber() : 0),
+      0,
+    );
 
     const last30Days = new Date();
     last30Days.setDate(last30Days.getDate() - 30);
@@ -263,11 +275,7 @@ export class CarsService {
       .filter((e) => new Date(e.createdAt) >= last30Days)
       .reduce((s, e) => s + e.amount.toNumber(), 0);
 
-    const lastService =
-      [...car.services].sort(
-        (a, b) =>
-          new Date(b.serviceDate).getTime() - new Date(a.serviceDate).getTime(),
-      )[0] || null;
+    const lastService = car?.services?.[0] ?? null;
 
     const lastFuel =
       [...car.fuels].sort(
@@ -282,9 +290,11 @@ export class CarsService {
       _avg: {
         consumption: true,
         pricePerLiter: true,
-      }
+      },
+      _sum: {
+        totalAmount: true, // or liters / fuelAmount depending on your schema
+      },
     });
-
 
     const costPerKilometer =
       car.currentKm > 0 ? totalExpenses / car.currentKm : 0;
@@ -296,6 +306,7 @@ export class CarsService {
       averageFuelConsumption: fuelStats._avg.consumption ?? 0,
       lastFuel,
       costPerKilometer,
+      currency: car.owner.currency,
     };
   }
 }
