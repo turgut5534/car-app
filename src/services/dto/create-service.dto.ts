@@ -2,17 +2,22 @@ import {
   IsString,
   IsNotEmpty,
   IsOptional,
-  IsNumber,
   IsInt,
-  IsDateString,
+  IsDate,
   IsEnum,
+  IsNumber,
 } from 'class-validator';
+import { Type } from 'class-transformer';
 import { ServiceCategory } from 'src/generated/prisma/enums';
 
 export class CreateServiceDto {
   @IsString()
   @IsNotEmpty()
   carId!: string;
+
+  @IsOptional()
+  @IsString()
+  createdById?: string;
 
   @IsOptional()
   @IsString()
@@ -23,15 +28,17 @@ export class CreateServiceDto {
   description?: string;
 
   @IsOptional()
-  @IsString()
-  amount?: string;
+  @Type(() => Number)
+  @IsNumber()
+  amount?: number;
 
-  @IsNotEmpty()
-  @IsString()
-  km!: string;
+  @Type(() => Number)
+  @IsInt()
+  km!: number;
 
-  @IsDateString()
-  serviceDate!: string;
+  @Type(() => Date)
+  @IsDate()
+  serviceDate!: Date;
 
   @IsEnum(ServiceCategory)
   category!: ServiceCategory;

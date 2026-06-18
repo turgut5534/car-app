@@ -144,8 +144,15 @@ export class ServicesService {
     });
   }
 
-  update(id: number, updateServiceDto: UpdateServiceDto) {
-    return `This action updates a #${id} service`;
+  update(id: string, dto: UpdateServiceDto, carId: string, files: Express.Multer.File[], userId: string) {
+    return this.prisma.serviceRecord.update({
+      where: { id },
+      data: {
+        ...dto,
+        carId,
+        createdById: userId,
+      },
+    });
   }
 
   async remove(id: string) {
