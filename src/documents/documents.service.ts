@@ -3,6 +3,7 @@ import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
 import { PrismaService } from 'src/prisma.service';
 import { unlink } from 'fs/promises';
+import { join } from 'path';
 
 @Injectable()
 export class DocumentsService {
@@ -34,6 +35,7 @@ export class DocumentsService {
             },
           },
         },
+        attachments: true,
       },
     });
 
@@ -44,19 +46,33 @@ export class DocumentsService {
     return document;
   }
 
-  async create(dto: CreateDocumentDto, userId: string, file?: any) {
+  async create(
+    dto: CreateDocumentDto,
+    userId: string,
+    files: Express.Multer.File[],
+  ) {
     try {
-      return await this.prisma.document.create({
-        data: {
-          ...dto,
-          carId: dto.carId,
-          fileUrl: file ? file.filename : undefined,
-          uploadedById: userId,
-          expiresAt: dto.expiresAt ? new Date(dto.expiresAt) : null,
-        },
+      return this.prisma.$transaction(async (prisma) => {
+        const document = await prisma.document.create({
+          data: {
+            ...dto,
+            carId: dto.carId,
+            uploadedById: userId,
+            expiresAt: dto.expiresAt ? new Date(dto.expiresAt) : null,
+            attachments: {
+              create: files.map((file) => ({
+                url: file.path,
+                fileName: file.filename,
+                mimeType: file.mimetype,
+              })),
+            },
+          },
+        });
+
+        return document;
       });
     } catch (error) {
-      if (file) {
+      for (const file of files ?? []) {
         await unlink(file.path).catch(() => null);
       }
 
@@ -70,5 +86,38 @@ export class DocumentsService {
 
   remove(id: number) {
     return `This action removes a #${id} document`;
+  }
+
+  async removeAttachment(id: string, attachmentId: string) {
+    const attachment = await this.prisma.documentAttachment.findFirst({
+      where: {
+        id: attachmentId,
+        documentId: id,
+      },
+    });
+
+    if (!attachment) {
+      throw new NotFoundException('Attachment not found');
+    }
+
+    await this.prisma.documentAttachment.delete({
+      where: {
+        id: attachmentId,
+        documentId: id,
+      },
+    });
+
+    try {
+      const filePath = join(
+        process.cwd(),
+        'uploads/documents',
+        attachment.fileName,
+      );
+      await unlink(filePath);
+    } catch (err) {
+      console.log('File delete error:', err);
+    }
+
+    return { message: 'Attachment removed successfully' };
   }
 }

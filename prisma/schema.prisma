@@ -263,6 +263,7 @@ model Document {
 
   car         Car @relation(fields: [carId], references: [id], onDelete: Cascade)
   uploadedBy  User? @relation(fields: [uploadedById], references: [id])
+  attachments DocumentAttachment[]
 }
 
 enum DocumentType {
@@ -274,6 +275,18 @@ enum DocumentType {
   PURCHASE_INVOICE
   ROADSIDE_ASSISTANCE
   OTHER
+}
+
+
+model DocumentAttachment {
+  id              String   @id @default(uuid())
+  documentId      String
+  url             String?
+  fileName        String
+  mimeType        String?
+  createdAt       DateTime @default(now())
+
+  document        Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
 }
 
 model Reminder {

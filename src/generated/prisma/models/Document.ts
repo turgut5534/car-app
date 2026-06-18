@@ -208,6 +208,7 @@ export type DocumentWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   car?: Prisma.XOR<Prisma.CarScalarRelationFilter, Prisma.CarWhereInput>
   uploadedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  attachments?: Prisma.DocumentAttachmentListRelationFilter
 }
 
 export type DocumentOrderByWithRelationInput = {
@@ -221,6 +222,7 @@ export type DocumentOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   car?: Prisma.CarOrderByWithRelationInput
   uploadedBy?: Prisma.UserOrderByWithRelationInput
+  attachments?: Prisma.DocumentAttachmentOrderByRelationAggregateInput
 }
 
 export type DocumentWhereUniqueInput = Prisma.AtLeast<{
@@ -237,6 +239,7 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   car?: Prisma.XOR<Prisma.CarScalarRelationFilter, Prisma.CarWhereInput>
   uploadedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  attachments?: Prisma.DocumentAttachmentListRelationFilter
 }, "id">
 
 export type DocumentOrderByWithAggregationInput = {
@@ -276,6 +279,7 @@ export type DocumentCreateInput = {
   createdAt?: Date | string
   car: Prisma.CarCreateNestedOneWithoutDocumentsInput
   uploadedBy?: Prisma.UserCreateNestedOneWithoutUploadedDocumentsInput
+  attachments?: Prisma.DocumentAttachmentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateInput = {
@@ -287,6 +291,7 @@ export type DocumentUncheckedCreateInput = {
   fileUrl?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
+  attachments?: Prisma.DocumentAttachmentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUpdateInput = {
@@ -298,6 +303,7 @@ export type DocumentUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   car?: Prisma.CarUpdateOneRequiredWithoutDocumentsNestedInput
   uploadedBy?: Prisma.UserUpdateOneWithoutUploadedDocumentsNestedInput
+  attachments?: Prisma.DocumentAttachmentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateInput = {
@@ -309,6 +315,7 @@ export type DocumentUncheckedUpdateInput = {
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.DocumentAttachmentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentCreateManyInput = {
@@ -383,6 +390,11 @@ export type DocumentMinOrderByAggregateInput = {
   fileUrl?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type DocumentScalarRelationFilter = {
+  is?: Prisma.DocumentWhereInput
+  isNot?: Prisma.DocumentWhereInput
 }
 
 export type DocumentCreateNestedManyWithoutUploadedByInput = {
@@ -477,6 +489,20 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
+export type DocumentCreateNestedOneWithoutAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutAttachmentsInput, Prisma.DocumentUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutAttachmentsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneRequiredWithoutAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutAttachmentsInput, Prisma.DocumentUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutAttachmentsInput
+  upsert?: Prisma.DocumentUpsertWithoutAttachmentsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutAttachmentsInput, Prisma.DocumentUpdateWithoutAttachmentsInput>, Prisma.DocumentUncheckedUpdateWithoutAttachmentsInput>
+}
+
 export type DocumentCreateWithoutUploadedByInput = {
   id?: string
   type: $Enums.DocumentType
@@ -485,6 +511,7 @@ export type DocumentCreateWithoutUploadedByInput = {
   expiresAt?: Date | string | null
   createdAt?: Date | string
   car: Prisma.CarCreateNestedOneWithoutDocumentsInput
+  attachments?: Prisma.DocumentAttachmentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutUploadedByInput = {
@@ -495,6 +522,7 @@ export type DocumentUncheckedCreateWithoutUploadedByInput = {
   fileUrl?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
+  attachments?: Prisma.DocumentAttachmentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutUploadedByInput = {
@@ -545,6 +573,7 @@ export type DocumentCreateWithoutCarInput = {
   expiresAt?: Date | string | null
   createdAt?: Date | string
   uploadedBy?: Prisma.UserCreateNestedOneWithoutUploadedDocumentsInput
+  attachments?: Prisma.DocumentAttachmentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutCarInput = {
@@ -555,6 +584,7 @@ export type DocumentUncheckedCreateWithoutCarInput = {
   fileUrl?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
+  attachments?: Prisma.DocumentAttachmentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutCarInput = {
@@ -583,6 +613,66 @@ export type DocumentUpdateManyWithWhereWithoutCarInput = {
   data: Prisma.XOR<Prisma.DocumentUpdateManyMutationInput, Prisma.DocumentUncheckedUpdateManyWithoutCarInput>
 }
 
+export type DocumentCreateWithoutAttachmentsInput = {
+  id?: string
+  type: $Enums.DocumentType
+  title?: string | null
+  fileUrl?: string | null
+  expiresAt?: Date | string | null
+  createdAt?: Date | string
+  car: Prisma.CarCreateNestedOneWithoutDocumentsInput
+  uploadedBy?: Prisma.UserCreateNestedOneWithoutUploadedDocumentsInput
+}
+
+export type DocumentUncheckedCreateWithoutAttachmentsInput = {
+  id?: string
+  carId: string
+  uploadedById?: string | null
+  type: $Enums.DocumentType
+  title?: string | null
+  fileUrl?: string | null
+  expiresAt?: Date | string | null
+  createdAt?: Date | string
+}
+
+export type DocumentCreateOrConnectWithoutAttachmentsInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutAttachmentsInput, Prisma.DocumentUncheckedCreateWithoutAttachmentsInput>
+}
+
+export type DocumentUpsertWithoutAttachmentsInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutAttachmentsInput, Prisma.DocumentUncheckedUpdateWithoutAttachmentsInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutAttachmentsInput, Prisma.DocumentUncheckedCreateWithoutAttachmentsInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutAttachmentsInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutAttachmentsInput, Prisma.DocumentUncheckedUpdateWithoutAttachmentsInput>
+}
+
+export type DocumentUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  car?: Prisma.CarUpdateOneRequiredWithoutDocumentsNestedInput
+  uploadedBy?: Prisma.UserUpdateOneWithoutUploadedDocumentsNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  carId?: Prisma.StringFieldUpdateOperationsInput | string
+  uploadedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type DocumentCreateManyUploadedByInput = {
   id?: string
   carId: string
@@ -601,6 +691,7 @@ export type DocumentUpdateWithoutUploadedByInput = {
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   car?: Prisma.CarUpdateOneRequiredWithoutDocumentsNestedInput
+  attachments?: Prisma.DocumentAttachmentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutUploadedByInput = {
@@ -611,6 +702,7 @@ export type DocumentUncheckedUpdateWithoutUploadedByInput = {
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.DocumentAttachmentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateManyWithoutUploadedByInput = {
@@ -641,6 +733,7 @@ export type DocumentUpdateWithoutCarInput = {
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   uploadedBy?: Prisma.UserUpdateOneWithoutUploadedDocumentsNestedInput
+  attachments?: Prisma.DocumentAttachmentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutCarInput = {
@@ -651,6 +744,7 @@ export type DocumentUncheckedUpdateWithoutCarInput = {
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.DocumentAttachmentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateManyWithoutCarInput = {
@@ -664,6 +758,35 @@ export type DocumentUncheckedUpdateManyWithoutCarInput = {
 }
 
 
+/**
+ * Count Type DocumentCountOutputType
+ */
+
+export type DocumentCountOutputType = {
+  attachments: number
+}
+
+export type DocumentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  attachments?: boolean | DocumentCountOutputTypeCountAttachmentsArgs
+}
+
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentCountOutputType
+   */
+  select?: Prisma.DocumentCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentAttachmentWhereInput
+}
+
 
 export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -676,6 +799,8 @@ export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   createdAt?: boolean
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   uploadedBy?: boolean | Prisma.Document$uploadedByArgs<ExtArgs>
+  attachments?: boolean | Prisma.Document$attachmentsArgs<ExtArgs>
+  _count?: boolean | Prisma.DocumentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["document"]>
 
 export type DocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -719,6 +844,8 @@ export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type DocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   uploadedBy?: boolean | Prisma.Document$uploadedByArgs<ExtArgs>
+  attachments?: boolean | Prisma.Document$attachmentsArgs<ExtArgs>
+  _count?: boolean | Prisma.DocumentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DocumentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
@@ -734,6 +861,7 @@ export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     car: Prisma.$CarPayload<ExtArgs>
     uploadedBy: Prisma.$UserPayload<ExtArgs> | null
+    attachments: Prisma.$DocumentAttachmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1140,6 +1268,7 @@ export interface Prisma__DocumentClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   car<T extends Prisma.CarDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarDefaultArgs<ExtArgs>>): Prisma.Prisma__CarClient<runtime.Types.Result.GetResult<Prisma.$CarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   uploadedBy<T extends Prisma.Document$uploadedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$uploadedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  attachments<T extends Prisma.Document$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1594,6 +1723,30 @@ export type Document$uploadedByArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
+}
+
+/**
+ * Document.attachments
+ */
+export type Document$attachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentAttachment
+   */
+  select?: Prisma.DocumentAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentAttachment
+   */
+  omit?: Prisma.DocumentAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentAttachmentInclude<ExtArgs> | null
+  where?: Prisma.DocumentAttachmentWhereInput
+  orderBy?: Prisma.DocumentAttachmentOrderByWithRelationInput | Prisma.DocumentAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentAttachmentScalarFieldEnum | Prisma.DocumentAttachmentScalarFieldEnum[]
 }
 
 /**

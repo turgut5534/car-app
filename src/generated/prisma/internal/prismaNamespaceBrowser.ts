@@ -63,6 +63,7 @@ export const ModelName = {
   FuelCard: 'FuelCard',
   FuelCardTransaction: 'FuelCardTransaction',
   Document: 'Document',
+  DocumentAttachment: 'DocumentAttachment',
   Reminder: 'Reminder'
 } as const
 
@@ -260,6 +261,18 @@ export const DocumentScalarFieldEnum = {
 } as const
 
 export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
+
+
+export const DocumentAttachmentScalarFieldEnum = {
+  id: 'id',
+  documentId: 'documentId',
+  url: 'url',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  createdAt: 'createdAt'
+} as const
+
+export type DocumentAttachmentScalarFieldEnum = (typeof DocumentAttachmentScalarFieldEnum)[keyof typeof DocumentAttachmentScalarFieldEnum]
 
 
 export const ReminderScalarFieldEnum = {

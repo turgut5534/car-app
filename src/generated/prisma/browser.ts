@@ -78,6 +78,11 @@ export type FuelCardTransaction = Prisma.FuelCardTransactionModel
  */
 export type Document = Prisma.DocumentModel
 /**
+ * Model DocumentAttachment
+ * 
+ */
+export type DocumentAttachment = Prisma.DocumentAttachmentModel
+/**
  * Model Reminder
  * 
  */

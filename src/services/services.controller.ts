@@ -17,7 +17,7 @@ import { UpdateServiceDto } from './dto/update-service.dto';
 import { UserId } from 'src/auth/decorators/current-user.decorator';
 import { Service } from './entities/service.entity';
 import { JwtAuthGuard } from 'src/middlewares/jwt-guard';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { memoryStorage } from 'multer';

@@ -396,6 +396,7 @@ export const ModelName = {
   FuelCard: 'FuelCard',
   FuelCardTransaction: 'FuelCardTransaction',
   Document: 'Document',
+  DocumentAttachment: 'DocumentAttachment',
   Reminder: 'Reminder'
 } as const
 
@@ -412,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "car" | "carPhotos" | "carMember" | "serviceRecord" | "serviceAttachment" | "fuelRecord" | "fuelAttachment" | "expense" | "fuelCard" | "fuelCardTransaction" | "document" | "reminder"
+    modelProps: "user" | "car" | "carPhotos" | "carMember" | "serviceRecord" | "serviceAttachment" | "fuelRecord" | "fuelAttachment" | "expense" | "fuelCard" | "fuelCardTransaction" | "document" | "documentAttachment" | "reminder"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1304,6 +1305,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DocumentAttachment: {
+      payload: Prisma.$DocumentAttachmentPayload<ExtArgs>
+      fields: Prisma.DocumentAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DocumentAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DocumentAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.DocumentAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DocumentAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.DocumentAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.DocumentAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.DocumentAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DocumentAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.DocumentAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentAttachmentPayload>
+        }
+        update: {
+          args: Prisma.DocumentAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.DocumentAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DocumentAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DocumentAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.DocumentAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.DocumentAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDocumentAttachment>
+        }
+        groupBy: {
+          args: Prisma.DocumentAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DocumentAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DocumentAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DocumentAttachmentCountAggregateOutputType> | number
+        }
+      }
+    }
     Reminder: {
       payload: Prisma.$ReminderPayload<ExtArgs>
       fields: Prisma.ReminderFieldRefs
@@ -1595,6 +1670,18 @@ export const DocumentScalarFieldEnum = {
 } as const
 
 export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
+
+
+export const DocumentAttachmentScalarFieldEnum = {
+  id: 'id',
+  documentId: 'documentId',
+  url: 'url',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  createdAt: 'createdAt'
+} as const
+
+export type DocumentAttachmentScalarFieldEnum = (typeof DocumentAttachmentScalarFieldEnum)[keyof typeof DocumentAttachmentScalarFieldEnum]
 
 
 export const ReminderScalarFieldEnum = {
@@ -1939,6 +2026,7 @@ export type GlobalOmitConfig = {
   fuelCard?: Prisma.FuelCardOmit
   fuelCardTransaction?: Prisma.FuelCardTransactionOmit
   document?: Prisma.DocumentOmit
+  documentAttachment?: Prisma.DocumentAttachmentOmit
   reminder?: Prisma.ReminderOmit
 }
 

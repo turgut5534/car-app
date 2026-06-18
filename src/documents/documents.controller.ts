@@ -10,11 +10,12 @@ import {
   UploadedFile,
   UseGuards,
   Query,
+  UploadedFiles,
 } from '@nestjs/common';
 import { DocumentsService } from './documents.service';
 import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { UserId } from 'src/auth/decorators/current-user.decorator';
@@ -37,7 +38,7 @@ export class DocumentsController {
 
   @Post()
   @UseInterceptors(
-    FileInterceptor('file', {
+    FilesInterceptor('files', 10, {
       storage: diskStorage({
         destination: './uploads/documents',
         filename: (req, file, cb) => {
@@ -73,11 +74,11 @@ export class DocumentsController {
     }),
   )
   create(
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFiles() files: Express.Multer.File[],
     @UserId() userId: string,
     @Body() createDocumentDto: CreateDocumentDto,
   ) {
-    return this.documentsService.create(createDocumentDto, userId, file);
+    return this.documentsService.create(createDocumentDto, userId, files);
   }
 
   @Patch(':id')
@@ -91,5 +92,10 @@ export class DocumentsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.documentsService.remove(+id);
+  }
+
+  @Delete(':id/attachments/:attachmentId')
+  removeAttachment(@Param('id') id: string, @Param('attachmentId') attachmentId: string) {
+    return this.documentsService.removeAttachment(id, attachmentId);
   }
 }
