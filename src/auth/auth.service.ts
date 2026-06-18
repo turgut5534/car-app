@@ -9,6 +9,7 @@ import {
 import * as bcrypt from 'bcrypt';
 import { User } from 'src/generated/prisma/client';
 import { NotFoundError } from 'rxjs';
+import { CheckPasswordDto } from './dto/change-password.dto';
 
 @Injectable()
 export class AuthService {
@@ -64,5 +65,30 @@ export class AuthService {
     }
 
     return user
+  }
+
+  async changePassword(dto: CheckPasswordDto, userId: string): Promise<boolean> {
+
+    const user = await this.prisma.user.findFirst({
+      where: { id: userId },
+    });
+
+    if(!user) {
+      throw new NotFoundException('User not found')
+    }
+
+    const validPassword = await bcrypt.compare(dto.currentPassword, user.password);
+
+    if (!validPassword) {
+      throw new UnauthorizedException('Invalid password');
+    }
+
+    const hashedPassword = await bcrypt.hash(dto.newPassword, 10);
+
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { password: hashedPassword },
+    }); 
+    return true;
   }
 }

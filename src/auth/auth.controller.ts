@@ -16,6 +16,7 @@ import { CheckEmailDto } from './dto/check-email.dto';
 import { JwtAuthGuard } from 'src/middlewares/jwt-guard';
 import { UserId } from './decorators/current-user.decorator';
 import { User } from 'src/generated/prisma/client';
+import { CheckPasswordDto } from './dto/change-password.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -34,6 +35,13 @@ export class AuthController {
     return {
       exists,
     };
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('change-password')
+  async changePassword(@Body() dto: CheckPasswordDto, @UserId() userId: string) {
+
+    return this.authService.changePassword(dto, userId);
   }
 
   @UseGuards(JwtAuthGuard)
