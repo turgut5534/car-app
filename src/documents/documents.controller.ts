@@ -82,11 +82,49 @@ export class DocumentsController {
   }
 
   @Patch(':id')
+  @UseInterceptors(
+    FilesInterceptor('files', 10, {
+      storage: diskStorage({
+        destination: './uploads/documents',
+        filename: (req, file, cb) => {
+          const uniqueName = `${Date.now()}-${Math.round(
+            Math.random() * 1e9,
+          )}${extname(file.originalname)}`;
+
+          cb(null, uniqueName);
+        },
+      }),
+      fileFilter: (req, file, cb) => {
+        const allowedMimeTypes = [
+          'application/pdf',
+          'application/msword',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          'image/jpeg',
+          'image/png',
+          'image/webp',
+        ];
+
+        if (!allowedMimeTypes.includes(file.mimetype)) {
+          return cb(
+            new Error('Only PDF, Word, or image files are allowed'),
+            false,
+          );
+        }
+
+        cb(null, true);
+      },
+      limits: {
+        fileSize: 5 * 1024 * 1024,
+      },
+    }),
+  )
   update(
     @Param('id') id: string,
     @Body() updateDocumentDto: UpdateDocumentDto,
+    @UserId() userId: string,
+    @UploadedFiles() files?: Express.Multer.File[],
   ) {
-    return this.documentsService.update(+id, updateDocumentDto);
+    return this.documentsService.update(id, updateDocumentDto, userId, files);
   }
 
   @Delete(':id')
@@ -95,7 +133,10 @@ export class DocumentsController {
   }
 
   @Delete(':id/attachments/:attachmentId')
-  removeAttachment(@Param('id') id: string, @Param('attachmentId') attachmentId: string) {
+  removeAttachment(
+    @Param('id') id: string,
+    @Param('attachmentId') attachmentId: string,
+  ) {
     return this.documentsService.removeAttachment(id, attachmentId);
   }
 }

@@ -75,13 +75,40 @@ export class DocumentsService {
       for (const file of files ?? []) {
         await unlink(file.path).catch(() => null);
       }
+      console.error('Error creating document:', error);
 
       throw error;
     }
   }
 
-  update(id: number, updateDocumentDto: UpdateDocumentDto) {
-    return `This action updates a #${id} document`;
+  update(id: string, updateDocumentDto: UpdateDocumentDto, userId: string, files?: Express.Multer.File[]) {
+
+
+    const updatedDocument = this.prisma.$transaction(async (prisma) => {
+      const document = await prisma.document.update({
+        where: { id },
+        data: {
+          ...updateDocumentDto,
+          uploadedById: userId,
+          expiresAt: updateDocumentDto.expiresAt
+            ? new Date(updateDocumentDto.expiresAt)
+            : null,
+          attachments: files
+            ? {
+                create: files.map((file) => ({
+                  url: file.path,
+                  fileName: file.filename,
+                  mimeType: file.mimetype,
+                })),
+              }
+            : undefined,
+        },
+      });
+
+      return document;
+    });
+
+    return updatedDocument; 
   }
 
   remove(id: number) {
