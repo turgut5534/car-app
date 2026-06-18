@@ -36,6 +36,7 @@ export type UserMinAggregateOutputType = {
   isVerified: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  picture: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -50,6 +51,7 @@ export type UserMaxAggregateOutputType = {
   isVerified: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  picture: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -64,6 +66,7 @@ export type UserCountAggregateOutputType = {
   isVerified: number
   createdAt: number
   updatedAt: number
+  picture: number
   _all: number
 }
 
@@ -80,6 +83,7 @@ export type UserMinAggregateInputType = {
   isVerified?: true
   createdAt?: true
   updatedAt?: true
+  picture?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -94,6 +98,7 @@ export type UserMaxAggregateInputType = {
   isVerified?: true
   createdAt?: true
   updatedAt?: true
+  picture?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -108,6 +113,7 @@ export type UserCountAggregateInputType = {
   isVerified?: true
   createdAt?: true
   updatedAt?: true
+  picture?: true
   _all?: true
 }
 
@@ -195,6 +201,7 @@ export type UserGroupByOutputType = {
   isVerified: boolean
   createdAt: Date
   updatedAt: Date
+  picture: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -230,6 +237,7 @@ export type UserWhereInput = {
   isVerified?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  picture?: Prisma.StringNullableFilter<"User"> | string | null
   ownedCars?: Prisma.CarListRelationFilter
   carMemberships?: Prisma.CarMemberListRelationFilter
   fuelCards?: Prisma.FuelCardListRelationFilter
@@ -253,6 +261,7 @@ export type UserOrderByWithRelationInput = {
   isVerified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  picture?: Prisma.SortOrderInput | Prisma.SortOrder
   ownedCars?: Prisma.CarOrderByRelationAggregateInput
   carMemberships?: Prisma.CarMemberOrderByRelationAggregateInput
   fuelCards?: Prisma.FuelCardOrderByRelationAggregateInput
@@ -279,6 +288,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   isVerified?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  picture?: Prisma.StringNullableFilter<"User"> | string | null
   ownedCars?: Prisma.CarListRelationFilter
   carMemberships?: Prisma.CarMemberListRelationFilter
   fuelCards?: Prisma.FuelCardListRelationFilter
@@ -302,6 +312,7 @@ export type UserOrderByWithAggregationInput = {
   isVerified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  picture?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -322,6 +333,7 @@ export type UserScalarWhereWithAggregatesInput = {
   isVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  picture?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
 export type UserCreateInput = {
@@ -336,6 +348,7 @@ export type UserCreateInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardCreateNestedManyWithoutUserInput
@@ -359,6 +372,7 @@ export type UserUncheckedCreateInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarUncheckedCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberUncheckedCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardUncheckedCreateNestedManyWithoutUserInput
@@ -382,6 +396,7 @@ export type UserUpdateInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUpdateManyWithoutUserNestedInput
@@ -405,6 +420,7 @@ export type UserUncheckedUpdateInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUncheckedUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUncheckedUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUncheckedUpdateManyWithoutUserNestedInput
@@ -428,6 +444,7 @@ export type UserCreateManyInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -442,6 +459,7 @@ export type UserUpdateManyMutationInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -456,6 +474,7 @@ export type UserUncheckedUpdateManyInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -470,6 +489,7 @@ export type UserCountOrderByAggregateInput = {
   isVerified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  picture?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -484,6 +504,7 @@ export type UserMaxOrderByAggregateInput = {
   isVerified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  picture?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -498,6 +519,7 @@ export type UserMinOrderByAggregateInput = {
   isVerified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  picture?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -674,6 +696,7 @@ export type UserCreateWithoutOwnedCarsInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   carMemberships?: Prisma.CarMemberCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
@@ -696,6 +719,7 @@ export type UserUncheckedCreateWithoutOwnedCarsInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   carMemberships?: Prisma.CarMemberUncheckedCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
@@ -734,6 +758,7 @@ export type UserUpdateWithoutOwnedCarsInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carMemberships?: Prisma.CarMemberUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
@@ -756,6 +781,7 @@ export type UserUncheckedUpdateWithoutOwnedCarsInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carMemberships?: Prisma.CarMemberUncheckedUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -778,6 +804,7 @@ export type UserCreateWithoutCarMembershipsInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarCreateNestedManyWithoutOwnerInput
   fuelCards?: Prisma.FuelCardCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
@@ -800,6 +827,7 @@ export type UserUncheckedCreateWithoutCarMembershipsInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarUncheckedCreateNestedManyWithoutOwnerInput
   fuelCards?: Prisma.FuelCardUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
@@ -838,6 +866,7 @@ export type UserUpdateWithoutCarMembershipsInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUpdateManyWithoutOwnerNestedInput
   fuelCards?: Prisma.FuelCardUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
@@ -860,6 +889,7 @@ export type UserUncheckedUpdateWithoutCarMembershipsInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUncheckedUpdateManyWithoutOwnerNestedInput
   fuelCards?: Prisma.FuelCardUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -882,6 +912,7 @@ export type UserCreateWithoutCreatedServicesInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardCreateNestedManyWithoutUserInput
@@ -904,6 +935,7 @@ export type UserUncheckedCreateWithoutCreatedServicesInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarUncheckedCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberUncheckedCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardUncheckedCreateNestedManyWithoutUserInput
@@ -942,6 +974,7 @@ export type UserUpdateWithoutCreatedServicesInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUpdateManyWithoutUserNestedInput
@@ -964,6 +997,7 @@ export type UserUncheckedUpdateWithoutCreatedServicesInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUncheckedUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUncheckedUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUncheckedUpdateManyWithoutUserNestedInput
@@ -986,6 +1020,7 @@ export type UserCreateWithoutCreatedFuelRecordsInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardCreateNestedManyWithoutUserInput
@@ -1008,6 +1043,7 @@ export type UserUncheckedCreateWithoutCreatedFuelRecordsInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarUncheckedCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberUncheckedCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardUncheckedCreateNestedManyWithoutUserInput
@@ -1046,6 +1082,7 @@ export type UserUpdateWithoutCreatedFuelRecordsInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUpdateManyWithoutUserNestedInput
@@ -1068,6 +1105,7 @@ export type UserUncheckedUpdateWithoutCreatedFuelRecordsInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUncheckedUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUncheckedUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUncheckedUpdateManyWithoutUserNestedInput
@@ -1090,6 +1128,7 @@ export type UserCreateWithoutCreatedExpensesInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardCreateNestedManyWithoutUserInput
@@ -1112,6 +1151,7 @@ export type UserUncheckedCreateWithoutCreatedExpensesInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarUncheckedCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberUncheckedCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardUncheckedCreateNestedManyWithoutUserInput
@@ -1150,6 +1190,7 @@ export type UserUpdateWithoutCreatedExpensesInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUpdateManyWithoutUserNestedInput
@@ -1172,6 +1213,7 @@ export type UserUncheckedUpdateWithoutCreatedExpensesInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUncheckedUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUncheckedUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUncheckedUpdateManyWithoutUserNestedInput
@@ -1194,6 +1236,7 @@ export type UserCreateWithoutFuelCardsInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
@@ -1216,6 +1259,7 @@ export type UserUncheckedCreateWithoutFuelCardsInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarUncheckedCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
@@ -1254,6 +1298,7 @@ export type UserUpdateWithoutFuelCardsInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
@@ -1276,6 +1321,7 @@ export type UserUncheckedUpdateWithoutFuelCardsInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUncheckedUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -1298,6 +1344,7 @@ export type UserCreateWithoutCreatedTransactionsInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardCreateNestedManyWithoutUserInput
@@ -1320,6 +1367,7 @@ export type UserUncheckedCreateWithoutCreatedTransactionsInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarUncheckedCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberUncheckedCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardUncheckedCreateNestedManyWithoutUserInput
@@ -1358,6 +1406,7 @@ export type UserUpdateWithoutCreatedTransactionsInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUpdateManyWithoutUserNestedInput
@@ -1380,6 +1429,7 @@ export type UserUncheckedUpdateWithoutCreatedTransactionsInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUncheckedUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUncheckedUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUncheckedUpdateManyWithoutUserNestedInput
@@ -1402,6 +1452,7 @@ export type UserCreateWithoutUploadedDocumentsInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardCreateNestedManyWithoutUserInput
@@ -1424,6 +1475,7 @@ export type UserUncheckedCreateWithoutUploadedDocumentsInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarUncheckedCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberUncheckedCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardUncheckedCreateNestedManyWithoutUserInput
@@ -1462,6 +1514,7 @@ export type UserUpdateWithoutUploadedDocumentsInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUpdateManyWithoutUserNestedInput
@@ -1484,6 +1537,7 @@ export type UserUncheckedUpdateWithoutUploadedDocumentsInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUncheckedUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUncheckedUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUncheckedUpdateManyWithoutUserNestedInput
@@ -1506,6 +1560,7 @@ export type UserCreateWithoutRemindersInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardCreateNestedManyWithoutUserInput
@@ -1528,6 +1583,7 @@ export type UserUncheckedCreateWithoutRemindersInput = {
   isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  picture?: string | null
   ownedCars?: Prisma.CarUncheckedCreateNestedManyWithoutOwnerInput
   carMemberships?: Prisma.CarMemberUncheckedCreateNestedManyWithoutUserInput
   fuelCards?: Prisma.FuelCardUncheckedCreateNestedManyWithoutUserInput
@@ -1566,6 +1622,7 @@ export type UserUpdateWithoutRemindersInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUpdateManyWithoutUserNestedInput
@@ -1588,6 +1645,7 @@ export type UserUncheckedUpdateWithoutRemindersInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  picture?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ownedCars?: Prisma.CarUncheckedUpdateManyWithoutOwnerNestedInput
   carMemberships?: Prisma.CarMemberUncheckedUpdateManyWithoutUserNestedInput
   fuelCards?: Prisma.FuelCardUncheckedUpdateManyWithoutUserNestedInput
@@ -1713,6 +1771,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   isVerified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  picture?: boolean
   ownedCars?: boolean | Prisma.User$ownedCarsArgs<ExtArgs>
   carMemberships?: boolean | Prisma.User$carMembershipsArgs<ExtArgs>
   fuelCards?: boolean | Prisma.User$fuelCardsArgs<ExtArgs>
@@ -1737,6 +1796,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isVerified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  picture?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1751,6 +1811,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isVerified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  picture?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -1765,9 +1826,10 @@ export type UserSelectScalar = {
   isVerified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  picture?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "currency" | "distanceUnit" | "theme" | "language" | "isVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "currency" | "distanceUnit" | "theme" | "language" | "isVerified" | "createdAt" | "updatedAt" | "picture", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ownedCars?: boolean | Prisma.User$ownedCarsArgs<ExtArgs>
   carMemberships?: boolean | Prisma.User$carMembershipsArgs<ExtArgs>
@@ -1808,6 +1870,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     isVerified: boolean
     createdAt: Date
     updatedAt: Date
+    picture: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -2251,6 +2314,7 @@ export interface UserFieldRefs {
   readonly isVerified: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly picture: Prisma.FieldRef<"User", 'String'>
 }
     
 

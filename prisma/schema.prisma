@@ -25,6 +25,7 @@ model User {
   isVerified   Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  picture      String?
 
   ownedCars       Car[] @relation("CarOwner")
   carMemberships  CarMember[]

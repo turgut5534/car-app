@@ -11,6 +11,8 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { AuthResponse } from './dto/return-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { join } from 'path';
+import { unlink } from 'fs/promises';
 
 @Injectable()
 export class UsersService {
@@ -72,14 +74,36 @@ export class UsersService {
     }
   }
 
-  async updateProfile(id: string, dto: UpdateUserDto): Promise<User> {
-
+  async updateProfile(
+    id: string,
+    dto: UpdateUserDto,
+    file?: Express.Multer.File,
+  ): Promise<User> {
     const user = await this.prisma.user.update({
       where: { id },
-      data:{
-        ...dto
-      }
+      data: {
+        ...dto,
+      },
     });
+
+    if (file) {
+
+      if(user.picture) {
+        const filePath = join(process.cwd(), 'uploads/users', user.picture);
+        try {
+          await unlink(filePath);
+        } catch (error) {
+          console.error('Error deleting old profile picture:', error);
+        }
+      }
+
+      await this.prisma.user.update({
+        where: { id },
+        data: {
+          picture: file.filename,
+        },
+      });
+    }
 
     return user;
   }
