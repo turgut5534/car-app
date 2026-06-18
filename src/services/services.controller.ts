@@ -78,13 +78,30 @@ export class ServicesController {
       },
     }),
   )
-  update(@Param('id') id: string, @Body() updateServiceDto: UpdateServiceDto, @Query('carId') carId: string, @UploadedFiles() files: Express.Multer.File[], @UserId() userId: string) {
-    return this.servicesService.update(id, updateServiceDto, carId, files, userId);
+  update(
+    @Param('id') id: string,
+    @Body() updateServiceDto: UpdateServiceDto,
+    @Query('carId') carId: string,
+    @UploadedFiles() files: Express.Multer.File[],
+    @UserId() userId: string,
+  ) {
+    return this.servicesService.update(
+      id,
+      updateServiceDto,
+      carId,
+      files,
+      userId,
+    );
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.servicesService.remove(id);
+  }
+
+  @Delete(':id/files/:fileId')
+  removeFile(@Param('id') id: string, @Param('fileId') fileId: string) {
+    return this.servicesService.removeFile(id, fileId );
   }
 
   @Post()

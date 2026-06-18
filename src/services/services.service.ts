@@ -145,13 +145,29 @@ export class ServicesService {
   }
 
   update(id: string, dto: UpdateServiceDto, carId: string, files: Express.Multer.File[], userId: string) {
-    return this.prisma.serviceRecord.update({
-      where: { id },
-      data: {
-        ...dto,
-        carId,
-        createdById: userId,
-      },
+
+    return this.prisma.$transaction(async (tx) => {
+      const updatedService = await tx.serviceRecord.update({
+        where: { id },
+        data: {
+          ...dto,
+          carId,
+          createdById: userId,
+        },
+      });
+
+      if (files && files.length > 0) {
+        await tx.serviceAttachment.createMany({
+          data: files.map((file) => ({
+            serviceRecordId: id,
+            url: file.path,
+            fileName: file.filename,
+            mimeType: file.mimetype,
+          })),
+        });
+      }
+
+      return updatedService;
     });
   }
 
@@ -189,5 +205,28 @@ export class ServicesService {
     });
 
     return { success: true };
+  }
+
+  async removeFile(id: string, fileId: string) {
+    const attachment = await this.prisma.serviceAttachment.findUnique({
+      where: { id: fileId },
+    });
+
+    if (!attachment) {
+      throw new NotFoundException('File not found');
+    }
+
+    try {
+      const filePath = join(process.cwd(), 'uploads/services', attachment.fileName);
+      await unlink(filePath);
+    } catch (err) {
+      console.log('File delete error:', err);
+    }
+
+    await this.prisma.serviceAttachment.delete({
+      where: { id: fileId },
+    });
+
+    return { success: true }; 
   }
 }
