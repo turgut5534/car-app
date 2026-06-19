@@ -144,8 +144,13 @@ export class ServicesService {
     });
   }
 
-  update(id: string, dto: UpdateServiceDto, carId: string, files: Express.Multer.File[], userId: string) {
-
+  update(
+    id: string,
+    dto: UpdateServiceDto,
+    carId: string,
+    files: Express.Multer.File[],
+    userId: string,
+  ) {
     return this.prisma.$transaction(async (tx) => {
       const updatedService = await tx.serviceRecord.update({
         where: { id },
@@ -181,28 +186,31 @@ export class ServicesService {
       throw new NotFoundException('Service not found');
     }
 
-    const files = service.attachments;
+    await Promise.all(
+      service.attachments.map(async (attachment) => {
+        try {
+          const filePath = join(
+            process.cwd(),
+            'uploads/services',
+            attachment.fileName,
+          );
 
-    // 1. Delete physical files
-    for (const file of files) {
-      try {
-        const filePath = join(process.cwd(), 'uploads/services', file.fileName);
+          await unlink(filePath);
+        } catch (err) {
+          console.log(`Failed to delete file ${attachment.fileName}:`, err);
+        }
+      }),
+    );
+    
 
-        await unlink(filePath);
-      } catch (err) {
-        console.log('File delete error:', err);
-      }
-    }
-
-    // 2. Delete DB records (attachments first if no cascade)
-    await this.prisma.serviceAttachment.deleteMany({
-      where: { serviceRecordId: id },
-    });
-
-    // 3. Delete service itself
-    await this.prisma.serviceRecord.delete({
-      where: { id },
-    });
+    await this.prisma.$transaction([
+      this.prisma.serviceAttachment.deleteMany({
+        where: { serviceRecordId: id },
+      }),
+      this.prisma.serviceRecord.delete({
+        where: { id },
+      }), 
+    ])
 
     return { success: true };
   }
@@ -217,7 +225,11 @@ export class ServicesService {
     }
 
     try {
-      const filePath = join(process.cwd(), 'uploads/services', attachment.fileName);
+      const filePath = join(
+        process.cwd(),
+        'uploads/services',
+        attachment.fileName,
+      );
       await unlink(filePath);
     } catch (err) {
       console.log('File delete error:', err);
@@ -227,6 +239,6 @@ export class ServicesService {
       where: { id: fileId },
     });
 
-    return { success: true }; 
+    return { success: true };
   }
 }
