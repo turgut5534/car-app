@@ -107,4 +107,26 @@ export class UsersService {
 
     return user;
   }
+
+   async updateCurrency(id: string, body: any) {
+
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const updatedUser = await this.prisma.user.update({
+      where: {id},
+      data: {
+        currency: body.currency
+      }
+    })
+
+    console.log(updatedUser)
+    return user;
+  }
+
 }

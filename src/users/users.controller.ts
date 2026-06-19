@@ -68,4 +68,10 @@ export class UsersController {
   async udpateProfile(@UserId() id: string, @Body() dto: UpdateUserDto, @UploadedFile() file?: Express.Multer.File): Promise<User> {
     return this.userService.updateProfile(id, dto, file);
   }
+
+  @Patch('currency')
+  @UseGuards(JwtAuthGuard)
+  async setCurrency(@UserId() userId: string, @Body() body) {
+    return this.userService.updateCurrency(userId, body)
+  }
 }
