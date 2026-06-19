@@ -32,6 +32,7 @@ export type FuelRecordAvgAggregateOutputType = {
   totalAmount: runtime.Decimal | null
   km: number | null
   consumption: runtime.Decimal | null
+  convertedAmount: number | null
 }
 
 export type FuelRecordSumAggregateOutputType = {
@@ -40,6 +41,7 @@ export type FuelRecordSumAggregateOutputType = {
   totalAmount: runtime.Decimal | null
   km: number | null
   consumption: runtime.Decimal | null
+  convertedAmount: number | null
 }
 
 export type FuelRecordMinAggregateOutputType = {
@@ -56,6 +58,9 @@ export type FuelRecordMinAggregateOutputType = {
   fuelDate: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  currency: string | null
+  convertedAmount: number | null
+  convertedCurrency: string | null
 }
 
 export type FuelRecordMaxAggregateOutputType = {
@@ -72,6 +77,9 @@ export type FuelRecordMaxAggregateOutputType = {
   fuelDate: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  currency: string | null
+  convertedAmount: number | null
+  convertedCurrency: string | null
 }
 
 export type FuelRecordCountAggregateOutputType = {
@@ -88,6 +96,9 @@ export type FuelRecordCountAggregateOutputType = {
   fuelDate: number
   createdAt: number
   updatedAt: number
+  currency: number
+  convertedAmount: number
+  convertedCurrency: number
   _all: number
 }
 
@@ -98,6 +109,7 @@ export type FuelRecordAvgAggregateInputType = {
   totalAmount?: true
   km?: true
   consumption?: true
+  convertedAmount?: true
 }
 
 export type FuelRecordSumAggregateInputType = {
@@ -106,6 +118,7 @@ export type FuelRecordSumAggregateInputType = {
   totalAmount?: true
   km?: true
   consumption?: true
+  convertedAmount?: true
 }
 
 export type FuelRecordMinAggregateInputType = {
@@ -122,6 +135,9 @@ export type FuelRecordMinAggregateInputType = {
   fuelDate?: true
   createdAt?: true
   updatedAt?: true
+  currency?: true
+  convertedAmount?: true
+  convertedCurrency?: true
 }
 
 export type FuelRecordMaxAggregateInputType = {
@@ -138,6 +154,9 @@ export type FuelRecordMaxAggregateInputType = {
   fuelDate?: true
   createdAt?: true
   updatedAt?: true
+  currency?: true
+  convertedAmount?: true
+  convertedCurrency?: true
 }
 
 export type FuelRecordCountAggregateInputType = {
@@ -154,6 +173,9 @@ export type FuelRecordCountAggregateInputType = {
   fuelDate?: true
   createdAt?: true
   updatedAt?: true
+  currency?: true
+  convertedAmount?: true
+  convertedCurrency?: true
   _all?: true
 }
 
@@ -257,6 +279,9 @@ export type FuelRecordGroupByOutputType = {
   fuelDate: Date
   createdAt: Date
   updatedAt: Date
+  currency: string
+  convertedAmount: number | null
+  convertedCurrency: string | null
   _count: FuelRecordCountAggregateOutputType | null
   _avg: FuelRecordAvgAggregateOutputType | null
   _sum: FuelRecordSumAggregateOutputType | null
@@ -296,6 +321,9 @@ export type FuelRecordWhereInput = {
   fuelDate?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
+  currency?: Prisma.StringFilter<"FuelRecord"> | string
+  convertedAmount?: Prisma.FloatNullableFilter<"FuelRecord"> | number | null
+  convertedCurrency?: Prisma.StringNullableFilter<"FuelRecord"> | string | null
   car?: Prisma.XOR<Prisma.CarScalarRelationFilter, Prisma.CarWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   cardTransaction?: Prisma.XOR<Prisma.FuelCardTransactionNullableScalarRelationFilter, Prisma.FuelCardTransactionWhereInput> | null
@@ -316,6 +344,9 @@ export type FuelRecordOrderByWithRelationInput = {
   fuelDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  convertedCurrency?: Prisma.SortOrderInput | Prisma.SortOrder
   car?: Prisma.CarOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   cardTransaction?: Prisma.FuelCardTransactionOrderByWithRelationInput
@@ -339,6 +370,9 @@ export type FuelRecordWhereUniqueInput = Prisma.AtLeast<{
   fuelDate?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
+  currency?: Prisma.StringFilter<"FuelRecord"> | string
+  convertedAmount?: Prisma.FloatNullableFilter<"FuelRecord"> | number | null
+  convertedCurrency?: Prisma.StringNullableFilter<"FuelRecord"> | string | null
   car?: Prisma.XOR<Prisma.CarScalarRelationFilter, Prisma.CarWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   cardTransaction?: Prisma.XOR<Prisma.FuelCardTransactionNullableScalarRelationFilter, Prisma.FuelCardTransactionWhereInput> | null
@@ -359,6 +393,9 @@ export type FuelRecordOrderByWithAggregationInput = {
   fuelDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  convertedCurrency?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FuelRecordCountOrderByAggregateInput
   _avg?: Prisma.FuelRecordAvgOrderByAggregateInput
   _max?: Prisma.FuelRecordMaxOrderByAggregateInput
@@ -383,6 +420,9 @@ export type FuelRecordScalarWhereWithAggregatesInput = {
   fuelDate?: Prisma.DateTimeWithAggregatesFilter<"FuelRecord"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"FuelRecord"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"FuelRecord"> | Date | string
+  currency?: Prisma.StringWithAggregatesFilter<"FuelRecord"> | string
+  convertedAmount?: Prisma.FloatNullableWithAggregatesFilter<"FuelRecord"> | number | null
+  convertedCurrency?: Prisma.StringNullableWithAggregatesFilter<"FuelRecord"> | string | null
 }
 
 export type FuelRecordCreateInput = {
@@ -396,6 +436,9 @@ export type FuelRecordCreateInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   car: Prisma.CarCreateNestedOneWithoutFuelsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedFuelRecordsInput
   cardTransaction?: Prisma.FuelCardTransactionCreateNestedOneWithoutFuelRecordInput
@@ -416,6 +459,9 @@ export type FuelRecordUncheckedCreateInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   attachments?: Prisma.FuelAttachmentUncheckedCreateNestedManyWithoutFuelRecordInput
 }
 
@@ -430,6 +476,9 @@ export type FuelRecordUpdateInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   car?: Prisma.CarUpdateOneRequiredWithoutFuelsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedFuelRecordsNestedInput
   cardTransaction?: Prisma.FuelCardTransactionUpdateOneWithoutFuelRecordNestedInput
@@ -450,6 +499,9 @@ export type FuelRecordUncheckedUpdateInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.FuelAttachmentUncheckedUpdateManyWithoutFuelRecordNestedInput
 }
 
@@ -467,6 +519,9 @@ export type FuelRecordCreateManyInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
 }
 
 export type FuelRecordUpdateManyMutationInput = {
@@ -480,6 +535,9 @@ export type FuelRecordUpdateManyMutationInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FuelRecordUncheckedUpdateManyInput = {
@@ -496,6 +554,9 @@ export type FuelRecordUncheckedUpdateManyInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FuelRecordListRelationFilter = {
@@ -522,6 +583,9 @@ export type FuelRecordCountOrderByAggregateInput = {
   fuelDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrder
+  convertedCurrency?: Prisma.SortOrder
 }
 
 export type FuelRecordAvgOrderByAggregateInput = {
@@ -530,6 +594,7 @@ export type FuelRecordAvgOrderByAggregateInput = {
   totalAmount?: Prisma.SortOrder
   km?: Prisma.SortOrder
   consumption?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrder
 }
 
 export type FuelRecordMaxOrderByAggregateInput = {
@@ -546,6 +611,9 @@ export type FuelRecordMaxOrderByAggregateInput = {
   fuelDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrder
+  convertedCurrency?: Prisma.SortOrder
 }
 
 export type FuelRecordMinOrderByAggregateInput = {
@@ -562,6 +630,9 @@ export type FuelRecordMinOrderByAggregateInput = {
   fuelDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrder
+  convertedCurrency?: Prisma.SortOrder
 }
 
 export type FuelRecordSumOrderByAggregateInput = {
@@ -570,6 +641,7 @@ export type FuelRecordSumOrderByAggregateInput = {
   totalAmount?: Prisma.SortOrder
   km?: Prisma.SortOrder
   consumption?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrder
 }
 
 export type FuelRecordScalarRelationFilter = {
@@ -731,6 +803,9 @@ export type FuelRecordCreateWithoutCreatedByInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   car: Prisma.CarCreateNestedOneWithoutFuelsInput
   cardTransaction?: Prisma.FuelCardTransactionCreateNestedOneWithoutFuelRecordInput
   attachments?: Prisma.FuelAttachmentCreateNestedManyWithoutFuelRecordInput
@@ -749,6 +824,9 @@ export type FuelRecordUncheckedCreateWithoutCreatedByInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   attachments?: Prisma.FuelAttachmentUncheckedCreateNestedManyWithoutFuelRecordInput
 }
 
@@ -795,6 +873,9 @@ export type FuelRecordScalarWhereInput = {
   fuelDate?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FuelRecord"> | Date | string
+  currency?: Prisma.StringFilter<"FuelRecord"> | string
+  convertedAmount?: Prisma.FloatNullableFilter<"FuelRecord"> | number | null
+  convertedCurrency?: Prisma.StringNullableFilter<"FuelRecord"> | string | null
 }
 
 export type FuelRecordCreateWithoutCarInput = {
@@ -808,6 +889,9 @@ export type FuelRecordCreateWithoutCarInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedFuelRecordsInput
   cardTransaction?: Prisma.FuelCardTransactionCreateNestedOneWithoutFuelRecordInput
   attachments?: Prisma.FuelAttachmentCreateNestedManyWithoutFuelRecordInput
@@ -826,6 +910,9 @@ export type FuelRecordUncheckedCreateWithoutCarInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   attachments?: Prisma.FuelAttachmentUncheckedCreateNestedManyWithoutFuelRecordInput
 }
 
@@ -866,6 +953,9 @@ export type FuelRecordCreateWithoutAttachmentsInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   car: Prisma.CarCreateNestedOneWithoutFuelsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedFuelRecordsInput
   cardTransaction?: Prisma.FuelCardTransactionCreateNestedOneWithoutFuelRecordInput
@@ -885,6 +975,9 @@ export type FuelRecordUncheckedCreateWithoutAttachmentsInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
 }
 
 export type FuelRecordCreateOrConnectWithoutAttachmentsInput = {
@@ -914,6 +1007,9 @@ export type FuelRecordUpdateWithoutAttachmentsInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   car?: Prisma.CarUpdateOneRequiredWithoutFuelsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedFuelRecordsNestedInput
   cardTransaction?: Prisma.FuelCardTransactionUpdateOneWithoutFuelRecordNestedInput
@@ -933,6 +1029,9 @@ export type FuelRecordUncheckedUpdateWithoutAttachmentsInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FuelRecordCreateWithoutCardTransactionInput = {
@@ -946,6 +1045,9 @@ export type FuelRecordCreateWithoutCardTransactionInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   car: Prisma.CarCreateNestedOneWithoutFuelsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedFuelRecordsInput
   attachments?: Prisma.FuelAttachmentCreateNestedManyWithoutFuelRecordInput
@@ -964,6 +1066,9 @@ export type FuelRecordUncheckedCreateWithoutCardTransactionInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   attachments?: Prisma.FuelAttachmentUncheckedCreateNestedManyWithoutFuelRecordInput
 }
 
@@ -994,6 +1099,9 @@ export type FuelRecordUpdateWithoutCardTransactionInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   car?: Prisma.CarUpdateOneRequiredWithoutFuelsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedFuelRecordsNestedInput
   attachments?: Prisma.FuelAttachmentUpdateManyWithoutFuelRecordNestedInput
@@ -1012,6 +1120,9 @@ export type FuelRecordUncheckedUpdateWithoutCardTransactionInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.FuelAttachmentUncheckedUpdateManyWithoutFuelRecordNestedInput
 }
 
@@ -1028,6 +1139,9 @@ export type FuelRecordCreateManyCreatedByInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
 }
 
 export type FuelRecordUpdateWithoutCreatedByInput = {
@@ -1041,6 +1155,9 @@ export type FuelRecordUpdateWithoutCreatedByInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   car?: Prisma.CarUpdateOneRequiredWithoutFuelsNestedInput
   cardTransaction?: Prisma.FuelCardTransactionUpdateOneWithoutFuelRecordNestedInput
   attachments?: Prisma.FuelAttachmentUpdateManyWithoutFuelRecordNestedInput
@@ -1059,6 +1176,9 @@ export type FuelRecordUncheckedUpdateWithoutCreatedByInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.FuelAttachmentUncheckedUpdateManyWithoutFuelRecordNestedInput
 }
 
@@ -1075,6 +1195,9 @@ export type FuelRecordUncheckedUpdateManyWithoutCreatedByInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FuelRecordCreateManyCarInput = {
@@ -1090,6 +1213,9 @@ export type FuelRecordCreateManyCarInput = {
   fuelDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
 }
 
 export type FuelRecordUpdateWithoutCarInput = {
@@ -1103,6 +1229,9 @@ export type FuelRecordUpdateWithoutCarInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdBy?: Prisma.UserUpdateOneWithoutCreatedFuelRecordsNestedInput
   cardTransaction?: Prisma.FuelCardTransactionUpdateOneWithoutFuelRecordNestedInput
   attachments?: Prisma.FuelAttachmentUpdateManyWithoutFuelRecordNestedInput
@@ -1121,6 +1250,9 @@ export type FuelRecordUncheckedUpdateWithoutCarInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.FuelAttachmentUncheckedUpdateManyWithoutFuelRecordNestedInput
 }
 
@@ -1137,6 +1269,9 @@ export type FuelRecordUncheckedUpdateManyWithoutCarInput = {
   fuelDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1184,6 +1319,9 @@ export type FuelRecordSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   fuelDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  currency?: boolean
+  convertedAmount?: boolean
+  convertedCurrency?: boolean
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.FuelRecord$createdByArgs<ExtArgs>
   cardTransaction?: boolean | Prisma.FuelRecord$cardTransactionArgs<ExtArgs>
@@ -1205,6 +1343,9 @@ export type FuelRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   fuelDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  currency?: boolean
+  convertedAmount?: boolean
+  convertedCurrency?: boolean
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.FuelRecord$createdByArgs<ExtArgs>
   cardTransaction?: boolean | Prisma.FuelRecord$cardTransactionArgs<ExtArgs>
@@ -1224,6 +1365,9 @@ export type FuelRecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   fuelDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  currency?: boolean
+  convertedAmount?: boolean
+  convertedCurrency?: boolean
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.FuelRecord$createdByArgs<ExtArgs>
   cardTransaction?: boolean | Prisma.FuelRecord$cardTransactionArgs<ExtArgs>
@@ -1243,9 +1387,12 @@ export type FuelRecordSelectScalar = {
   fuelDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  currency?: boolean
+  convertedAmount?: boolean
+  convertedCurrency?: boolean
 }
 
-export type FuelRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carId" | "createdById" | "fuelCardTransactionId" | "station" | "liters" | "pricePerLiter" | "totalAmount" | "km" | "consumption" | "fuelDate" | "createdAt" | "updatedAt", ExtArgs["result"]["fuelRecord"]>
+export type FuelRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carId" | "createdById" | "fuelCardTransactionId" | "station" | "liters" | "pricePerLiter" | "totalAmount" | "km" | "consumption" | "fuelDate" | "createdAt" | "updatedAt" | "currency" | "convertedAmount" | "convertedCurrency", ExtArgs["result"]["fuelRecord"]>
 export type FuelRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.FuelRecord$createdByArgs<ExtArgs>
@@ -1286,6 +1433,9 @@ export type $FuelRecordPayload<ExtArgs extends runtime.Types.Extensions.Internal
     fuelDate: Date
     createdAt: Date
     updatedAt: Date
+    currency: string
+    convertedAmount: number | null
+    convertedCurrency: string | null
   }, ExtArgs["result"]["fuelRecord"]>
   composites: {}
 }
@@ -1726,6 +1876,9 @@ export interface FuelRecordFieldRefs {
   readonly fuelDate: Prisma.FieldRef<"FuelRecord", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"FuelRecord", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"FuelRecord", 'DateTime'>
+  readonly currency: Prisma.FieldRef<"FuelRecord", 'String'>
+  readonly convertedAmount: Prisma.FieldRef<"FuelRecord", 'Float'>
+  readonly convertedCurrency: Prisma.FieldRef<"FuelRecord", 'String'>
 }
     
 

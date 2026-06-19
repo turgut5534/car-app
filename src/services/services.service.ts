@@ -87,6 +87,9 @@ export class ServicesService {
         id: dto.carId,
         ownerId: userId,
       },
+      include: {
+        owner: true
+      }
     });
 
     if (!car) {
@@ -103,14 +106,9 @@ export class ServicesService {
       try {
         const newService = await tx.serviceRecord.create({
           data: {
-            carId: dto.carId,
+            ...dto,
             createdById: userId,
-            title: dto.title,
-            description: dto.description,
-            category: dto.category,
-            km: Number(dto.km),
-            amount: dto.amount ? Number(dto.amount) : 0,
-            serviceDate: new Date(dto.serviceDate),
+            currency: car.owner.currency,
             attachments: {
               create: files.map((file) => ({
                 url: file.path,

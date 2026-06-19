@@ -42,4 +42,5 @@ export class CreateServiceDto {
 
   @IsEnum(ServiceCategory)
   category!: ServiceCategory;
+
 }

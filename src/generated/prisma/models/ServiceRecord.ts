@@ -29,11 +29,13 @@ export type AggregateServiceRecord = {
 export type ServiceRecordAvgAggregateOutputType = {
   amount: runtime.Decimal | null
   km: number | null
+  convertedAmount: number | null
 }
 
 export type ServiceRecordSumAggregateOutputType = {
   amount: runtime.Decimal | null
   km: number | null
+  convertedAmount: number | null
 }
 
 export type ServiceRecordMinAggregateOutputType = {
@@ -45,6 +47,9 @@ export type ServiceRecordMinAggregateOutputType = {
   description: string | null
   amount: runtime.Decimal | null
   km: number | null
+  currency: string | null
+  convertedAmount: number | null
+  convertedCurrency: string | null
   serviceDate: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -59,6 +64,9 @@ export type ServiceRecordMaxAggregateOutputType = {
   description: string | null
   amount: runtime.Decimal | null
   km: number | null
+  currency: string | null
+  convertedAmount: number | null
+  convertedCurrency: string | null
   serviceDate: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -73,6 +81,9 @@ export type ServiceRecordCountAggregateOutputType = {
   description: number
   amount: number
   km: number
+  currency: number
+  convertedAmount: number
+  convertedCurrency: number
   serviceDate: number
   createdAt: number
   updatedAt: number
@@ -83,11 +94,13 @@ export type ServiceRecordCountAggregateOutputType = {
 export type ServiceRecordAvgAggregateInputType = {
   amount?: true
   km?: true
+  convertedAmount?: true
 }
 
 export type ServiceRecordSumAggregateInputType = {
   amount?: true
   km?: true
+  convertedAmount?: true
 }
 
 export type ServiceRecordMinAggregateInputType = {
@@ -99,6 +112,9 @@ export type ServiceRecordMinAggregateInputType = {
   description?: true
   amount?: true
   km?: true
+  currency?: true
+  convertedAmount?: true
+  convertedCurrency?: true
   serviceDate?: true
   createdAt?: true
   updatedAt?: true
@@ -113,6 +129,9 @@ export type ServiceRecordMaxAggregateInputType = {
   description?: true
   amount?: true
   km?: true
+  currency?: true
+  convertedAmount?: true
+  convertedCurrency?: true
   serviceDate?: true
   createdAt?: true
   updatedAt?: true
@@ -127,6 +146,9 @@ export type ServiceRecordCountAggregateInputType = {
   description?: true
   amount?: true
   km?: true
+  currency?: true
+  convertedAmount?: true
+  convertedCurrency?: true
   serviceDate?: true
   createdAt?: true
   updatedAt?: true
@@ -228,6 +250,9 @@ export type ServiceRecordGroupByOutputType = {
   description: string | null
   amount: runtime.Decimal | null
   km: number
+  currency: string
+  convertedAmount: number | null
+  convertedCurrency: string | null
   serviceDate: Date
   createdAt: Date
   updatedAt: Date
@@ -265,6 +290,9 @@ export type ServiceRecordWhereInput = {
   description?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
   amount?: Prisma.DecimalNullableFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntFilter<"ServiceRecord"> | number
+  currency?: Prisma.StringFilter<"ServiceRecord"> | string
+  convertedAmount?: Prisma.FloatNullableFilter<"ServiceRecord"> | number | null
+  convertedCurrency?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
   serviceDate?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
@@ -282,6 +310,9 @@ export type ServiceRecordOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
   km?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  convertedCurrency?: Prisma.SortOrderInput | Prisma.SortOrder
   serviceDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -302,6 +333,9 @@ export type ServiceRecordWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
   amount?: Prisma.DecimalNullableFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntFilter<"ServiceRecord"> | number
+  currency?: Prisma.StringFilter<"ServiceRecord"> | string
+  convertedAmount?: Prisma.FloatNullableFilter<"ServiceRecord"> | number | null
+  convertedCurrency?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
   serviceDate?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
@@ -319,6 +353,9 @@ export type ServiceRecordOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrderInput | Prisma.SortOrder
   km?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  convertedCurrency?: Prisma.SortOrderInput | Prisma.SortOrder
   serviceDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -341,6 +378,9 @@ export type ServiceRecordScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"ServiceRecord"> | string | null
   amount?: Prisma.DecimalNullableWithAggregatesFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntWithAggregatesFilter<"ServiceRecord"> | number
+  currency?: Prisma.StringWithAggregatesFilter<"ServiceRecord"> | string
+  convertedAmount?: Prisma.FloatNullableWithAggregatesFilter<"ServiceRecord"> | number | null
+  convertedCurrency?: Prisma.StringNullableWithAggregatesFilter<"ServiceRecord"> | string | null
   serviceDate?: Prisma.DateTimeWithAggregatesFilter<"ServiceRecord"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ServiceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ServiceRecord"> | Date | string
@@ -353,6 +393,9 @@ export type ServiceRecordCreateInput = {
   description?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km: number
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -370,6 +413,9 @@ export type ServiceRecordUncheckedCreateInput = {
   description?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km: number
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -383,6 +429,9 @@ export type ServiceRecordUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -400,6 +449,9 @@ export type ServiceRecordUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -415,6 +467,9 @@ export type ServiceRecordCreateManyInput = {
   description?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km: number
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -427,6 +482,9 @@ export type ServiceRecordUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -441,6 +499,9 @@ export type ServiceRecordUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -465,6 +526,9 @@ export type ServiceRecordCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   km?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrder
+  convertedCurrency?: Prisma.SortOrder
   serviceDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -473,6 +537,7 @@ export type ServiceRecordCountOrderByAggregateInput = {
 export type ServiceRecordAvgOrderByAggregateInput = {
   amount?: Prisma.SortOrder
   km?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrder
 }
 
 export type ServiceRecordMaxOrderByAggregateInput = {
@@ -484,6 +549,9 @@ export type ServiceRecordMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   km?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrder
+  convertedCurrency?: Prisma.SortOrder
   serviceDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -498,6 +566,9 @@ export type ServiceRecordMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   km?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrder
+  convertedCurrency?: Prisma.SortOrder
   serviceDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -506,6 +577,7 @@ export type ServiceRecordMinOrderByAggregateInput = {
 export type ServiceRecordSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
   km?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrder
 }
 
 export type ServiceRecordScalarRelationFilter = {
@@ -609,6 +681,14 @@ export type NullableDecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type ServiceRecordCreateNestedOneWithoutAttachmentsInput = {
   create?: Prisma.XOR<Prisma.ServiceRecordCreateWithoutAttachmentsInput, Prisma.ServiceRecordUncheckedCreateWithoutAttachmentsInput>
   connectOrCreate?: Prisma.ServiceRecordCreateOrConnectWithoutAttachmentsInput
@@ -630,6 +710,9 @@ export type ServiceRecordCreateWithoutCreatedByInput = {
   description?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km: number
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -645,6 +728,9 @@ export type ServiceRecordUncheckedCreateWithoutCreatedByInput = {
   description?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km: number
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -689,6 +775,9 @@ export type ServiceRecordScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
   amount?: Prisma.DecimalNullableFilter<"ServiceRecord"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntFilter<"ServiceRecord"> | number
+  currency?: Prisma.StringFilter<"ServiceRecord"> | string
+  convertedAmount?: Prisma.FloatNullableFilter<"ServiceRecord"> | number | null
+  convertedCurrency?: Prisma.StringNullableFilter<"ServiceRecord"> | string | null
   serviceDate?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ServiceRecord"> | Date | string
@@ -701,6 +790,9 @@ export type ServiceRecordCreateWithoutCarInput = {
   description?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km: number
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -716,6 +808,9 @@ export type ServiceRecordUncheckedCreateWithoutCarInput = {
   description?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km: number
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -755,6 +850,9 @@ export type ServiceRecordCreateWithoutAttachmentsInput = {
   description?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km: number
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -771,6 +869,9 @@ export type ServiceRecordUncheckedCreateWithoutAttachmentsInput = {
   description?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km: number
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -799,6 +900,9 @@ export type ServiceRecordUpdateWithoutAttachmentsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -815,6 +919,9 @@ export type ServiceRecordUncheckedUpdateWithoutAttachmentsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -828,6 +935,9 @@ export type ServiceRecordCreateManyCreatedByInput = {
   description?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km: number
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -840,6 +950,9 @@ export type ServiceRecordUpdateWithoutCreatedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -855,6 +968,9 @@ export type ServiceRecordUncheckedUpdateWithoutCreatedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -869,6 +985,9 @@ export type ServiceRecordUncheckedUpdateManyWithoutCreatedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -882,6 +1001,9 @@ export type ServiceRecordCreateManyCarInput = {
   description?: string | null
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km: number
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   serviceDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -894,6 +1016,9 @@ export type ServiceRecordUpdateWithoutCarInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -909,6 +1034,9 @@ export type ServiceRecordUncheckedUpdateWithoutCarInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -923,6 +1051,9 @@ export type ServiceRecordUncheckedUpdateManyWithoutCarInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   km?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serviceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -968,6 +1099,9 @@ export type ServiceRecordSelect<ExtArgs extends runtime.Types.Extensions.Interna
   description?: boolean
   amount?: boolean
   km?: boolean
+  currency?: boolean
+  convertedAmount?: boolean
+  convertedCurrency?: boolean
   serviceDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -986,6 +1120,9 @@ export type ServiceRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   description?: boolean
   amount?: boolean
   km?: boolean
+  currency?: boolean
+  convertedAmount?: boolean
+  convertedCurrency?: boolean
   serviceDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1002,6 +1139,9 @@ export type ServiceRecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   description?: boolean
   amount?: boolean
   km?: boolean
+  currency?: boolean
+  convertedAmount?: boolean
+  convertedCurrency?: boolean
   serviceDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1018,12 +1158,15 @@ export type ServiceRecordSelectScalar = {
   description?: boolean
   amount?: boolean
   km?: boolean
+  currency?: boolean
+  convertedAmount?: boolean
+  convertedCurrency?: boolean
   serviceDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ServiceRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carId" | "createdById" | "category" | "title" | "description" | "amount" | "km" | "serviceDate" | "createdAt" | "updatedAt", ExtArgs["result"]["serviceRecord"]>
+export type ServiceRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carId" | "createdById" | "category" | "title" | "description" | "amount" | "km" | "currency" | "convertedAmount" | "convertedCurrency" | "serviceDate" | "createdAt" | "updatedAt", ExtArgs["result"]["serviceRecord"]>
 export type ServiceRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.ServiceRecord$createdByArgs<ExtArgs>
@@ -1055,6 +1198,9 @@ export type $ServiceRecordPayload<ExtArgs extends runtime.Types.Extensions.Inter
     description: string | null
     amount: runtime.Decimal | null
     km: number
+    currency: string
+    convertedAmount: number | null
+    convertedCurrency: string | null
     serviceDate: Date
     createdAt: Date
     updatedAt: Date
@@ -1492,6 +1638,9 @@ export interface ServiceRecordFieldRefs {
   readonly description: Prisma.FieldRef<"ServiceRecord", 'String'>
   readonly amount: Prisma.FieldRef<"ServiceRecord", 'Decimal'>
   readonly km: Prisma.FieldRef<"ServiceRecord", 'Int'>
+  readonly currency: Prisma.FieldRef<"ServiceRecord", 'String'>
+  readonly convertedAmount: Prisma.FieldRef<"ServiceRecord", 'Float'>
+  readonly convertedCurrency: Prisma.FieldRef<"ServiceRecord", 'String'>
   readonly serviceDate: Prisma.FieldRef<"ServiceRecord", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"ServiceRecord", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"ServiceRecord", 'DateTime'>

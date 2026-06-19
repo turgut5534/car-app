@@ -113,6 +113,9 @@ model ServiceRecord {
   description String?
   amount      Decimal?  @db.Decimal(10, 2) 
   km          Int
+  currency         String
+  convertedAmount  Float?
+  convertedCurrency String?
   serviceDate DateTime
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -165,6 +168,9 @@ model FuelRecord {
   fuelDate    DateTime
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  currency         String
+  convertedAmount  Float?
+  convertedCurrency String?
 
   car             Car @relation(fields: [carId], references: [id], onDelete: Cascade)
   createdBy       User? @relation(fields: [createdById], references: [id])
@@ -196,6 +202,9 @@ model Expense {
   expenseDate DateTime
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  currency         String
+  convertedAmount  Float?
+  convertedCurrency String?
 
   car         Car   @relation(fields: [carId], references: [id], onDelete: Cascade)
   createdBy   User? @relation(fields: [createdById], references: [id])

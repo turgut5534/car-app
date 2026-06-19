@@ -59,6 +59,9 @@ export class FuelsService {
         id: dto.carId,
         ownerId: userId,
       },
+      include: {
+        owner: true
+      }
     });
 
     if (!car) {
@@ -103,6 +106,7 @@ export class FuelsService {
           fuelDate: new Date(),
           pricePerLiter: Number(dto.pricePerLiter),
           liters,
+          currency: car.owner.currency,
           consumption,
           km: Number(dto.km),
           totalAmount: Number(dto.totalAmount),

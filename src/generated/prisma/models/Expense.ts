@@ -29,11 +29,13 @@ export type AggregateExpense = {
 export type ExpenseAvgAggregateOutputType = {
   mileage: number | null
   amount: runtime.Decimal | null
+  convertedAmount: number | null
 }
 
 export type ExpenseSumAggregateOutputType = {
   mileage: number | null
   amount: runtime.Decimal | null
+  convertedAmount: number | null
 }
 
 export type ExpenseMinAggregateOutputType = {
@@ -48,6 +50,9 @@ export type ExpenseMinAggregateOutputType = {
   expenseDate: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  currency: string | null
+  convertedAmount: number | null
+  convertedCurrency: string | null
 }
 
 export type ExpenseMaxAggregateOutputType = {
@@ -62,6 +67,9 @@ export type ExpenseMaxAggregateOutputType = {
   expenseDate: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  currency: string | null
+  convertedAmount: number | null
+  convertedCurrency: string | null
 }
 
 export type ExpenseCountAggregateOutputType = {
@@ -76,6 +84,9 @@ export type ExpenseCountAggregateOutputType = {
   expenseDate: number
   createdAt: number
   updatedAt: number
+  currency: number
+  convertedAmount: number
+  convertedCurrency: number
   _all: number
 }
 
@@ -83,11 +94,13 @@ export type ExpenseCountAggregateOutputType = {
 export type ExpenseAvgAggregateInputType = {
   mileage?: true
   amount?: true
+  convertedAmount?: true
 }
 
 export type ExpenseSumAggregateInputType = {
   mileage?: true
   amount?: true
+  convertedAmount?: true
 }
 
 export type ExpenseMinAggregateInputType = {
@@ -102,6 +115,9 @@ export type ExpenseMinAggregateInputType = {
   expenseDate?: true
   createdAt?: true
   updatedAt?: true
+  currency?: true
+  convertedAmount?: true
+  convertedCurrency?: true
 }
 
 export type ExpenseMaxAggregateInputType = {
@@ -116,6 +132,9 @@ export type ExpenseMaxAggregateInputType = {
   expenseDate?: true
   createdAt?: true
   updatedAt?: true
+  currency?: true
+  convertedAmount?: true
+  convertedCurrency?: true
 }
 
 export type ExpenseCountAggregateInputType = {
@@ -130,6 +149,9 @@ export type ExpenseCountAggregateInputType = {
   expenseDate?: true
   createdAt?: true
   updatedAt?: true
+  currency?: true
+  convertedAmount?: true
+  convertedCurrency?: true
   _all?: true
 }
 
@@ -231,6 +253,9 @@ export type ExpenseGroupByOutputType = {
   expenseDate: Date
   createdAt: Date
   updatedAt: Date
+  currency: string
+  convertedAmount: number | null
+  convertedCurrency: string | null
   _count: ExpenseCountAggregateOutputType | null
   _avg: ExpenseAvgAggregateOutputType | null
   _sum: ExpenseSumAggregateOutputType | null
@@ -268,6 +293,9 @@ export type ExpenseWhereInput = {
   expenseDate?: Prisma.DateTimeFilter<"Expense"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Expense"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Expense"> | Date | string
+  currency?: Prisma.StringFilter<"Expense"> | string
+  convertedAmount?: Prisma.FloatNullableFilter<"Expense"> | number | null
+  convertedCurrency?: Prisma.StringNullableFilter<"Expense"> | string | null
   car?: Prisma.XOR<Prisma.CarScalarRelationFilter, Prisma.CarWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
@@ -284,6 +312,9 @@ export type ExpenseOrderByWithRelationInput = {
   expenseDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  convertedCurrency?: Prisma.SortOrderInput | Prisma.SortOrder
   car?: Prisma.CarOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
 }
@@ -303,6 +334,9 @@ export type ExpenseWhereUniqueInput = Prisma.AtLeast<{
   expenseDate?: Prisma.DateTimeFilter<"Expense"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Expense"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Expense"> | Date | string
+  currency?: Prisma.StringFilter<"Expense"> | string
+  convertedAmount?: Prisma.FloatNullableFilter<"Expense"> | number | null
+  convertedCurrency?: Prisma.StringNullableFilter<"Expense"> | string | null
   car?: Prisma.XOR<Prisma.CarScalarRelationFilter, Prisma.CarWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
@@ -319,6 +353,9 @@ export type ExpenseOrderByWithAggregationInput = {
   expenseDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  convertedCurrency?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ExpenseCountOrderByAggregateInput
   _avg?: Prisma.ExpenseAvgOrderByAggregateInput
   _max?: Prisma.ExpenseMaxOrderByAggregateInput
@@ -341,6 +378,9 @@ export type ExpenseScalarWhereWithAggregatesInput = {
   expenseDate?: Prisma.DateTimeWithAggregatesFilter<"Expense"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Expense"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Expense"> | Date | string
+  currency?: Prisma.StringWithAggregatesFilter<"Expense"> | string
+  convertedAmount?: Prisma.FloatNullableWithAggregatesFilter<"Expense"> | number | null
+  convertedCurrency?: Prisma.StringNullableWithAggregatesFilter<"Expense"> | string | null
 }
 
 export type ExpenseCreateInput = {
@@ -353,6 +393,9 @@ export type ExpenseCreateInput = {
   expenseDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   car: Prisma.CarCreateNestedOneWithoutExpensesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedExpensesInput
 }
@@ -369,6 +412,9 @@ export type ExpenseUncheckedCreateInput = {
   expenseDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
 }
 
 export type ExpenseUpdateInput = {
@@ -381,6 +427,9 @@ export type ExpenseUpdateInput = {
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   car?: Prisma.CarUpdateOneRequiredWithoutExpensesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedExpensesNestedInput
 }
@@ -397,6 +446,9 @@ export type ExpenseUncheckedUpdateInput = {
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ExpenseCreateManyInput = {
@@ -411,6 +463,9 @@ export type ExpenseCreateManyInput = {
   expenseDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
 }
 
 export type ExpenseUpdateManyMutationInput = {
@@ -423,6 +478,9 @@ export type ExpenseUpdateManyMutationInput = {
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ExpenseUncheckedUpdateManyInput = {
@@ -437,6 +495,9 @@ export type ExpenseUncheckedUpdateManyInput = {
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ExpenseListRelationFilter = {
@@ -461,11 +522,15 @@ export type ExpenseCountOrderByAggregateInput = {
   expenseDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrder
+  convertedCurrency?: Prisma.SortOrder
 }
 
 export type ExpenseAvgOrderByAggregateInput = {
   mileage?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrder
 }
 
 export type ExpenseMaxOrderByAggregateInput = {
@@ -480,6 +545,9 @@ export type ExpenseMaxOrderByAggregateInput = {
   expenseDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrder
+  convertedCurrency?: Prisma.SortOrder
 }
 
 export type ExpenseMinOrderByAggregateInput = {
@@ -494,11 +562,15 @@ export type ExpenseMinOrderByAggregateInput = {
   expenseDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrder
+  convertedCurrency?: Prisma.SortOrder
 }
 
 export type ExpenseSumOrderByAggregateInput = {
   mileage?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  convertedAmount?: Prisma.SortOrder
 }
 
 export type ExpenseCreateNestedManyWithoutCreatedByInput = {
@@ -599,6 +671,9 @@ export type ExpenseCreateWithoutCreatedByInput = {
   expenseDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   car: Prisma.CarCreateNestedOneWithoutExpensesInput
 }
 
@@ -613,6 +688,9 @@ export type ExpenseUncheckedCreateWithoutCreatedByInput = {
   expenseDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
 }
 
 export type ExpenseCreateOrConnectWithoutCreatedByInput = {
@@ -656,6 +734,9 @@ export type ExpenseScalarWhereInput = {
   expenseDate?: Prisma.DateTimeFilter<"Expense"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Expense"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Expense"> | Date | string
+  currency?: Prisma.StringFilter<"Expense"> | string
+  convertedAmount?: Prisma.FloatNullableFilter<"Expense"> | number | null
+  convertedCurrency?: Prisma.StringNullableFilter<"Expense"> | string | null
 }
 
 export type ExpenseCreateWithoutCarInput = {
@@ -668,6 +749,9 @@ export type ExpenseCreateWithoutCarInput = {
   expenseDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedExpensesInput
 }
 
@@ -682,6 +766,9 @@ export type ExpenseUncheckedCreateWithoutCarInput = {
   expenseDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
 }
 
 export type ExpenseCreateOrConnectWithoutCarInput = {
@@ -721,6 +808,9 @@ export type ExpenseCreateManyCreatedByInput = {
   expenseDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
 }
 
 export type ExpenseUpdateWithoutCreatedByInput = {
@@ -733,6 +823,9 @@ export type ExpenseUpdateWithoutCreatedByInput = {
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   car?: Prisma.CarUpdateOneRequiredWithoutExpensesNestedInput
 }
 
@@ -747,6 +840,9 @@ export type ExpenseUncheckedUpdateWithoutCreatedByInput = {
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ExpenseUncheckedUpdateManyWithoutCreatedByInput = {
@@ -760,6 +856,9 @@ export type ExpenseUncheckedUpdateManyWithoutCreatedByInput = {
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ExpenseCreateManyCarInput = {
@@ -773,6 +872,9 @@ export type ExpenseCreateManyCarInput = {
   expenseDate: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  currency: string
+  convertedAmount?: number | null
+  convertedCurrency?: string | null
 }
 
 export type ExpenseUpdateWithoutCarInput = {
@@ -785,6 +887,9 @@ export type ExpenseUpdateWithoutCarInput = {
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdBy?: Prisma.UserUpdateOneWithoutCreatedExpensesNestedInput
 }
 
@@ -799,6 +904,9 @@ export type ExpenseUncheckedUpdateWithoutCarInput = {
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ExpenseUncheckedUpdateManyWithoutCarInput = {
@@ -812,6 +920,9 @@ export type ExpenseUncheckedUpdateManyWithoutCarInput = {
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  convertedCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -828,6 +939,9 @@ export type ExpenseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   expenseDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  currency?: boolean
+  convertedAmount?: boolean
+  convertedCurrency?: boolean
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.Expense$createdByArgs<ExtArgs>
 }, ExtArgs["result"]["expense"]>
@@ -844,6 +958,9 @@ export type ExpenseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   expenseDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  currency?: boolean
+  convertedAmount?: boolean
+  convertedCurrency?: boolean
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.Expense$createdByArgs<ExtArgs>
 }, ExtArgs["result"]["expense"]>
@@ -860,6 +977,9 @@ export type ExpenseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   expenseDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  currency?: boolean
+  convertedAmount?: boolean
+  convertedCurrency?: boolean
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.Expense$createdByArgs<ExtArgs>
 }, ExtArgs["result"]["expense"]>
@@ -876,9 +996,12 @@ export type ExpenseSelectScalar = {
   expenseDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  currency?: boolean
+  convertedAmount?: boolean
+  convertedCurrency?: boolean
 }
 
-export type ExpenseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carId" | "createdById" | "category" | "title" | "mileage" | "description" | "amount" | "expenseDate" | "createdAt" | "updatedAt", ExtArgs["result"]["expense"]>
+export type ExpenseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carId" | "createdById" | "category" | "title" | "mileage" | "description" | "amount" | "expenseDate" | "createdAt" | "updatedAt" | "currency" | "convertedAmount" | "convertedCurrency", ExtArgs["result"]["expense"]>
 export type ExpenseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.Expense$createdByArgs<ExtArgs>
@@ -910,6 +1033,9 @@ export type $ExpensePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     expenseDate: Date
     createdAt: Date
     updatedAt: Date
+    currency: string
+    convertedAmount: number | null
+    convertedCurrency: string | null
   }, ExtArgs["result"]["expense"]>
   composites: {}
 }
@@ -1346,6 +1472,9 @@ export interface ExpenseFieldRefs {
   readonly expenseDate: Prisma.FieldRef<"Expense", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Expense", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Expense", 'DateTime'>
+  readonly currency: Prisma.FieldRef<"Expense", 'String'>
+  readonly convertedAmount: Prisma.FieldRef<"Expense", 'Float'>
+  readonly convertedCurrency: Prisma.FieldRef<"Expense", 'String'>
 }
     
 

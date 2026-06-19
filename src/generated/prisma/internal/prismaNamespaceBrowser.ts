@@ -151,6 +151,9 @@ export const ServiceRecordScalarFieldEnum = {
   description: 'description',
   amount: 'amount',
   km: 'km',
+  currency: 'currency',
+  convertedAmount: 'convertedAmount',
+  convertedCurrency: 'convertedCurrency',
   serviceDate: 'serviceDate',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -184,7 +187,10 @@ export const FuelRecordScalarFieldEnum = {
   consumption: 'consumption',
   fuelDate: 'fuelDate',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  currency: 'currency',
+  convertedAmount: 'convertedAmount',
+  convertedCurrency: 'convertedCurrency'
 } as const
 
 export type FuelRecordScalarFieldEnum = (typeof FuelRecordScalarFieldEnum)[keyof typeof FuelRecordScalarFieldEnum]
@@ -213,7 +219,10 @@ export const ExpenseScalarFieldEnum = {
   amount: 'amount',
   expenseDate: 'expenseDate',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  currency: 'currency',
+  convertedAmount: 'convertedAmount',
+  convertedCurrency: 'convertedCurrency'
 } as const
 
 export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]

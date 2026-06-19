@@ -25,6 +25,7 @@ export class CarsService {
       include: {
         owner: true,
         documents: true,
+        services: true,
         photos: {
           orderBy: [{ is_cover: 'desc' }, { createdAt: 'asc' }],
         },
@@ -270,7 +271,7 @@ export class CarsService {
         mileage: s.km,
         amount: s.amount,
         date: s.serviceDate,
-        currency: user.currency,
+        currency: s.currency,
       })),
 
       ...fuels.map((f) => ({
@@ -281,7 +282,7 @@ export class CarsService {
         mileage: f.km,
         amount: f.totalAmount,
         date: f.fuelDate,
-        currency: user.currency,
+        currency: f.currency,
       })),
 
       ...expenses.map((e) => ({
@@ -292,7 +293,7 @@ export class CarsService {
         mileage: e.mileage,
         amount: e.amount,
         date: e.expenseDate,
-        currency: user.currency,
+        currency: e.currency,
       })),
     ];
 
