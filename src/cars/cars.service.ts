@@ -238,75 +238,64 @@ export class CarsService {
   }
 
   async overviewData(userId: string, carId: string) {
-    const car = await this.prisma.car.findFirst({
-      where: {
-        id: carId,
-        ownerId: userId,
-      },
-      include: {
-        expenses: true,
-        services: {
-          orderBy: {
-            createdAt: 'desc',
-          },
-        },
-        fuels: true,
-        owner: {
-          select: {
-            currency: true,
-          },
-        },
-      },
+
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
     });
 
-    if (!car) {
-      throw new NotFoundException('Car not found');
+    if (!user) {
+      throw new NotFoundException('User not found');
     }
 
-    const totalExpenses = car.services.reduce(
-      (s, e) => s + (e.amount ? e.amount.toNumber() : 0),
-      0,
-    );
+    const [services, fuels, expenses] = await Promise.all([
+      this.prisma.serviceRecord.findMany({
+        where: { carId: carId },
+      }),
 
-    const last30Days = new Date();
-    last30Days.setDate(last30Days.getDate() - 30);
+      this.prisma.fuelRecord.findMany({
+        where: { carId: carId },
+      }),
 
-    const monthlyExpenses = car.expenses
-      .filter((e) => new Date(e.createdAt) >= last30Days)
-      .reduce((s, e) => s + e.amount.toNumber(), 0);
+      this.prisma.expense.findMany({
+        where: { carId: carId },
+      }),
+    ]);
 
-    const lastService = car?.services?.[0] ?? null;
+    const history = [
+      ...services.map((s) => ({
+        id: s.id,
+        type: 'SERVICE',
+        title: s.title,
+        description: s.description,
+        mileage: s.km,
+        amount: s.amount,
+        date: s.serviceDate,
+        currency: user.currency,
+      })),
 
-    const lastFuel =
-      [...car.fuels].sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-      )[0] || null;
+      ...fuels.map((f) => ({
+        id: f.id,
+        type: 'FUEL',
+        title: 'Refuel',
+        description: `${f.liters} L`,
+        mileage: f.km,
+        amount: f.totalAmount,
+        date: f.fuelDate,
+        currency: user.currency,
+      })),
 
-    const fuelStats = await this.prisma.fuelRecord.aggregate({
-      where: {
-        carId,
-      },
-      _avg: {
-        consumption: true,
-        pricePerLiter: true,
-      },
-      _sum: {
-        totalAmount: true, // or liters / fuelAmount depending on your schema
-      },
-    });
+      ...expenses.map((e) => ({
+        id: e.id,
+        type: 'EXPENSE',
+        title: e.title,
+        description: e.description,
+        mileage: e.mileage,
+        amount: e.amount,
+        date: e.expenseDate,
+        currency: user.currency,
+      })),
+    ];
 
-    const costPerKilometer =
-      car.currentKm > 0 ? totalExpenses / car.currentKm : 0;
-
-    return {
-      monthlyExpenses,
-      totalExpenses,
-      lastService,
-      averageFuelConsumption: fuelStats._avg.consumption ?? 0,
-      lastFuel,
-      costPerKilometer,
-      currency: car.owner.currency,
-    };
+    return history.sort((a, b) => (b.mileage ?? 0) - (a.mileage ?? 0));
   }
 }

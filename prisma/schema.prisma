@@ -190,6 +190,7 @@ model Expense {
   createdById String?
   category    ExpenseCategory
   title       String
+  mileage     Int      @default(0)
   description String?
   amount      Decimal  @db.Decimal(10, 2)
   expenseDate DateTime

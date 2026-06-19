@@ -1617,6 +1617,7 @@ export const ExpenseScalarFieldEnum = {
   createdById: 'createdById',
   category: 'category',
   title: 'title',
+  mileage: 'mileage',
   description: 'description',
   amount: 'amount',
   expenseDate: 'expenseDate',

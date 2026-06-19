@@ -27,10 +27,12 @@ export type AggregateExpense = {
 }
 
 export type ExpenseAvgAggregateOutputType = {
+  mileage: number | null
   amount: runtime.Decimal | null
 }
 
 export type ExpenseSumAggregateOutputType = {
+  mileage: number | null
   amount: runtime.Decimal | null
 }
 
@@ -40,6 +42,7 @@ export type ExpenseMinAggregateOutputType = {
   createdById: string | null
   category: $Enums.ExpenseCategory | null
   title: string | null
+  mileage: number | null
   description: string | null
   amount: runtime.Decimal | null
   expenseDate: Date | null
@@ -53,6 +56,7 @@ export type ExpenseMaxAggregateOutputType = {
   createdById: string | null
   category: $Enums.ExpenseCategory | null
   title: string | null
+  mileage: number | null
   description: string | null
   amount: runtime.Decimal | null
   expenseDate: Date | null
@@ -66,6 +70,7 @@ export type ExpenseCountAggregateOutputType = {
   createdById: number
   category: number
   title: number
+  mileage: number
   description: number
   amount: number
   expenseDate: number
@@ -76,10 +81,12 @@ export type ExpenseCountAggregateOutputType = {
 
 
 export type ExpenseAvgAggregateInputType = {
+  mileage?: true
   amount?: true
 }
 
 export type ExpenseSumAggregateInputType = {
+  mileage?: true
   amount?: true
 }
 
@@ -89,6 +96,7 @@ export type ExpenseMinAggregateInputType = {
   createdById?: true
   category?: true
   title?: true
+  mileage?: true
   description?: true
   amount?: true
   expenseDate?: true
@@ -102,6 +110,7 @@ export type ExpenseMaxAggregateInputType = {
   createdById?: true
   category?: true
   title?: true
+  mileage?: true
   description?: true
   amount?: true
   expenseDate?: true
@@ -115,6 +124,7 @@ export type ExpenseCountAggregateInputType = {
   createdById?: true
   category?: true
   title?: true
+  mileage?: true
   description?: true
   amount?: true
   expenseDate?: true
@@ -215,6 +225,7 @@ export type ExpenseGroupByOutputType = {
   createdById: string | null
   category: $Enums.ExpenseCategory
   title: string
+  mileage: number
   description: string | null
   amount: runtime.Decimal
   expenseDate: Date
@@ -251,6 +262,7 @@ export type ExpenseWhereInput = {
   createdById?: Prisma.StringNullableFilter<"Expense"> | string | null
   category?: Prisma.EnumExpenseCategoryFilter<"Expense"> | $Enums.ExpenseCategory
   title?: Prisma.StringFilter<"Expense"> | string
+  mileage?: Prisma.IntFilter<"Expense"> | number
   description?: Prisma.StringNullableFilter<"Expense"> | string | null
   amount?: Prisma.DecimalFilter<"Expense"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate?: Prisma.DateTimeFilter<"Expense"> | Date | string
@@ -266,6 +278,7 @@ export type ExpenseOrderByWithRelationInput = {
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   category?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  mileage?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrder
   expenseDate?: Prisma.SortOrder
@@ -284,6 +297,7 @@ export type ExpenseWhereUniqueInput = Prisma.AtLeast<{
   createdById?: Prisma.StringNullableFilter<"Expense"> | string | null
   category?: Prisma.EnumExpenseCategoryFilter<"Expense"> | $Enums.ExpenseCategory
   title?: Prisma.StringFilter<"Expense"> | string
+  mileage?: Prisma.IntFilter<"Expense"> | number
   description?: Prisma.StringNullableFilter<"Expense"> | string | null
   amount?: Prisma.DecimalFilter<"Expense"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate?: Prisma.DateTimeFilter<"Expense"> | Date | string
@@ -299,6 +313,7 @@ export type ExpenseOrderByWithAggregationInput = {
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   category?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  mileage?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrder
   expenseDate?: Prisma.SortOrder
@@ -320,6 +335,7 @@ export type ExpenseScalarWhereWithAggregatesInput = {
   createdById?: Prisma.StringNullableWithAggregatesFilter<"Expense"> | string | null
   category?: Prisma.EnumExpenseCategoryWithAggregatesFilter<"Expense"> | $Enums.ExpenseCategory
   title?: Prisma.StringWithAggregatesFilter<"Expense"> | string
+  mileage?: Prisma.IntWithAggregatesFilter<"Expense"> | number
   description?: Prisma.StringNullableWithAggregatesFilter<"Expense"> | string | null
   amount?: Prisma.DecimalWithAggregatesFilter<"Expense"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate?: Prisma.DateTimeWithAggregatesFilter<"Expense"> | Date | string
@@ -331,6 +347,7 @@ export type ExpenseCreateInput = {
   id?: string
   category: $Enums.ExpenseCategory
   title: string
+  mileage?: number
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate: Date | string
@@ -346,6 +363,7 @@ export type ExpenseUncheckedCreateInput = {
   createdById?: string | null
   category: $Enums.ExpenseCategory
   title: string
+  mileage?: number
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate: Date | string
@@ -357,6 +375,7 @@ export type ExpenseUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  mileage?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -372,6 +391,7 @@ export type ExpenseUncheckedUpdateInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  mileage?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -385,6 +405,7 @@ export type ExpenseCreateManyInput = {
   createdById?: string | null
   category: $Enums.ExpenseCategory
   title: string
+  mileage?: number
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate: Date | string
@@ -396,6 +417,7 @@ export type ExpenseUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  mileage?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -409,6 +431,7 @@ export type ExpenseUncheckedUpdateManyInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  mileage?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -432,6 +455,7 @@ export type ExpenseCountOrderByAggregateInput = {
   createdById?: Prisma.SortOrder
   category?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  mileage?: Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   expenseDate?: Prisma.SortOrder
@@ -440,6 +464,7 @@ export type ExpenseCountOrderByAggregateInput = {
 }
 
 export type ExpenseAvgOrderByAggregateInput = {
+  mileage?: Prisma.SortOrder
   amount?: Prisma.SortOrder
 }
 
@@ -449,6 +474,7 @@ export type ExpenseMaxOrderByAggregateInput = {
   createdById?: Prisma.SortOrder
   category?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  mileage?: Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   expenseDate?: Prisma.SortOrder
@@ -462,6 +488,7 @@ export type ExpenseMinOrderByAggregateInput = {
   createdById?: Prisma.SortOrder
   category?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  mileage?: Prisma.SortOrder
   description?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   expenseDate?: Prisma.SortOrder
@@ -470,6 +497,7 @@ export type ExpenseMinOrderByAggregateInput = {
 }
 
 export type ExpenseSumOrderByAggregateInput = {
+  mileage?: Prisma.SortOrder
   amount?: Prisma.SortOrder
 }
 
@@ -565,6 +593,7 @@ export type ExpenseCreateWithoutCreatedByInput = {
   id?: string
   category: $Enums.ExpenseCategory
   title: string
+  mileage?: number
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate: Date | string
@@ -578,6 +607,7 @@ export type ExpenseUncheckedCreateWithoutCreatedByInput = {
   carId: string
   category: $Enums.ExpenseCategory
   title: string
+  mileage?: number
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate: Date | string
@@ -620,6 +650,7 @@ export type ExpenseScalarWhereInput = {
   createdById?: Prisma.StringNullableFilter<"Expense"> | string | null
   category?: Prisma.EnumExpenseCategoryFilter<"Expense"> | $Enums.ExpenseCategory
   title?: Prisma.StringFilter<"Expense"> | string
+  mileage?: Prisma.IntFilter<"Expense"> | number
   description?: Prisma.StringNullableFilter<"Expense"> | string | null
   amount?: Prisma.DecimalFilter<"Expense"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate?: Prisma.DateTimeFilter<"Expense"> | Date | string
@@ -631,6 +662,7 @@ export type ExpenseCreateWithoutCarInput = {
   id?: string
   category: $Enums.ExpenseCategory
   title: string
+  mileage?: number
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate: Date | string
@@ -644,6 +676,7 @@ export type ExpenseUncheckedCreateWithoutCarInput = {
   createdById?: string | null
   category: $Enums.ExpenseCategory
   title: string
+  mileage?: number
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate: Date | string
@@ -682,6 +715,7 @@ export type ExpenseCreateManyCreatedByInput = {
   carId: string
   category: $Enums.ExpenseCategory
   title: string
+  mileage?: number
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate: Date | string
@@ -693,6 +727,7 @@ export type ExpenseUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  mileage?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -706,6 +741,7 @@ export type ExpenseUncheckedUpdateWithoutCreatedByInput = {
   carId?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  mileage?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -718,6 +754,7 @@ export type ExpenseUncheckedUpdateManyWithoutCreatedByInput = {
   carId?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  mileage?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -730,6 +767,7 @@ export type ExpenseCreateManyCarInput = {
   createdById?: string | null
   category: $Enums.ExpenseCategory
   title: string
+  mileage?: number
   description?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate: Date | string
@@ -741,6 +779,7 @@ export type ExpenseUpdateWithoutCarInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  mileage?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -754,6 +793,7 @@ export type ExpenseUncheckedUpdateWithoutCarInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  mileage?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -766,6 +806,7 @@ export type ExpenseUncheckedUpdateManyWithoutCarInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.EnumExpenseCategoryFieldUpdateOperationsInput | $Enums.ExpenseCategory
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  mileage?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   expenseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -781,6 +822,7 @@ export type ExpenseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdById?: boolean
   category?: boolean
   title?: boolean
+  mileage?: boolean
   description?: boolean
   amount?: boolean
   expenseDate?: boolean
@@ -796,6 +838,7 @@ export type ExpenseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   createdById?: boolean
   category?: boolean
   title?: boolean
+  mileage?: boolean
   description?: boolean
   amount?: boolean
   expenseDate?: boolean
@@ -811,6 +854,7 @@ export type ExpenseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   createdById?: boolean
   category?: boolean
   title?: boolean
+  mileage?: boolean
   description?: boolean
   amount?: boolean
   expenseDate?: boolean
@@ -826,6 +870,7 @@ export type ExpenseSelectScalar = {
   createdById?: boolean
   category?: boolean
   title?: boolean
+  mileage?: boolean
   description?: boolean
   amount?: boolean
   expenseDate?: boolean
@@ -833,7 +878,7 @@ export type ExpenseSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ExpenseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carId" | "createdById" | "category" | "title" | "description" | "amount" | "expenseDate" | "createdAt" | "updatedAt", ExtArgs["result"]["expense"]>
+export type ExpenseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carId" | "createdById" | "category" | "title" | "mileage" | "description" | "amount" | "expenseDate" | "createdAt" | "updatedAt", ExtArgs["result"]["expense"]>
 export type ExpenseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   car?: boolean | Prisma.CarDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.Expense$createdByArgs<ExtArgs>
@@ -859,6 +904,7 @@ export type $ExpensePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     createdById: string | null
     category: $Enums.ExpenseCategory
     title: string
+    mileage: number
     description: string | null
     amount: runtime.Decimal
     expenseDate: Date
@@ -1294,6 +1340,7 @@ export interface ExpenseFieldRefs {
   readonly createdById: Prisma.FieldRef<"Expense", 'String'>
   readonly category: Prisma.FieldRef<"Expense", 'ExpenseCategory'>
   readonly title: Prisma.FieldRef<"Expense", 'String'>
+  readonly mileage: Prisma.FieldRef<"Expense", 'Int'>
   readonly description: Prisma.FieldRef<"Expense", 'String'>
   readonly amount: Prisma.FieldRef<"Expense", 'Decimal'>
   readonly expenseDate: Prisma.FieldRef<"Expense", 'DateTime'>
