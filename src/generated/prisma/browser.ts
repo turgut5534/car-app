@@ -63,6 +63,11 @@ export type FuelAttachment = Prisma.FuelAttachmentModel
  */
 export type Expense = Prisma.ExpenseModel
 /**
+ * Model ExpenseAttachment
+ * 
+ */
+export type ExpenseAttachment = Prisma.ExpenseAttachmentModel
+/**
  * Model FuelCard
  * 
  */

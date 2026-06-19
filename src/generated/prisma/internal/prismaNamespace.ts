@@ -393,6 +393,7 @@ export const ModelName = {
   FuelRecord: 'FuelRecord',
   FuelAttachment: 'FuelAttachment',
   Expense: 'Expense',
+  ExpenseAttachment: 'ExpenseAttachment',
   FuelCard: 'FuelCard',
   FuelCardTransaction: 'FuelCardTransaction',
   Document: 'Document',
@@ -413,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "car" | "carPhotos" | "carMember" | "serviceRecord" | "serviceAttachment" | "fuelRecord" | "fuelAttachment" | "expense" | "fuelCard" | "fuelCardTransaction" | "document" | "documentAttachment" | "reminder"
+    modelProps: "user" | "car" | "carPhotos" | "carMember" | "serviceRecord" | "serviceAttachment" | "fuelRecord" | "fuelAttachment" | "expense" | "expenseAttachment" | "fuelCard" | "fuelCardTransaction" | "document" | "documentAttachment" | "reminder"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1083,6 +1084,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ExpenseAttachment: {
+      payload: Prisma.$ExpenseAttachmentPayload<ExtArgs>
+      fields: Prisma.ExpenseAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ExpenseAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpenseAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ExpenseAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpenseAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.ExpenseAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpenseAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ExpenseAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpenseAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.ExpenseAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpenseAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.ExpenseAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpenseAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.ExpenseAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ExpenseAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpenseAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.ExpenseAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpenseAttachmentPayload>
+        }
+        update: {
+          args: Prisma.ExpenseAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpenseAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.ExpenseAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ExpenseAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ExpenseAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpenseAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.ExpenseAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExpenseAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.ExpenseAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateExpenseAttachment>
+        }
+        groupBy: {
+          args: Prisma.ExpenseAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExpenseAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ExpenseAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExpenseAttachmentCountAggregateOutputType> | number
+        }
+      }
+    }
     FuelCard: {
       payload: Prisma.$FuelCardPayload<ExtArgs>
       fields: Prisma.FuelCardFieldRefs
@@ -1637,6 +1712,18 @@ export const ExpenseScalarFieldEnum = {
 export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
 
 
+export const ExpenseAttachmentScalarFieldEnum = {
+  id: 'id',
+  expenseId: 'expenseId',
+  url: 'url',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  createdAt: 'createdAt'
+} as const
+
+export type ExpenseAttachmentScalarFieldEnum = (typeof ExpenseAttachmentScalarFieldEnum)[keyof typeof ExpenseAttachmentScalarFieldEnum]
+
+
 export const FuelCardScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -2034,6 +2121,7 @@ export type GlobalOmitConfig = {
   fuelRecord?: Prisma.FuelRecordOmit
   fuelAttachment?: Prisma.FuelAttachmentOmit
   expense?: Prisma.ExpenseOmit
+  expenseAttachment?: Prisma.ExpenseAttachmentOmit
   fuelCard?: Prisma.FuelCardOmit
   fuelCardTransaction?: Prisma.FuelCardTransactionOmit
   document?: Prisma.DocumentOmit

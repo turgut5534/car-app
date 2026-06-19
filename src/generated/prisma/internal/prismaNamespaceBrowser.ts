@@ -60,6 +60,7 @@ export const ModelName = {
   FuelRecord: 'FuelRecord',
   FuelAttachment: 'FuelAttachment',
   Expense: 'Expense',
+  ExpenseAttachment: 'ExpenseAttachment',
   FuelCard: 'FuelCard',
   FuelCardTransaction: 'FuelCardTransaction',
   Document: 'Document',
@@ -226,6 +227,18 @@ export const ExpenseScalarFieldEnum = {
 } as const
 
 export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
+
+
+export const ExpenseAttachmentScalarFieldEnum = {
+  id: 'id',
+  expenseId: 'expenseId',
+  url: 'url',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  createdAt: 'createdAt'
+} as const
+
+export type ExpenseAttachmentScalarFieldEnum = (typeof ExpenseAttachmentScalarFieldEnum)[keyof typeof ExpenseAttachmentScalarFieldEnum]
 
 
 export const FuelCardScalarFieldEnum = {

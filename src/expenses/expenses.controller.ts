@@ -7,18 +7,67 @@ import {
   Param,
   Delete,
   Query,
+  UseInterceptors,
+  UploadedFiles,
+  UseGuards,
 } from '@nestjs/common';
 import { ExpensesService } from './expenses.service';
 import { CreateExpenseDto } from './dto/create-expense.dto';
 import { UpdateExpenseDto } from './dto/update-expense.dto';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
+import { UserId } from 'src/auth/decorators/current-user.decorator';
+import { JwtAuthGuard } from 'src/middlewares/jwt-guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('expenses')
 export class ExpensesController {
   constructor(private readonly expensesService: ExpensesService) {}
 
   @Post()
-  create(@Body() createExpenseDto: CreateExpenseDto) {
-    return this.expensesService.create(createExpenseDto);
+  @UseInterceptors(
+    FilesInterceptor('files', 10, {
+      storage: diskStorage({
+        destination: './uploads/expenses',
+        filename: (req, file, cb) => {
+          const uniqueName = `${Date.now()}-${Math.round(
+            Math.random() * 1e9,
+          )}${extname(file.originalname)}`;
+
+          cb(null, uniqueName);
+        },
+      }),
+      fileFilter: (req, file, cb) => {
+        const allowedMimeTypes = [
+          'application/pdf',
+          'application/msword',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          'image/jpeg',
+          'image/png',
+          'image/webp',
+        ];
+
+        if (!allowedMimeTypes.includes(file.mimetype)) {
+          return cb(
+            new Error('Only PDF, Word, or image files are allowed'),
+            false,
+          );
+        }
+
+        cb(null, true);
+      },
+      limits: {
+        fileSize: 5 * 1024 * 1024,
+      },
+    }),
+  )
+  create(
+    @UserId() userId: string,
+    @Body() createExpenseDto: CreateExpenseDto,
+    @UploadedFiles() files: Express.Multer.File[],
+  ) {
+    return this.expensesService.create(userId, createExpenseDto, files);
   }
 
   @Get()
@@ -32,16 +81,68 @@ export class ExpensesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.expensesService.findOne(+id);
+    return this.expensesService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateExpenseDto: UpdateExpenseDto) {
-    return this.expensesService.update(+id, updateExpenseDto);
-  }
+  @UseInterceptors(
+    FilesInterceptor('files', 10, {
+      storage: diskStorage({
+        destination: './uploads/expenses',
+        filename: (req, file, cb) => {
+          const uniqueName = `${Date.now()}-${Math.round(
+            Math.random() * 1e9,
+          )}${extname(file.originalname)}`;
 
+          cb(null, uniqueName);
+        },
+      }),
+      fileFilter: (req, file, cb) => {
+        const allowedMimeTypes = [
+          'application/pdf',
+          'application/msword',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          'image/jpeg',
+          'image/png',
+          'image/webp',
+        ];
+
+        if (!allowedMimeTypes.includes(file.mimetype)) {
+          return cb(
+            new Error('Only PDF, Word, or image files are allowed'),
+            false,
+          );
+        }
+
+        cb(null, true);
+      },
+      limits: {
+        fileSize: 5 * 1024 * 1024,
+      },
+    }),
+  )
+  update(
+    @Param('id') id: string,
+    @Body() updateExpenseDto: UpdateExpenseDto,
+    @Query('carId') carId: string,
+    @UploadedFiles() files: Express.Multer.File[],
+    @UserId() userId: string,
+  ) {
+    return this.expensesService.update(
+      id,
+      updateExpenseDto,
+      carId,
+      files,
+      userId,
+    );
+  }
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.expensesService.remove(+id);
+    return this.expensesService.remove(id);
+  }
+
+  @Delete(':id/files/:fileId')
+  removeFile(@Param('id') id: string, @Param('fileId') fileId: string) {
+    return this.expensesService.removeFile(id, fileId);
   }
 }

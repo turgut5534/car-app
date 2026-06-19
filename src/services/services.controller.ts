@@ -146,7 +146,6 @@ export class ServicesController {
     @Body() createServiceDto: CreateServiceDto,
     @UploadedFiles() files: Express.Multer.File[],
   ) {
-    // return console.log(createServiceDto)
     return this.servicesService.create(userId, createServiceDto, files);
   }
 }

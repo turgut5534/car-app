@@ -208,6 +208,7 @@ model Expense {
 
   car         Car   @relation(fields: [carId], references: [id], onDelete: Cascade)
   createdBy   User? @relation(fields: [createdById], references: [id])
+  attachments ExpenseAttachment[]
 }
 
 enum ExpenseCategory {
@@ -221,6 +222,17 @@ enum ExpenseCategory {
   TIRE
   DOCUMENT
   OTHER
+}
+
+model ExpenseAttachment {
+  id              String   @id @default(uuid())
+  expenseId    String
+  url             String?
+  fileName        String
+  mimeType        String?
+  createdAt       DateTime @default(now())
+
+  expense         Expense @relation(fields: [expenseId], references: [id], onDelete: Cascade)
 }
 
 model FuelCard {
