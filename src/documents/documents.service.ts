@@ -81,9 +81,12 @@ export class DocumentsService {
     }
   }
 
-  update(id: string, updateDocumentDto: UpdateDocumentDto, userId: string, files?: Express.Multer.File[]) {
-
-
+  update(
+    id: string,
+    updateDocumentDto: UpdateDocumentDto,
+    userId: string,
+    files?: Express.Multer.File[],
+  ) {
     const updatedDocument = this.prisma.$transaction(async (prisma) => {
       const document = await prisma.document.update({
         where: { id },
@@ -108,11 +111,53 @@ export class DocumentsService {
       return document;
     });
 
-    return updatedDocument; 
+    return updatedDocument;
   }
+  async remove(id: string, userId: string) {
+    const document = await this.prisma.document.findFirst({
+      where: {
+        id,
+        uploadedById: userId,
+      },
+      include: {
+        attachments: true,
+      },
+    });
 
-  remove(id: number) {
-    return `This action removes a #${id} document`;
+    if (!document) {
+      throw new NotFoundException(
+        'Document not found or you do not have permission to delete it',
+      );
+    }
+
+    await Promise.all(
+      document.attachments.map(async (attachment) => {
+        try {
+          const filePath = join(
+            process.cwd(),
+            'uploads/documents',
+            attachment.fileName,
+          );
+
+          await unlink(filePath);
+        } catch (err) {
+          console.log(`Failed to delete file ${attachment.fileName}:`, err);
+        }
+      }),
+    );
+
+    await this.prisma.$transaction([
+      this.prisma.documentAttachment.deleteMany({
+        where: { documentId: document.id },
+      }),
+      this.prisma.document.delete({
+        where: { id: document.id },
+      }),
+    ]);
+
+    return {
+      message: 'Document removed successfully',
+    };
   }
 
   async removeAttachment(id: string, attachmentId: string) {

@@ -128,8 +128,8 @@ export class DocumentsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.documentsService.remove(+id);
+  remove(@Param('id') id: string, @UserId() userId: string) {
+    return this.documentsService.remove(id, userId);
   }
 
   @Delete(':id/attachments/:attachmentId')
