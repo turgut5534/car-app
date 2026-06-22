@@ -386,8 +386,9 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   Car: 'Car',
+  Family: 'Family',
+  FamilyMember: 'FamilyMember',
   CarPhotos: 'CarPhotos',
-  CarMember: 'CarMember',
   ServiceRecord: 'ServiceRecord',
   ServiceAttachment: 'ServiceAttachment',
   FuelRecord: 'FuelRecord',
@@ -398,7 +399,8 @@ export const ModelName = {
   FuelCardTransaction: 'FuelCardTransaction',
   Document: 'Document',
   DocumentAttachment: 'DocumentAttachment',
-  Reminder: 'Reminder'
+  Reminder: 'Reminder',
+  Notification: 'Notification'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -414,7 +416,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "car" | "carPhotos" | "carMember" | "serviceRecord" | "serviceAttachment" | "fuelRecord" | "fuelAttachment" | "expense" | "expenseAttachment" | "fuelCard" | "fuelCardTransaction" | "document" | "documentAttachment" | "reminder"
+    modelProps: "user" | "car" | "family" | "familyMember" | "carPhotos" | "serviceRecord" | "serviceAttachment" | "fuelRecord" | "fuelAttachment" | "expense" | "expenseAttachment" | "fuelCard" | "fuelCardTransaction" | "document" | "documentAttachment" | "reminder" | "notification"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -566,6 +568,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Family: {
+      payload: Prisma.$FamilyPayload<ExtArgs>
+      fields: Prisma.FamilyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FamilyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FamilyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyPayload>
+        }
+        findFirst: {
+          args: Prisma.FamilyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FamilyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyPayload>
+        }
+        findMany: {
+          args: Prisma.FamilyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyPayload>[]
+        }
+        create: {
+          args: Prisma.FamilyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyPayload>
+        }
+        createMany: {
+          args: Prisma.FamilyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FamilyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyPayload>[]
+        }
+        delete: {
+          args: Prisma.FamilyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyPayload>
+        }
+        update: {
+          args: Prisma.FamilyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyPayload>
+        }
+        deleteMany: {
+          args: Prisma.FamilyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FamilyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FamilyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyPayload>[]
+        }
+        upsert: {
+          args: Prisma.FamilyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyPayload>
+        }
+        aggregate: {
+          args: Prisma.FamilyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFamily>
+        }
+        groupBy: {
+          args: Prisma.FamilyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FamilyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FamilyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FamilyCountAggregateOutputType> | number
+        }
+      }
+    }
+    FamilyMember: {
+      payload: Prisma.$FamilyMemberPayload<ExtArgs>
+      fields: Prisma.FamilyMemberFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FamilyMemberFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyMemberPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FamilyMemberFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyMemberPayload>
+        }
+        findFirst: {
+          args: Prisma.FamilyMemberFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyMemberPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FamilyMemberFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyMemberPayload>
+        }
+        findMany: {
+          args: Prisma.FamilyMemberFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyMemberPayload>[]
+        }
+        create: {
+          args: Prisma.FamilyMemberCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyMemberPayload>
+        }
+        createMany: {
+          args: Prisma.FamilyMemberCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FamilyMemberCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyMemberPayload>[]
+        }
+        delete: {
+          args: Prisma.FamilyMemberDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyMemberPayload>
+        }
+        update: {
+          args: Prisma.FamilyMemberUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyMemberPayload>
+        }
+        deleteMany: {
+          args: Prisma.FamilyMemberDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FamilyMemberUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FamilyMemberUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyMemberPayload>[]
+        }
+        upsert: {
+          args: Prisma.FamilyMemberUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyMemberPayload>
+        }
+        aggregate: {
+          args: Prisma.FamilyMemberAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFamilyMember>
+        }
+        groupBy: {
+          args: Prisma.FamilyMemberGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FamilyMemberGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FamilyMemberCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FamilyMemberCountAggregateOutputType> | number
+        }
+      }
+    }
     CarPhotos: {
       payload: Prisma.$CarPhotosPayload<ExtArgs>
       fields: Prisma.CarPhotosFieldRefs
@@ -637,80 +787,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CarPhotosCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CarPhotosCountAggregateOutputType> | number
-        }
-      }
-    }
-    CarMember: {
-      payload: Prisma.$CarMemberPayload<ExtArgs>
-      fields: Prisma.CarMemberFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.CarMemberFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarMemberPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.CarMemberFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarMemberPayload>
-        }
-        findFirst: {
-          args: Prisma.CarMemberFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarMemberPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.CarMemberFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarMemberPayload>
-        }
-        findMany: {
-          args: Prisma.CarMemberFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarMemberPayload>[]
-        }
-        create: {
-          args: Prisma.CarMemberCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarMemberPayload>
-        }
-        createMany: {
-          args: Prisma.CarMemberCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.CarMemberCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarMemberPayload>[]
-        }
-        delete: {
-          args: Prisma.CarMemberDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarMemberPayload>
-        }
-        update: {
-          args: Prisma.CarMemberUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarMemberPayload>
-        }
-        deleteMany: {
-          args: Prisma.CarMemberDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.CarMemberUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.CarMemberUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarMemberPayload>[]
-        }
-        upsert: {
-          args: Prisma.CarMemberUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarMemberPayload>
-        }
-        aggregate: {
-          args: Prisma.CarMemberAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateCarMember>
-        }
-        groupBy: {
-          args: Prisma.CarMemberGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CarMemberGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.CarMemberCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CarMemberCountAggregateOutputType> | number
         }
       }
     }
@@ -1528,6 +1604,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Notification: {
+      payload: Prisma.$NotificationPayload<ExtArgs>
+      fields: Prisma.NotificationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NotificationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NotificationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        findFirst: {
+          args: Prisma.NotificationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NotificationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        findMany: {
+          args: Prisma.NotificationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        create: {
+          args: Prisma.NotificationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        createMany: {
+          args: Prisma.NotificationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.NotificationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        delete: {
+          args: Prisma.NotificationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        update: {
+          args: Prisma.NotificationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        deleteMany: {
+          args: Prisma.NotificationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NotificationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.NotificationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        upsert: {
+          args: Prisma.NotificationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        aggregate: {
+          args: Prisma.NotificationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNotification>
+        }
+        groupBy: {
+          args: Prisma.NotificationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NotificationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1596,10 +1746,34 @@ export const CarScalarFieldEnum = {
   currentKm: 'currentKm',
   imageUrl: 'imageUrl',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  familyId: 'familyId'
 } as const
 
 export type CarScalarFieldEnum = (typeof CarScalarFieldEnum)[keyof typeof CarScalarFieldEnum]
+
+
+export const FamilyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  ownerId: 'ownerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FamilyScalarFieldEnum = (typeof FamilyScalarFieldEnum)[keyof typeof FamilyScalarFieldEnum]
+
+
+export const FamilyMemberScalarFieldEnum = {
+  id: 'id',
+  familyId: 'familyId',
+  userId: 'userId',
+  role: 'role',
+  createdAt: 'createdAt',
+  is_approved: 'is_approved'
+} as const
+
+export type FamilyMemberScalarFieldEnum = (typeof FamilyMemberScalarFieldEnum)[keyof typeof FamilyMemberScalarFieldEnum]
 
 
 export const CarPhotosScalarFieldEnum = {
@@ -1613,17 +1787,6 @@ export const CarPhotosScalarFieldEnum = {
 } as const
 
 export type CarPhotosScalarFieldEnum = (typeof CarPhotosScalarFieldEnum)[keyof typeof CarPhotosScalarFieldEnum]
-
-
-export const CarMemberScalarFieldEnum = {
-  id: 'id',
-  carId: 'carId',
-  userId: 'userId',
-  role: 'role',
-  createdAt: 'createdAt'
-} as const
-
-export type CarMemberScalarFieldEnum = (typeof CarMemberScalarFieldEnum)[keyof typeof CarMemberScalarFieldEnum]
 
 
 export const ServiceRecordScalarFieldEnum = {
@@ -1798,6 +1961,22 @@ export const ReminderScalarFieldEnum = {
 export type ReminderScalarFieldEnum = (typeof ReminderScalarFieldEnum)[keyof typeof ReminderScalarFieldEnum]
 
 
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  message: 'message',
+  type: 'type',
+  isRead: 'isRead',
+  familyId: 'familyId',
+  carId: 'carId',
+  createdAt: 'createdAt',
+  readAt: 'readAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1892,16 +2071,16 @@ export type ListEnumFuelTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
 
 
 /**
- * Reference to a field of type 'CarRole'
+ * Reference to a field of type 'FamilyRole'
  */
-export type EnumCarRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CarRole'>
+export type EnumFamilyRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FamilyRole'>
     
 
 
 /**
- * Reference to a field of type 'CarRole[]'
+ * Reference to a field of type 'FamilyRole[]'
  */
-export type ListEnumCarRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CarRole[]'>
+export type ListEnumFamilyRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FamilyRole[]'>
     
 
 
@@ -2000,6 +2179,20 @@ export type EnumReminderTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
  * Reference to a field of type 'ReminderType[]'
  */
 export type ListEnumReminderTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReminderType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'NotificationType'
+ */
+export type EnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationType'>
+    
+
+
+/**
+ * Reference to a field of type 'NotificationType[]'
+ */
+export type ListEnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationType[]'>
     
 
 /**
@@ -2114,8 +2307,9 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   car?: Prisma.CarOmit
+  family?: Prisma.FamilyOmit
+  familyMember?: Prisma.FamilyMemberOmit
   carPhotos?: Prisma.CarPhotosOmit
-  carMember?: Prisma.CarMemberOmit
   serviceRecord?: Prisma.ServiceRecordOmit
   serviceAttachment?: Prisma.ServiceAttachmentOmit
   fuelRecord?: Prisma.FuelRecordOmit
@@ -2127,6 +2321,7 @@ export type GlobalOmitConfig = {
   document?: Prisma.DocumentOmit
   documentAttachment?: Prisma.DocumentAttachmentOmit
   reminder?: Prisma.ReminderOmit
+  notification?: Prisma.NotificationOmit
 }
 
 /* Types for Logging */

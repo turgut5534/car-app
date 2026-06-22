@@ -9,6 +9,16 @@
 * 🟢 You can import this file directly.
 */
 
+export const FamilyRole = {
+  OWNER: 'OWNER',
+  ADMIN: 'ADMIN',
+  MEMBER: 'MEMBER',
+  VIEWER: 'VIEWER'
+} as const
+
+export type FamilyRole = (typeof FamilyRole)[keyof typeof FamilyRole]
+
+
 export const CarRole = {
   OWNER: 'OWNER',
   ADMIN: 'ADMIN',
@@ -97,3 +107,21 @@ export const ReminderType = {
 } as const
 
 export type ReminderType = (typeof ReminderType)[keyof typeof ReminderType]
+
+
+export const NotificationType = {
+  FAMILY_INVITE: 'FAMILY_INVITE',
+  FAMILY_MEMBER_JOINED: 'FAMILY_MEMBER_JOINED',
+  FAMILY_MEMBER_REMOVED: 'FAMILY_MEMBER_REMOVED',
+  REMINDER_DUE: 'REMINDER_DUE',
+  REMINDER_OVERDUE: 'REMINDER_OVERDUE',
+  DOCUMENT_EXPIRING: 'DOCUMENT_EXPIRING',
+  INSURANCE_EXPIRING: 'INSURANCE_EXPIRING',
+  INSPECTION_EXPIRING: 'INSPECTION_EXPIRING',
+  SERVICE_DUE: 'SERVICE_DUE',
+  OIL_CHANGE_DUE: 'OIL_CHANGE_DUE',
+  CAR_SHARED: 'CAR_SHARED',
+  INFO: 'INFO'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]

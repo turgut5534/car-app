@@ -53,8 +53,9 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Car: 'Car',
+  Family: 'Family',
+  FamilyMember: 'FamilyMember',
   CarPhotos: 'CarPhotos',
-  CarMember: 'CarMember',
   ServiceRecord: 'ServiceRecord',
   ServiceAttachment: 'ServiceAttachment',
   FuelRecord: 'FuelRecord',
@@ -65,7 +66,8 @@ export const ModelName = {
   FuelCardTransaction: 'FuelCardTransaction',
   Document: 'Document',
   DocumentAttachment: 'DocumentAttachment',
-  Reminder: 'Reminder'
+  Reminder: 'Reminder',
+  Notification: 'Notification'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -113,10 +115,34 @@ export const CarScalarFieldEnum = {
   currentKm: 'currentKm',
   imageUrl: 'imageUrl',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  familyId: 'familyId'
 } as const
 
 export type CarScalarFieldEnum = (typeof CarScalarFieldEnum)[keyof typeof CarScalarFieldEnum]
+
+
+export const FamilyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  ownerId: 'ownerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FamilyScalarFieldEnum = (typeof FamilyScalarFieldEnum)[keyof typeof FamilyScalarFieldEnum]
+
+
+export const FamilyMemberScalarFieldEnum = {
+  id: 'id',
+  familyId: 'familyId',
+  userId: 'userId',
+  role: 'role',
+  createdAt: 'createdAt',
+  is_approved: 'is_approved'
+} as const
+
+export type FamilyMemberScalarFieldEnum = (typeof FamilyMemberScalarFieldEnum)[keyof typeof FamilyMemberScalarFieldEnum]
 
 
 export const CarPhotosScalarFieldEnum = {
@@ -130,17 +156,6 @@ export const CarPhotosScalarFieldEnum = {
 } as const
 
 export type CarPhotosScalarFieldEnum = (typeof CarPhotosScalarFieldEnum)[keyof typeof CarPhotosScalarFieldEnum]
-
-
-export const CarMemberScalarFieldEnum = {
-  id: 'id',
-  carId: 'carId',
-  userId: 'userId',
-  role: 'role',
-  createdAt: 'createdAt'
-} as const
-
-export type CarMemberScalarFieldEnum = (typeof CarMemberScalarFieldEnum)[keyof typeof CarMemberScalarFieldEnum]
 
 
 export const ServiceRecordScalarFieldEnum = {
@@ -313,6 +328,22 @@ export const ReminderScalarFieldEnum = {
 } as const
 
 export type ReminderScalarFieldEnum = (typeof ReminderScalarFieldEnum)[keyof typeof ReminderScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  message: 'message',
+  type: 'type',
+  isRead: 'isRead',
+  familyId: 'familyId',
+  carId: 'carId',
+  createdAt: 'createdAt',
+  readAt: 'readAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
 export const SortOrder = {

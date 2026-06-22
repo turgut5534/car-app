@@ -48,6 +48,7 @@ export type CarMinAggregateOutputType = {
   imageUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  familyId: string | null
 }
 
 export type CarMaxAggregateOutputType = {
@@ -62,6 +63,7 @@ export type CarMaxAggregateOutputType = {
   imageUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  familyId: string | null
 }
 
 export type CarCountAggregateOutputType = {
@@ -76,6 +78,7 @@ export type CarCountAggregateOutputType = {
   imageUrl: number
   createdAt: number
   updatedAt: number
+  familyId: number
   _all: number
 }
 
@@ -102,6 +105,7 @@ export type CarMinAggregateInputType = {
   imageUrl?: true
   createdAt?: true
   updatedAt?: true
+  familyId?: true
 }
 
 export type CarMaxAggregateInputType = {
@@ -116,6 +120,7 @@ export type CarMaxAggregateInputType = {
   imageUrl?: true
   createdAt?: true
   updatedAt?: true
+  familyId?: true
 }
 
 export type CarCountAggregateInputType = {
@@ -130,6 +135,7 @@ export type CarCountAggregateInputType = {
   imageUrl?: true
   createdAt?: true
   updatedAt?: true
+  familyId?: true
   _all?: true
 }
 
@@ -231,6 +237,7 @@ export type CarGroupByOutputType = {
   imageUrl: string | null
   createdAt: Date
   updatedAt: Date
+  familyId: string | null
   _count: CarCountAggregateOutputType | null
   _avg: CarAvgAggregateOutputType | null
   _sum: CarSumAggregateOutputType | null
@@ -268,8 +275,9 @@ export type CarWhereInput = {
   imageUrl?: Prisma.StringNullableFilter<"Car"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Car"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Car"> | Date | string
+  familyId?: Prisma.StringNullableFilter<"Car"> | string | null
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  members?: Prisma.CarMemberListRelationFilter
+  family?: Prisma.XOR<Prisma.FamilyNullableScalarRelationFilter, Prisma.FamilyWhereInput> | null
   services?: Prisma.ServiceRecordListRelationFilter
   fuels?: Prisma.FuelRecordListRelationFilter
   expenses?: Prisma.ExpenseListRelationFilter
@@ -277,6 +285,7 @@ export type CarWhereInput = {
   reminders?: Prisma.ReminderListRelationFilter
   cardTransactions?: Prisma.FuelCardTransactionListRelationFilter
   photos?: Prisma.CarPhotosListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }
 
 export type CarOrderByWithRelationInput = {
@@ -291,8 +300,9 @@ export type CarOrderByWithRelationInput = {
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  familyId?: Prisma.SortOrderInput | Prisma.SortOrder
   owner?: Prisma.UserOrderByWithRelationInput
-  members?: Prisma.CarMemberOrderByRelationAggregateInput
+  family?: Prisma.FamilyOrderByWithRelationInput
   services?: Prisma.ServiceRecordOrderByRelationAggregateInput
   fuels?: Prisma.FuelRecordOrderByRelationAggregateInput
   expenses?: Prisma.ExpenseOrderByRelationAggregateInput
@@ -300,6 +310,7 @@ export type CarOrderByWithRelationInput = {
   reminders?: Prisma.ReminderOrderByRelationAggregateInput
   cardTransactions?: Prisma.FuelCardTransactionOrderByRelationAggregateInput
   photos?: Prisma.CarPhotosOrderByRelationAggregateInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
 }
 
 export type CarWhereUniqueInput = Prisma.AtLeast<{
@@ -317,8 +328,9 @@ export type CarWhereUniqueInput = Prisma.AtLeast<{
   imageUrl?: Prisma.StringNullableFilter<"Car"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Car"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Car"> | Date | string
+  familyId?: Prisma.StringNullableFilter<"Car"> | string | null
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  members?: Prisma.CarMemberListRelationFilter
+  family?: Prisma.XOR<Prisma.FamilyNullableScalarRelationFilter, Prisma.FamilyWhereInput> | null
   services?: Prisma.ServiceRecordListRelationFilter
   fuels?: Prisma.FuelRecordListRelationFilter
   expenses?: Prisma.ExpenseListRelationFilter
@@ -326,6 +338,7 @@ export type CarWhereUniqueInput = Prisma.AtLeast<{
   reminders?: Prisma.ReminderListRelationFilter
   cardTransactions?: Prisma.FuelCardTransactionListRelationFilter
   photos?: Prisma.CarPhotosListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }, "id">
 
 export type CarOrderByWithAggregationInput = {
@@ -340,6 +353,7 @@ export type CarOrderByWithAggregationInput = {
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  familyId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CarCountOrderByAggregateInput
   _avg?: Prisma.CarAvgOrderByAggregateInput
   _max?: Prisma.CarMaxOrderByAggregateInput
@@ -362,6 +376,7 @@ export type CarScalarWhereWithAggregatesInput = {
   imageUrl?: Prisma.StringNullableWithAggregatesFilter<"Car"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Car"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Car"> | Date | string
+  familyId?: Prisma.StringNullableWithAggregatesFilter<"Car"> | string | null
 }
 
 export type CarCreateInput = {
@@ -376,7 +391,7 @@ export type CarCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedCarsInput
-  members?: Prisma.CarMemberCreateNestedManyWithoutCarInput
+  family?: Prisma.FamilyCreateNestedOneWithoutCarsInput
   services?: Prisma.ServiceRecordCreateNestedManyWithoutCarInput
   fuels?: Prisma.FuelRecordCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutCarInput
@@ -384,6 +399,7 @@ export type CarCreateInput = {
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateInput = {
@@ -398,7 +414,7 @@ export type CarUncheckedCreateInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.CarMemberUncheckedCreateNestedManyWithoutCarInput
+  familyId?: string | null
   services?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutCarInput
   fuels?: Prisma.FuelRecordUncheckedCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCarInput
@@ -406,6 +422,7 @@ export type CarUncheckedCreateInput = {
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarUpdateInput = {
@@ -420,7 +437,7 @@ export type CarUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedCarsNestedInput
-  members?: Prisma.CarMemberUpdateManyWithoutCarNestedInput
+  family?: Prisma.FamilyUpdateOneWithoutCarsNestedInput
   services?: Prisma.ServiceRecordUpdateManyWithoutCarNestedInput
   fuels?: Prisma.FuelRecordUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutCarNestedInput
@@ -428,6 +445,7 @@ export type CarUpdateInput = {
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateInput = {
@@ -442,7 +460,7 @@ export type CarUncheckedUpdateInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.CarMemberUncheckedUpdateManyWithoutCarNestedInput
+  familyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceRecordUncheckedUpdateManyWithoutCarNestedInput
   fuels?: Prisma.FuelRecordUncheckedUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCarNestedInput
@@ -450,6 +468,7 @@ export type CarUncheckedUpdateInput = {
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateManyInput = {
@@ -464,6 +483,7 @@ export type CarCreateManyInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  familyId?: string | null
 }
 
 export type CarUpdateManyMutationInput = {
@@ -491,6 +511,7 @@ export type CarUncheckedUpdateManyInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  familyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type CarListRelationFilter = {
@@ -515,6 +536,7 @@ export type CarCountOrderByAggregateInput = {
   imageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  familyId?: Prisma.SortOrder
 }
 
 export type CarAvgOrderByAggregateInput = {
@@ -534,6 +556,7 @@ export type CarMaxOrderByAggregateInput = {
   imageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  familyId?: Prisma.SortOrder
 }
 
 export type CarMinOrderByAggregateInput = {
@@ -548,6 +571,7 @@ export type CarMinOrderByAggregateInput = {
   imageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  familyId?: Prisma.SortOrder
 }
 
 export type CarSumOrderByAggregateInput = {
@@ -627,6 +651,48 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type CarCreateNestedManyWithoutFamilyInput = {
+  create?: Prisma.XOR<Prisma.CarCreateWithoutFamilyInput, Prisma.CarUncheckedCreateWithoutFamilyInput> | Prisma.CarCreateWithoutFamilyInput[] | Prisma.CarUncheckedCreateWithoutFamilyInput[]
+  connectOrCreate?: Prisma.CarCreateOrConnectWithoutFamilyInput | Prisma.CarCreateOrConnectWithoutFamilyInput[]
+  createMany?: Prisma.CarCreateManyFamilyInputEnvelope
+  connect?: Prisma.CarWhereUniqueInput | Prisma.CarWhereUniqueInput[]
+}
+
+export type CarUncheckedCreateNestedManyWithoutFamilyInput = {
+  create?: Prisma.XOR<Prisma.CarCreateWithoutFamilyInput, Prisma.CarUncheckedCreateWithoutFamilyInput> | Prisma.CarCreateWithoutFamilyInput[] | Prisma.CarUncheckedCreateWithoutFamilyInput[]
+  connectOrCreate?: Prisma.CarCreateOrConnectWithoutFamilyInput | Prisma.CarCreateOrConnectWithoutFamilyInput[]
+  createMany?: Prisma.CarCreateManyFamilyInputEnvelope
+  connect?: Prisma.CarWhereUniqueInput | Prisma.CarWhereUniqueInput[]
+}
+
+export type CarUpdateManyWithoutFamilyNestedInput = {
+  create?: Prisma.XOR<Prisma.CarCreateWithoutFamilyInput, Prisma.CarUncheckedCreateWithoutFamilyInput> | Prisma.CarCreateWithoutFamilyInput[] | Prisma.CarUncheckedCreateWithoutFamilyInput[]
+  connectOrCreate?: Prisma.CarCreateOrConnectWithoutFamilyInput | Prisma.CarCreateOrConnectWithoutFamilyInput[]
+  upsert?: Prisma.CarUpsertWithWhereUniqueWithoutFamilyInput | Prisma.CarUpsertWithWhereUniqueWithoutFamilyInput[]
+  createMany?: Prisma.CarCreateManyFamilyInputEnvelope
+  set?: Prisma.CarWhereUniqueInput | Prisma.CarWhereUniqueInput[]
+  disconnect?: Prisma.CarWhereUniqueInput | Prisma.CarWhereUniqueInput[]
+  delete?: Prisma.CarWhereUniqueInput | Prisma.CarWhereUniqueInput[]
+  connect?: Prisma.CarWhereUniqueInput | Prisma.CarWhereUniqueInput[]
+  update?: Prisma.CarUpdateWithWhereUniqueWithoutFamilyInput | Prisma.CarUpdateWithWhereUniqueWithoutFamilyInput[]
+  updateMany?: Prisma.CarUpdateManyWithWhereWithoutFamilyInput | Prisma.CarUpdateManyWithWhereWithoutFamilyInput[]
+  deleteMany?: Prisma.CarScalarWhereInput | Prisma.CarScalarWhereInput[]
+}
+
+export type CarUncheckedUpdateManyWithoutFamilyNestedInput = {
+  create?: Prisma.XOR<Prisma.CarCreateWithoutFamilyInput, Prisma.CarUncheckedCreateWithoutFamilyInput> | Prisma.CarCreateWithoutFamilyInput[] | Prisma.CarUncheckedCreateWithoutFamilyInput[]
+  connectOrCreate?: Prisma.CarCreateOrConnectWithoutFamilyInput | Prisma.CarCreateOrConnectWithoutFamilyInput[]
+  upsert?: Prisma.CarUpsertWithWhereUniqueWithoutFamilyInput | Prisma.CarUpsertWithWhereUniqueWithoutFamilyInput[]
+  createMany?: Prisma.CarCreateManyFamilyInputEnvelope
+  set?: Prisma.CarWhereUniqueInput | Prisma.CarWhereUniqueInput[]
+  disconnect?: Prisma.CarWhereUniqueInput | Prisma.CarWhereUniqueInput[]
+  delete?: Prisma.CarWhereUniqueInput | Prisma.CarWhereUniqueInput[]
+  connect?: Prisma.CarWhereUniqueInput | Prisma.CarWhereUniqueInput[]
+  update?: Prisma.CarUpdateWithWhereUniqueWithoutFamilyInput | Prisma.CarUpdateWithWhereUniqueWithoutFamilyInput[]
+  updateMany?: Prisma.CarUpdateManyWithWhereWithoutFamilyInput | Prisma.CarUpdateManyWithWhereWithoutFamilyInput[]
+  deleteMany?: Prisma.CarScalarWhereInput | Prisma.CarScalarWhereInput[]
+}
+
 export type CarCreateNestedOneWithoutPhotosInput = {
   create?: Prisma.XOR<Prisma.CarCreateWithoutPhotosInput, Prisma.CarUncheckedCreateWithoutPhotosInput>
   connectOrCreate?: Prisma.CarCreateOrConnectWithoutPhotosInput
@@ -639,20 +705,6 @@ export type CarUpdateOneRequiredWithoutPhotosNestedInput = {
   upsert?: Prisma.CarUpsertWithoutPhotosInput
   connect?: Prisma.CarWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.CarUpdateToOneWithWhereWithoutPhotosInput, Prisma.CarUpdateWithoutPhotosInput>, Prisma.CarUncheckedUpdateWithoutPhotosInput>
-}
-
-export type CarCreateNestedOneWithoutMembersInput = {
-  create?: Prisma.XOR<Prisma.CarCreateWithoutMembersInput, Prisma.CarUncheckedCreateWithoutMembersInput>
-  connectOrCreate?: Prisma.CarCreateOrConnectWithoutMembersInput
-  connect?: Prisma.CarWhereUniqueInput
-}
-
-export type CarUpdateOneRequiredWithoutMembersNestedInput = {
-  create?: Prisma.XOR<Prisma.CarCreateWithoutMembersInput, Prisma.CarUncheckedCreateWithoutMembersInput>
-  connectOrCreate?: Prisma.CarCreateOrConnectWithoutMembersInput
-  upsert?: Prisma.CarUpsertWithoutMembersInput
-  connect?: Prisma.CarWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CarUpdateToOneWithWhereWithoutMembersInput, Prisma.CarUpdateWithoutMembersInput>, Prisma.CarUncheckedUpdateWithoutMembersInput>
 }
 
 export type CarCreateNestedOneWithoutServicesInput = {
@@ -743,6 +795,22 @@ export type CarUpdateOneWithoutRemindersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CarUpdateToOneWithWhereWithoutRemindersInput, Prisma.CarUpdateWithoutRemindersInput>, Prisma.CarUncheckedUpdateWithoutRemindersInput>
 }
 
+export type CarCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.CarCreateWithoutNotificationsInput, Prisma.CarUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.CarCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.CarWhereUniqueInput
+}
+
+export type CarUpdateOneWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.CarCreateWithoutNotificationsInput, Prisma.CarUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.CarCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.CarUpsertWithoutNotificationsInput
+  disconnect?: Prisma.CarWhereInput | boolean
+  delete?: Prisma.CarWhereInput | boolean
+  connect?: Prisma.CarWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CarUpdateToOneWithWhereWithoutNotificationsInput, Prisma.CarUpdateWithoutNotificationsInput>, Prisma.CarUncheckedUpdateWithoutNotificationsInput>
+}
+
 export type CarCreateWithoutOwnerInput = {
   id?: string
   plate?: string | null
@@ -754,7 +822,7 @@ export type CarCreateWithoutOwnerInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.CarMemberCreateNestedManyWithoutCarInput
+  family?: Prisma.FamilyCreateNestedOneWithoutCarsInput
   services?: Prisma.ServiceRecordCreateNestedManyWithoutCarInput
   fuels?: Prisma.FuelRecordCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutCarInput
@@ -762,6 +830,7 @@ export type CarCreateWithoutOwnerInput = {
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutOwnerInput = {
@@ -775,7 +844,7 @@ export type CarUncheckedCreateWithoutOwnerInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.CarMemberUncheckedCreateNestedManyWithoutCarInput
+  familyId?: string | null
   services?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutCarInput
   fuels?: Prisma.FuelRecordUncheckedCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCarInput
@@ -783,6 +852,7 @@ export type CarUncheckedCreateWithoutOwnerInput = {
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutOwnerInput = {
@@ -826,6 +896,77 @@ export type CarScalarWhereInput = {
   imageUrl?: Prisma.StringNullableFilter<"Car"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Car"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Car"> | Date | string
+  familyId?: Prisma.StringNullableFilter<"Car"> | string | null
+}
+
+export type CarCreateWithoutFamilyInput = {
+  id?: string
+  plate?: string | null
+  brand?: string | null
+  model?: string | null
+  year?: number | null
+  fuelType?: $Enums.FuelType
+  currentKm?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutOwnedCarsInput
+  services?: Prisma.ServiceRecordCreateNestedManyWithoutCarInput
+  fuels?: Prisma.FuelRecordCreateNestedManyWithoutCarInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCarInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
+  cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutCarInput
+}
+
+export type CarUncheckedCreateWithoutFamilyInput = {
+  id?: string
+  ownerId: string
+  plate?: string | null
+  brand?: string | null
+  model?: string | null
+  year?: number | null
+  fuelType?: $Enums.FuelType
+  currentKm?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  services?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutCarInput
+  fuels?: Prisma.FuelRecordUncheckedCreateNestedManyWithoutCarInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCarInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
+  cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutCarInput
+}
+
+export type CarCreateOrConnectWithoutFamilyInput = {
+  where: Prisma.CarWhereUniqueInput
+  create: Prisma.XOR<Prisma.CarCreateWithoutFamilyInput, Prisma.CarUncheckedCreateWithoutFamilyInput>
+}
+
+export type CarCreateManyFamilyInputEnvelope = {
+  data: Prisma.CarCreateManyFamilyInput | Prisma.CarCreateManyFamilyInput[]
+  skipDuplicates?: boolean
+}
+
+export type CarUpsertWithWhereUniqueWithoutFamilyInput = {
+  where: Prisma.CarWhereUniqueInput
+  update: Prisma.XOR<Prisma.CarUpdateWithoutFamilyInput, Prisma.CarUncheckedUpdateWithoutFamilyInput>
+  create: Prisma.XOR<Prisma.CarCreateWithoutFamilyInput, Prisma.CarUncheckedCreateWithoutFamilyInput>
+}
+
+export type CarUpdateWithWhereUniqueWithoutFamilyInput = {
+  where: Prisma.CarWhereUniqueInput
+  data: Prisma.XOR<Prisma.CarUpdateWithoutFamilyInput, Prisma.CarUncheckedUpdateWithoutFamilyInput>
+}
+
+export type CarUpdateManyWithWhereWithoutFamilyInput = {
+  where: Prisma.CarScalarWhereInput
+  data: Prisma.XOR<Prisma.CarUpdateManyMutationInput, Prisma.CarUncheckedUpdateManyWithoutFamilyInput>
 }
 
 export type CarCreateWithoutPhotosInput = {
@@ -840,13 +981,14 @@ export type CarCreateWithoutPhotosInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedCarsInput
-  members?: Prisma.CarMemberCreateNestedManyWithoutCarInput
+  family?: Prisma.FamilyCreateNestedOneWithoutCarsInput
   services?: Prisma.ServiceRecordCreateNestedManyWithoutCarInput
   fuels?: Prisma.FuelRecordCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutPhotosInput = {
@@ -861,13 +1003,14 @@ export type CarUncheckedCreateWithoutPhotosInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.CarMemberUncheckedCreateNestedManyWithoutCarInput
+  familyId?: string | null
   services?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutCarInput
   fuels?: Prisma.FuelRecordUncheckedCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutPhotosInput = {
@@ -898,13 +1041,14 @@ export type CarUpdateWithoutPhotosInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedCarsNestedInput
-  members?: Prisma.CarMemberUpdateManyWithoutCarNestedInput
+  family?: Prisma.FamilyUpdateOneWithoutCarsNestedInput
   services?: Prisma.ServiceRecordUpdateManyWithoutCarNestedInput
   fuels?: Prisma.FuelRecordUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutPhotosInput = {
@@ -919,113 +1063,14 @@ export type CarUncheckedUpdateWithoutPhotosInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.CarMemberUncheckedUpdateManyWithoutCarNestedInput
+  familyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceRecordUncheckedUpdateManyWithoutCarNestedInput
   fuels?: Prisma.FuelRecordUncheckedUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
-}
-
-export type CarCreateWithoutMembersInput = {
-  id?: string
-  plate?: string | null
-  brand?: string | null
-  model?: string | null
-  year?: number | null
-  fuelType?: $Enums.FuelType
-  currentKm?: number
-  imageUrl?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  owner: Prisma.UserCreateNestedOneWithoutOwnedCarsInput
-  services?: Prisma.ServiceRecordCreateNestedManyWithoutCarInput
-  fuels?: Prisma.FuelRecordCreateNestedManyWithoutCarInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutCarInput
-  documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
-  cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
-  photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
-}
-
-export type CarUncheckedCreateWithoutMembersInput = {
-  id?: string
-  ownerId: string
-  plate?: string | null
-  brand?: string | null
-  model?: string | null
-  year?: number | null
-  fuelType?: $Enums.FuelType
-  currentKm?: number
-  imageUrl?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  services?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutCarInput
-  fuels?: Prisma.FuelRecordUncheckedCreateNestedManyWithoutCarInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCarInput
-  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
-  cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
-  photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
-}
-
-export type CarCreateOrConnectWithoutMembersInput = {
-  where: Prisma.CarWhereUniqueInput
-  create: Prisma.XOR<Prisma.CarCreateWithoutMembersInput, Prisma.CarUncheckedCreateWithoutMembersInput>
-}
-
-export type CarUpsertWithoutMembersInput = {
-  update: Prisma.XOR<Prisma.CarUpdateWithoutMembersInput, Prisma.CarUncheckedUpdateWithoutMembersInput>
-  create: Prisma.XOR<Prisma.CarCreateWithoutMembersInput, Prisma.CarUncheckedCreateWithoutMembersInput>
-  where?: Prisma.CarWhereInput
-}
-
-export type CarUpdateToOneWithWhereWithoutMembersInput = {
-  where?: Prisma.CarWhereInput
-  data: Prisma.XOR<Prisma.CarUpdateWithoutMembersInput, Prisma.CarUncheckedUpdateWithoutMembersInput>
-}
-
-export type CarUpdateWithoutMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  fuelType?: Prisma.EnumFuelTypeFieldUpdateOperationsInput | $Enums.FuelType
-  currentKm?: Prisma.IntFieldUpdateOperationsInput | number
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedCarsNestedInput
-  services?: Prisma.ServiceRecordUpdateManyWithoutCarNestedInput
-  fuels?: Prisma.FuelRecordUpdateManyWithoutCarNestedInput
-  expenses?: Prisma.ExpenseUpdateManyWithoutCarNestedInput
-  documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
-  cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
-  photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
-}
-
-export type CarUncheckedUpdateWithoutMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  fuelType?: Prisma.EnumFuelTypeFieldUpdateOperationsInput | $Enums.FuelType
-  currentKm?: Prisma.IntFieldUpdateOperationsInput | number
-  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  services?: Prisma.ServiceRecordUncheckedUpdateManyWithoutCarNestedInput
-  fuels?: Prisma.FuelRecordUncheckedUpdateManyWithoutCarNestedInput
-  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCarNestedInput
-  documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
-  cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
-  photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateWithoutServicesInput = {
@@ -1040,13 +1085,14 @@ export type CarCreateWithoutServicesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedCarsInput
-  members?: Prisma.CarMemberCreateNestedManyWithoutCarInput
+  family?: Prisma.FamilyCreateNestedOneWithoutCarsInput
   fuels?: Prisma.FuelRecordCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutServicesInput = {
@@ -1061,13 +1107,14 @@ export type CarUncheckedCreateWithoutServicesInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.CarMemberUncheckedCreateNestedManyWithoutCarInput
+  familyId?: string | null
   fuels?: Prisma.FuelRecordUncheckedCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutServicesInput = {
@@ -1098,13 +1145,14 @@ export type CarUpdateWithoutServicesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedCarsNestedInput
-  members?: Prisma.CarMemberUpdateManyWithoutCarNestedInput
+  family?: Prisma.FamilyUpdateOneWithoutCarsNestedInput
   fuels?: Prisma.FuelRecordUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutServicesInput = {
@@ -1119,13 +1167,14 @@ export type CarUncheckedUpdateWithoutServicesInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.CarMemberUncheckedUpdateManyWithoutCarNestedInput
+  familyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fuels?: Prisma.FuelRecordUncheckedUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateWithoutFuelsInput = {
@@ -1140,13 +1189,14 @@ export type CarCreateWithoutFuelsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedCarsInput
-  members?: Prisma.CarMemberCreateNestedManyWithoutCarInput
+  family?: Prisma.FamilyCreateNestedOneWithoutCarsInput
   services?: Prisma.ServiceRecordCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutFuelsInput = {
@@ -1161,13 +1211,14 @@ export type CarUncheckedCreateWithoutFuelsInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.CarMemberUncheckedCreateNestedManyWithoutCarInput
+  familyId?: string | null
   services?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutFuelsInput = {
@@ -1198,13 +1249,14 @@ export type CarUpdateWithoutFuelsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedCarsNestedInput
-  members?: Prisma.CarMemberUpdateManyWithoutCarNestedInput
+  family?: Prisma.FamilyUpdateOneWithoutCarsNestedInput
   services?: Prisma.ServiceRecordUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutFuelsInput = {
@@ -1219,13 +1271,14 @@ export type CarUncheckedUpdateWithoutFuelsInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.CarMemberUncheckedUpdateManyWithoutCarNestedInput
+  familyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceRecordUncheckedUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateWithoutExpensesInput = {
@@ -1240,13 +1293,14 @@ export type CarCreateWithoutExpensesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedCarsInput
-  members?: Prisma.CarMemberCreateNestedManyWithoutCarInput
+  family?: Prisma.FamilyCreateNestedOneWithoutCarsInput
   services?: Prisma.ServiceRecordCreateNestedManyWithoutCarInput
   fuels?: Prisma.FuelRecordCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutExpensesInput = {
@@ -1261,13 +1315,14 @@ export type CarUncheckedCreateWithoutExpensesInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.CarMemberUncheckedCreateNestedManyWithoutCarInput
+  familyId?: string | null
   services?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutCarInput
   fuels?: Prisma.FuelRecordUncheckedCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutExpensesInput = {
@@ -1298,13 +1353,14 @@ export type CarUpdateWithoutExpensesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedCarsNestedInput
-  members?: Prisma.CarMemberUpdateManyWithoutCarNestedInput
+  family?: Prisma.FamilyUpdateOneWithoutCarsNestedInput
   services?: Prisma.ServiceRecordUpdateManyWithoutCarNestedInput
   fuels?: Prisma.FuelRecordUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutExpensesInput = {
@@ -1319,13 +1375,14 @@ export type CarUncheckedUpdateWithoutExpensesInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.CarMemberUncheckedUpdateManyWithoutCarNestedInput
+  familyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceRecordUncheckedUpdateManyWithoutCarNestedInput
   fuels?: Prisma.FuelRecordUncheckedUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateWithoutCardTransactionsInput = {
@@ -1340,13 +1397,14 @@ export type CarCreateWithoutCardTransactionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedCarsInput
-  members?: Prisma.CarMemberCreateNestedManyWithoutCarInput
+  family?: Prisma.FamilyCreateNestedOneWithoutCarsInput
   services?: Prisma.ServiceRecordCreateNestedManyWithoutCarInput
   fuels?: Prisma.FuelRecordCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutCardTransactionsInput = {
@@ -1361,13 +1419,14 @@ export type CarUncheckedCreateWithoutCardTransactionsInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.CarMemberUncheckedCreateNestedManyWithoutCarInput
+  familyId?: string | null
   services?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutCarInput
   fuels?: Prisma.FuelRecordUncheckedCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutCardTransactionsInput = {
@@ -1398,13 +1457,14 @@ export type CarUpdateWithoutCardTransactionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedCarsNestedInput
-  members?: Prisma.CarMemberUpdateManyWithoutCarNestedInput
+  family?: Prisma.FamilyUpdateOneWithoutCarsNestedInput
   services?: Prisma.ServiceRecordUpdateManyWithoutCarNestedInput
   fuels?: Prisma.FuelRecordUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutCardTransactionsInput = {
@@ -1419,13 +1479,14 @@ export type CarUncheckedUpdateWithoutCardTransactionsInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.CarMemberUncheckedUpdateManyWithoutCarNestedInput
+  familyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceRecordUncheckedUpdateManyWithoutCarNestedInput
   fuels?: Prisma.FuelRecordUncheckedUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateWithoutDocumentsInput = {
@@ -1440,13 +1501,14 @@ export type CarCreateWithoutDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedCarsInput
-  members?: Prisma.CarMemberCreateNestedManyWithoutCarInput
+  family?: Prisma.FamilyCreateNestedOneWithoutCarsInput
   services?: Prisma.ServiceRecordCreateNestedManyWithoutCarInput
   fuels?: Prisma.FuelRecordCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutDocumentsInput = {
@@ -1461,13 +1523,14 @@ export type CarUncheckedCreateWithoutDocumentsInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.CarMemberUncheckedCreateNestedManyWithoutCarInput
+  familyId?: string | null
   services?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutCarInput
   fuels?: Prisma.FuelRecordUncheckedCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCarInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutDocumentsInput = {
@@ -1498,13 +1561,14 @@ export type CarUpdateWithoutDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedCarsNestedInput
-  members?: Prisma.CarMemberUpdateManyWithoutCarNestedInput
+  family?: Prisma.FamilyUpdateOneWithoutCarsNestedInput
   services?: Prisma.ServiceRecordUpdateManyWithoutCarNestedInput
   fuels?: Prisma.FuelRecordUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutDocumentsInput = {
@@ -1519,13 +1583,14 @@ export type CarUncheckedUpdateWithoutDocumentsInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.CarMemberUncheckedUpdateManyWithoutCarNestedInput
+  familyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceRecordUncheckedUpdateManyWithoutCarNestedInput
   fuels?: Prisma.FuelRecordUncheckedUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCarNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarCreateWithoutRemindersInput = {
@@ -1540,13 +1605,14 @@ export type CarCreateWithoutRemindersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedCarsInput
-  members?: Prisma.CarMemberCreateNestedManyWithoutCarInput
+  family?: Prisma.FamilyCreateNestedOneWithoutCarsInput
   services?: Prisma.ServiceRecordCreateNestedManyWithoutCarInput
   fuels?: Prisma.FuelRecordCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutCarInput
 }
 
 export type CarUncheckedCreateWithoutRemindersInput = {
@@ -1561,13 +1627,14 @@ export type CarUncheckedCreateWithoutRemindersInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  members?: Prisma.CarMemberUncheckedCreateNestedManyWithoutCarInput
+  familyId?: string | null
   services?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutCarInput
   fuels?: Prisma.FuelRecordUncheckedCreateNestedManyWithoutCarInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCarInput
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
   photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutCarInput
 }
 
 export type CarCreateOrConnectWithoutRemindersInput = {
@@ -1598,13 +1665,14 @@ export type CarUpdateWithoutRemindersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedCarsNestedInput
-  members?: Prisma.CarMemberUpdateManyWithoutCarNestedInput
+  family?: Prisma.FamilyUpdateOneWithoutCarsNestedInput
   services?: Prisma.ServiceRecordUpdateManyWithoutCarNestedInput
   fuels?: Prisma.FuelRecordUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutRemindersInput = {
@@ -1619,11 +1687,116 @@ export type CarUncheckedUpdateWithoutRemindersInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.CarMemberUncheckedUpdateManyWithoutCarNestedInput
+  familyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceRecordUncheckedUpdateManyWithoutCarNestedInput
   fuels?: Prisma.FuelRecordUncheckedUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCarNestedInput
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
+  cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutCarNestedInput
+}
+
+export type CarCreateWithoutNotificationsInput = {
+  id?: string
+  plate?: string | null
+  brand?: string | null
+  model?: string | null
+  year?: number | null
+  fuelType?: $Enums.FuelType
+  currentKm?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutOwnedCarsInput
+  family?: Prisma.FamilyCreateNestedOneWithoutCarsInput
+  services?: Prisma.ServiceRecordCreateNestedManyWithoutCarInput
+  fuels?: Prisma.FuelRecordCreateNestedManyWithoutCarInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutCarInput
+  documents?: Prisma.DocumentCreateNestedManyWithoutCarInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutCarInput
+  cardTransactions?: Prisma.FuelCardTransactionCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosCreateNestedManyWithoutCarInput
+}
+
+export type CarUncheckedCreateWithoutNotificationsInput = {
+  id?: string
+  ownerId: string
+  plate?: string | null
+  brand?: string | null
+  model?: string | null
+  year?: number | null
+  fuelType?: $Enums.FuelType
+  currentKm?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  familyId?: string | null
+  services?: Prisma.ServiceRecordUncheckedCreateNestedManyWithoutCarInput
+  fuels?: Prisma.FuelRecordUncheckedCreateNestedManyWithoutCarInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutCarInput
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutCarInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutCarInput
+  cardTransactions?: Prisma.FuelCardTransactionUncheckedCreateNestedManyWithoutCarInput
+  photos?: Prisma.CarPhotosUncheckedCreateNestedManyWithoutCarInput
+}
+
+export type CarCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.CarWhereUniqueInput
+  create: Prisma.XOR<Prisma.CarCreateWithoutNotificationsInput, Prisma.CarUncheckedCreateWithoutNotificationsInput>
+}
+
+export type CarUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.CarUpdateWithoutNotificationsInput, Prisma.CarUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.CarCreateWithoutNotificationsInput, Prisma.CarUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.CarWhereInput
+}
+
+export type CarUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.CarWhereInput
+  data: Prisma.XOR<Prisma.CarUpdateWithoutNotificationsInput, Prisma.CarUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type CarUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fuelType?: Prisma.EnumFuelTypeFieldUpdateOperationsInput | $Enums.FuelType
+  currentKm?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedCarsNestedInput
+  family?: Prisma.FamilyUpdateOneWithoutCarsNestedInput
+  services?: Prisma.ServiceRecordUpdateManyWithoutCarNestedInput
+  fuels?: Prisma.FuelRecordUpdateManyWithoutCarNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCarNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
+  cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
+}
+
+export type CarUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fuelType?: Prisma.EnumFuelTypeFieldUpdateOperationsInput | $Enums.FuelType
+  currentKm?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  familyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  services?: Prisma.ServiceRecordUncheckedUpdateManyWithoutCarNestedInput
+  fuels?: Prisma.FuelRecordUncheckedUpdateManyWithoutCarNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCarNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
 }
@@ -1639,6 +1812,7 @@ export type CarCreateManyOwnerInput = {
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  familyId?: string | null
 }
 
 export type CarUpdateWithoutOwnerInput = {
@@ -1652,7 +1826,7 @@ export type CarUpdateWithoutOwnerInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.CarMemberUpdateManyWithoutCarNestedInput
+  family?: Prisma.FamilyUpdateOneWithoutCarsNestedInput
   services?: Prisma.ServiceRecordUpdateManyWithoutCarNestedInput
   fuels?: Prisma.FuelRecordUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutCarNestedInput
@@ -1660,6 +1834,7 @@ export type CarUpdateWithoutOwnerInput = {
   reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateWithoutOwnerInput = {
@@ -1673,7 +1848,7 @@ export type CarUncheckedUpdateWithoutOwnerInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  members?: Prisma.CarMemberUncheckedUpdateManyWithoutCarNestedInput
+  familyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceRecordUncheckedUpdateManyWithoutCarNestedInput
   fuels?: Prisma.FuelRecordUncheckedUpdateManyWithoutCarNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCarNestedInput
@@ -1681,10 +1856,84 @@ export type CarUncheckedUpdateWithoutOwnerInput = {
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
   cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
   photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutCarNestedInput
 }
 
 export type CarUncheckedUpdateManyWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fuelType?: Prisma.EnumFuelTypeFieldUpdateOperationsInput | $Enums.FuelType
+  currentKm?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  familyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type CarCreateManyFamilyInput = {
+  id?: string
+  ownerId: string
+  plate?: string | null
+  brand?: string | null
+  model?: string | null
+  year?: number | null
+  fuelType?: $Enums.FuelType
+  currentKm?: number
+  imageUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type CarUpdateWithoutFamilyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fuelType?: Prisma.EnumFuelTypeFieldUpdateOperationsInput | $Enums.FuelType
+  currentKm?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedCarsNestedInput
+  services?: Prisma.ServiceRecordUpdateManyWithoutCarNestedInput
+  fuels?: Prisma.FuelRecordUpdateManyWithoutCarNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutCarNestedInput
+  documents?: Prisma.DocumentUpdateManyWithoutCarNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutCarNestedInput
+  cardTransactions?: Prisma.FuelCardTransactionUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutCarNestedInput
+}
+
+export type CarUncheckedUpdateWithoutFamilyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fuelType?: Prisma.EnumFuelTypeFieldUpdateOperationsInput | $Enums.FuelType
+  currentKm?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  services?: Prisma.ServiceRecordUncheckedUpdateManyWithoutCarNestedInput
+  fuels?: Prisma.FuelRecordUncheckedUpdateManyWithoutCarNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutCarNestedInput
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutCarNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutCarNestedInput
+  cardTransactions?: Prisma.FuelCardTransactionUncheckedUpdateManyWithoutCarNestedInput
+  photos?: Prisma.CarPhotosUncheckedUpdateManyWithoutCarNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutCarNestedInput
+}
+
+export type CarUncheckedUpdateManyWithoutFamilyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   plate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1702,7 +1951,6 @@ export type CarUncheckedUpdateManyWithoutOwnerInput = {
  */
 
 export type CarCountOutputType = {
-  members: number
   services: number
   fuels: number
   expenses: number
@@ -1710,10 +1958,10 @@ export type CarCountOutputType = {
   reminders: number
   cardTransactions: number
   photos: number
+  notifications: number
 }
 
 export type CarCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  members?: boolean | CarCountOutputTypeCountMembersArgs
   services?: boolean | CarCountOutputTypeCountServicesArgs
   fuels?: boolean | CarCountOutputTypeCountFuelsArgs
   expenses?: boolean | CarCountOutputTypeCountExpensesArgs
@@ -1721,6 +1969,7 @@ export type CarCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.In
   reminders?: boolean | CarCountOutputTypeCountRemindersArgs
   cardTransactions?: boolean | CarCountOutputTypeCountCardTransactionsArgs
   photos?: boolean | CarCountOutputTypeCountPhotosArgs
+  notifications?: boolean | CarCountOutputTypeCountNotificationsArgs
 }
 
 /**
@@ -1731,13 +1980,6 @@ export type CarCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensio
    * Select specific fields to fetch from the CarCountOutputType
    */
   select?: Prisma.CarCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * CarCountOutputType without action
- */
-export type CarCountOutputTypeCountMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CarMemberWhereInput
 }
 
 /**
@@ -1789,6 +2031,13 @@ export type CarCountOutputTypeCountPhotosArgs<ExtArgs extends runtime.Types.Exte
   where?: Prisma.CarPhotosWhereInput
 }
 
+/**
+ * CarCountOutputType without action
+ */
+export type CarCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
 
 export type CarSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1802,8 +2051,9 @@ export type CarSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   imageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  familyId?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  members?: boolean | Prisma.Car$membersArgs<ExtArgs>
+  family?: boolean | Prisma.Car$familyArgs<ExtArgs>
   services?: boolean | Prisma.Car$servicesArgs<ExtArgs>
   fuels?: boolean | Prisma.Car$fuelsArgs<ExtArgs>
   expenses?: boolean | Prisma.Car$expensesArgs<ExtArgs>
@@ -1811,6 +2061,7 @@ export type CarSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   reminders?: boolean | Prisma.Car$remindersArgs<ExtArgs>
   cardTransactions?: boolean | Prisma.Car$cardTransactionsArgs<ExtArgs>
   photos?: boolean | Prisma.Car$photosArgs<ExtArgs>
+  notifications?: boolean | Prisma.Car$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.CarCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["car"]>
 
@@ -1826,7 +2077,9 @@ export type CarSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extension
   imageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  familyId?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  family?: boolean | Prisma.Car$familyArgs<ExtArgs>
 }, ExtArgs["result"]["car"]>
 
 export type CarSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1841,7 +2094,9 @@ export type CarSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extension
   imageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  familyId?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  family?: boolean | Prisma.Car$familyArgs<ExtArgs>
 }, ExtArgs["result"]["car"]>
 
 export type CarSelectScalar = {
@@ -1856,12 +2111,13 @@ export type CarSelectScalar = {
   imageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  familyId?: boolean
 }
 
-export type CarOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ownerId" | "plate" | "brand" | "model" | "year" | "fuelType" | "currentKm" | "imageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["car"]>
+export type CarOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ownerId" | "plate" | "brand" | "model" | "year" | "fuelType" | "currentKm" | "imageUrl" | "createdAt" | "updatedAt" | "familyId", ExtArgs["result"]["car"]>
 export type CarInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  members?: boolean | Prisma.Car$membersArgs<ExtArgs>
+  family?: boolean | Prisma.Car$familyArgs<ExtArgs>
   services?: boolean | Prisma.Car$servicesArgs<ExtArgs>
   fuels?: boolean | Prisma.Car$fuelsArgs<ExtArgs>
   expenses?: boolean | Prisma.Car$expensesArgs<ExtArgs>
@@ -1869,20 +2125,23 @@ export type CarInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   reminders?: boolean | Prisma.Car$remindersArgs<ExtArgs>
   cardTransactions?: boolean | Prisma.Car$cardTransactionsArgs<ExtArgs>
   photos?: boolean | Prisma.Car$photosArgs<ExtArgs>
+  notifications?: boolean | Prisma.Car$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.CarCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CarIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  family?: boolean | Prisma.Car$familyArgs<ExtArgs>
 }
 export type CarIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  family?: boolean | Prisma.Car$familyArgs<ExtArgs>
 }
 
 export type $CarPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Car"
   objects: {
     owner: Prisma.$UserPayload<ExtArgs>
-    members: Prisma.$CarMemberPayload<ExtArgs>[]
+    family: Prisma.$FamilyPayload<ExtArgs> | null
     services: Prisma.$ServiceRecordPayload<ExtArgs>[]
     fuels: Prisma.$FuelRecordPayload<ExtArgs>[]
     expenses: Prisma.$ExpensePayload<ExtArgs>[]
@@ -1890,6 +2149,7 @@ export type $CarPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     reminders: Prisma.$ReminderPayload<ExtArgs>[]
     cardTransactions: Prisma.$FuelCardTransactionPayload<ExtArgs>[]
     photos: Prisma.$CarPhotosPayload<ExtArgs>[]
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1903,6 +2163,7 @@ export type $CarPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     imageUrl: string | null
     createdAt: Date
     updatedAt: Date
+    familyId: string | null
   }, ExtArgs["result"]["car"]>
   composites: {}
 }
@@ -2298,7 +2559,7 @@ readonly fields: CarFieldRefs;
 export interface Prisma__CarClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   owner<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  members<T extends Prisma.Car$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  family<T extends Prisma.Car$familyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$familyArgs<ExtArgs>>): Prisma.Prisma__FamilyClient<runtime.Types.Result.GetResult<Prisma.$FamilyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   services<T extends Prisma.Car$servicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   fuels<T extends Prisma.Car$fuelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$fuelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FuelRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   expenses<T extends Prisma.Car$expensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2306,6 +2567,7 @@ export interface Prisma__CarClient<T, Null = never, ExtArgs extends runtime.Type
   reminders<T extends Prisma.Car$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cardTransactions<T extends Prisma.Car$cardTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$cardTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FuelCardTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   photos<T extends Prisma.Car$photosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$photosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarPhotosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.Car$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Car$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2346,6 +2608,7 @@ export interface CarFieldRefs {
   readonly imageUrl: Prisma.FieldRef<"Car", 'String'>
   readonly createdAt: Prisma.FieldRef<"Car", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Car", 'DateTime'>
+  readonly familyId: Prisma.FieldRef<"Car", 'String'>
 }
     
 
@@ -2747,27 +3010,22 @@ export type CarDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * Car.members
+ * Car.family
  */
-export type Car$membersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Car$familyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the CarMember
+   * Select specific fields to fetch from the Family
    */
-  select?: Prisma.CarMemberSelect<ExtArgs> | null
+  select?: Prisma.FamilySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the CarMember
+   * Omit specific fields from the Family
    */
-  omit?: Prisma.CarMemberOmit<ExtArgs> | null
+  omit?: Prisma.FamilyOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.CarMemberInclude<ExtArgs> | null
-  where?: Prisma.CarMemberWhereInput
-  orderBy?: Prisma.CarMemberOrderByWithRelationInput | Prisma.CarMemberOrderByWithRelationInput[]
-  cursor?: Prisma.CarMemberWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CarMemberScalarFieldEnum | Prisma.CarMemberScalarFieldEnum[]
+  include?: Prisma.FamilyInclude<ExtArgs> | null
+  where?: Prisma.FamilyWhereInput
 }
 
 /**
@@ -2936,6 +3194,30 @@ export type Car$photosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.CarPhotosScalarFieldEnum | Prisma.CarPhotosScalarFieldEnum[]
+}
+
+/**
+ * Car.notifications
+ */
+export type Car$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
 }
 
 /**

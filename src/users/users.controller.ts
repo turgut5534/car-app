@@ -1,4 +1,14 @@
-import { Body, Controller, Param, Patch, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from 'src/generated/prisma/client';
 import { Get } from '@nestjs/common';
@@ -27,51 +37,61 @@ export class UsersController {
     return this.userService.saveUser(dto);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('lookup')
+  async searchUser(@Query('email') email: string, @UserId() userId: string) {
+    return this.userService.searchUser(email, userId);
+  }
+
   @Patch()
   @UseGuards(JwtAuthGuard)
-    @UseInterceptors(
-      FileInterceptor('file', {
-        storage: diskStorage({
-          destination: './uploads/users',
-          filename: (req, file, cb) => {
-            const uniqueName = `${Date.now()}-${Math.round(
-              Math.random() * 1e9,
-            )}${extname(file.originalname)}`;
-  
-            cb(null, uniqueName);
-          },
-        }),
-        fileFilter: (req, file, cb) => {
-          const allowedMimeTypes = [
-            'application/pdf',
-            'application/msword',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'image/jpeg',
-            'image/png',
-            'image/webp',
-          ];
-  
-          if (!allowedMimeTypes.includes(file.mimetype)) {
-            return cb(
-              new Error('Only PDF, Word, or image files are allowed'),
-              false,
-            );
-          }
-  
-          cb(null, true);
-        },
-        limits: {
-          fileSize: 5 * 1024 * 1024,
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './uploads/users',
+        filename: (req, file, cb) => {
+          const uniqueName = `${Date.now()}-${Math.round(
+            Math.random() * 1e9,
+          )}${extname(file.originalname)}`;
+
+          cb(null, uniqueName);
         },
       }),
-    )
-  async udpateProfile(@UserId() id: string, @Body() dto: UpdateUserDto, @UploadedFile() file?: Express.Multer.File): Promise<User> {
+      fileFilter: (req, file, cb) => {
+        const allowedMimeTypes = [
+          'application/pdf',
+          'application/msword',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          'image/jpeg',
+          'image/png',
+          'image/webp',
+        ];
+
+        if (!allowedMimeTypes.includes(file.mimetype)) {
+          return cb(
+            new Error('Only PDF, Word, or image files are allowed'),
+            false,
+          );
+        }
+
+        cb(null, true);
+      },
+      limits: {
+        fileSize: 5 * 1024 * 1024,
+      },
+    }),
+  )
+  async udpateProfile(
+    @UserId() id: string,
+    @Body() dto: UpdateUserDto,
+    @UploadedFile() file?: Express.Multer.File,
+  ): Promise<User> {
     return this.userService.updateProfile(id, dto, file);
   }
 
   @Patch('currency')
   @UseGuards(JwtAuthGuard)
   async setCurrency(@UserId() userId: string, @Body() body) {
-    return this.userService.updateCurrency(userId, body)
+    return this.userService.updateCurrency(userId, body);
   }
 }

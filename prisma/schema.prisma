@@ -27,17 +27,17 @@ model User {
   updatedAt    DateTime @updatedAt
   picture      String?
 
+  ownedFamilies Family?
+  familyMember FamilyMember[]
   ownedCars       Car[] @relation("CarOwner")
-  carMemberships  CarMember[]
   fuelCards       FuelCard[]
   reminders       Reminder[]
-
   createdServices     ServiceRecord[]
   createdFuelRecords  FuelRecord[]
   createdExpenses     Expense[]
   createdTransactions FuelCardTransaction[]
-
   uploadedDocuments   Document[] 
+  notifications Notification[]
 }
 
 model Car {
@@ -52,10 +52,11 @@ model Car {
   imageUrl    String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  familyId    String?
 
   owner       User @relation("CarOwner", fields: [ownerId], references: [id])
-  members     CarMember[]
 
+  family      Family? @relation(fields: [familyId], references: [id])
   services    ServiceRecord[]
   fuels       FuelRecord[]
   expenses    Expense[]
@@ -63,6 +64,42 @@ model Car {
   reminders   Reminder[]
   cardTransactions FuelCardTransaction[]
   photos  CarPhotos[]
+  notifications Notification[]
+}
+
+model Family {
+  id        String   @id @default(uuid())
+  name      String
+  ownerId   String @unique 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner     User @relation(fields: [ownerId], references: [id])
+
+  members   FamilyMember[]
+  cars      Car[]
+  notifications Notification[]notifications Notification[]
+}
+
+model FamilyMember {
+  id           String   @id @default(uuid())
+  familyId     String
+  userId       String
+  role         FamilyRole @default(MEMBER)
+  createdAt    DateTime @default(now())
+  is_approved  Boolean   @default(false)
+
+  family       Family @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  user         User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([familyId, userId])
+}
+
+enum FamilyRole {
+  OWNER
+  ADMIN
+  MEMBER
+  VIEWER
 }
 
 model CarPhotos {
@@ -77,18 +114,6 @@ model CarPhotos {
   car   Car @relation(fields: [carId], references: [id], onDelete: Cascade)
 }
 
-model CarMember {
-  id        String   @id @default(uuid())
-  carId     String
-  userId    String
-  role      CarRole  @default(MEMBER)
-  createdAt DateTime @default(now())
-
-  car       Car  @relation(fields: [carId], references: [id], onDelete: Cascade)
-  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([carId, userId])
-}
 
 enum CarRole {
   OWNER
@@ -337,4 +362,46 @@ enum ReminderType {
   TAX
   CUSTOM
   YES
+}
+
+model Notification {
+  id          String             @id @default(uuid())
+  userId      String
+  title       String
+  message     String
+  type        NotificationType
+  isRead      Boolean            @default(false)
+
+  familyId    String?
+  carId       String?
+
+  createdAt   DateTime           @default(now())
+  readAt      DateTime?
+
+  user         User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  family       Family?           @relation(fields: [familyId], references: [id])
+  car          Car?              @relation(fields: [carId], references: [id])
+
+  @@index([userId, isRead])
+  @@index([createdAt])
+}
+
+enum NotificationType {
+  FAMILY_INVITE
+  FAMILY_MEMBER_JOINED
+  FAMILY_MEMBER_REMOVED
+
+  REMINDER_DUE
+  REMINDER_OVERDUE
+
+  DOCUMENT_EXPIRING
+  INSURANCE_EXPIRING
+  INSPECTION_EXPIRING
+
+  SERVICE_DUE
+  OIL_CHANGE_DUE
+
+  CAR_SHARED
+
+  INFO
 }

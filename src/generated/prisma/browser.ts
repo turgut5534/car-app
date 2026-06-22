@@ -28,15 +28,20 @@ export type User = Prisma.UserModel
  */
 export type Car = Prisma.CarModel
 /**
+ * Model Family
+ * 
+ */
+export type Family = Prisma.FamilyModel
+/**
+ * Model FamilyMember
+ * 
+ */
+export type FamilyMember = Prisma.FamilyMemberModel
+/**
  * Model CarPhotos
  * 
  */
 export type CarPhotos = Prisma.CarPhotosModel
-/**
- * Model CarMember
- * 
- */
-export type CarMember = Prisma.CarMemberModel
 /**
  * Model ServiceRecord
  * 
@@ -92,3 +97,8 @@ export type DocumentAttachment = Prisma.DocumentAttachmentModel
  * 
  */
 export type Reminder = Prisma.ReminderModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel

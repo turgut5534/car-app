@@ -194,21 +194,21 @@ export type IntWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedIntFilter<$PrismaModel>
 }
 
-export type EnumCarRoleFilter<$PrismaModel = never> = {
-  equals?: $Enums.CarRole | Prisma.EnumCarRoleFieldRefInput<$PrismaModel>
-  in?: $Enums.CarRole[] | Prisma.ListEnumCarRoleFieldRefInput<$PrismaModel>
-  notIn?: $Enums.CarRole[] | Prisma.ListEnumCarRoleFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumCarRoleFilter<$PrismaModel> | $Enums.CarRole
+export type EnumFamilyRoleFilter<$PrismaModel = never> = {
+  equals?: $Enums.FamilyRole | Prisma.EnumFamilyRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.FamilyRole[] | Prisma.ListEnumFamilyRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FamilyRole[] | Prisma.ListEnumFamilyRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFamilyRoleFilter<$PrismaModel> | $Enums.FamilyRole
 }
 
-export type EnumCarRoleWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.CarRole | Prisma.EnumCarRoleFieldRefInput<$PrismaModel>
-  in?: $Enums.CarRole[] | Prisma.ListEnumCarRoleFieldRefInput<$PrismaModel>
-  notIn?: $Enums.CarRole[] | Prisma.ListEnumCarRoleFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumCarRoleWithAggregatesFilter<$PrismaModel> | $Enums.CarRole
+export type EnumFamilyRoleWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FamilyRole | Prisma.EnumFamilyRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.FamilyRole[] | Prisma.ListEnumFamilyRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FamilyRole[] | Prisma.ListEnumFamilyRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFamilyRoleWithAggregatesFilter<$PrismaModel> | $Enums.FamilyRole
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumCarRoleFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumCarRoleFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFamilyRoleFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFamilyRoleFilter<$PrismaModel>
 }
 
 export type EnumServiceCategoryFilter<$PrismaModel = never> = {
@@ -400,6 +400,23 @@ export type EnumReminderTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumReminderTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumReminderTypeFilter<$PrismaModel>
+}
+
+export type EnumNotificationTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.NotificationType | Prisma.EnumNotificationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.NotificationType[] | Prisma.ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NotificationType[] | Prisma.ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNotificationTypeFilter<$PrismaModel> | $Enums.NotificationType
+}
+
+export type EnumNotificationTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.NotificationType | Prisma.EnumNotificationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.NotificationType[] | Prisma.ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NotificationType[] | Prisma.ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel> | $Enums.NotificationType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumNotificationTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumNotificationTypeFilter<$PrismaModel>
 }
 
 export type NestedStringFilter<$PrismaModel = never> = {
@@ -595,21 +612,21 @@ export type NestedFloatFilter<$PrismaModel = never> = {
   not?: Prisma.NestedFloatFilter<$PrismaModel> | number
 }
 
-export type NestedEnumCarRoleFilter<$PrismaModel = never> = {
-  equals?: $Enums.CarRole | Prisma.EnumCarRoleFieldRefInput<$PrismaModel>
-  in?: $Enums.CarRole[] | Prisma.ListEnumCarRoleFieldRefInput<$PrismaModel>
-  notIn?: $Enums.CarRole[] | Prisma.ListEnumCarRoleFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumCarRoleFilter<$PrismaModel> | $Enums.CarRole
+export type NestedEnumFamilyRoleFilter<$PrismaModel = never> = {
+  equals?: $Enums.FamilyRole | Prisma.EnumFamilyRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.FamilyRole[] | Prisma.ListEnumFamilyRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FamilyRole[] | Prisma.ListEnumFamilyRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFamilyRoleFilter<$PrismaModel> | $Enums.FamilyRole
 }
 
-export type NestedEnumCarRoleWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.CarRole | Prisma.EnumCarRoleFieldRefInput<$PrismaModel>
-  in?: $Enums.CarRole[] | Prisma.ListEnumCarRoleFieldRefInput<$PrismaModel>
-  notIn?: $Enums.CarRole[] | Prisma.ListEnumCarRoleFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumCarRoleWithAggregatesFilter<$PrismaModel> | $Enums.CarRole
+export type NestedEnumFamilyRoleWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FamilyRole | Prisma.EnumFamilyRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.FamilyRole[] | Prisma.ListEnumFamilyRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FamilyRole[] | Prisma.ListEnumFamilyRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFamilyRoleWithAggregatesFilter<$PrismaModel> | $Enums.FamilyRole
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumCarRoleFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumCarRoleFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFamilyRoleFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFamilyRoleFilter<$PrismaModel>
 }
 
 export type NestedEnumServiceCategoryFilter<$PrismaModel = never> = {
@@ -790,6 +807,23 @@ export type NestedEnumReminderTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumReminderTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumReminderTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumNotificationTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.NotificationType | Prisma.EnumNotificationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.NotificationType[] | Prisma.ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NotificationType[] | Prisma.ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNotificationTypeFilter<$PrismaModel> | $Enums.NotificationType
+}
+
+export type NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.NotificationType | Prisma.EnumNotificationTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.NotificationType[] | Prisma.ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.NotificationType[] | Prisma.ListEnumNotificationTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel> | $Enums.NotificationType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumNotificationTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumNotificationTypeFilter<$PrismaModel>
 }
 
 

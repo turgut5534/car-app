@@ -33,9 +33,6 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    // if (!user.isVerified) {
-    //   throw new ForbiddenException('Please verify your account first');
-    // }
     return {
       accessToken: await this.jwt.signAsync({
         sub: user.id,

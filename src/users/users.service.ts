@@ -50,30 +50,51 @@ export class UsersService {
         throw new ConflictException('Email already exists');
       }
 
-      const user = await this.prisma.user.create({
-        data: {
-          email: data.email,
-          password: hashedPassword,
-        },
+      const result = await this.prisma.$transaction(async (tx) => {
+        // 1. create user
+        const user = await tx.user.create({
+          data: {
+            email: data.email,
+            password: hashedPassword,
+          },
+        });
+
+        // 2. create family (auto for every user)
+        const family = await tx.family.create({
+          data: {
+            name: `${data.email}'s family`,
+            ownerId: user.id,
+          },
+        });
+
+        // 3. create membership (OWNER)
+        await tx.familyMember.create({
+          data: {
+            userId: user.id,
+            familyId: family.id,
+            role: 'OWNER',
+          },
+        });
+
+        return user;
       });
 
       const accessToken = await this.jwt.signAsync({
-        sub: user.id,
-        email: user.email,
+        sub: result.id,
+        email: result.email,
       });
 
       return {
-        user,
+        user: result,
         accessToken,
       };
-    } catch (error) {
+    } catch (error: any) {
       if (error.code === 'P2002') {
         throw new BadRequestException('An error occurred');
       }
       throw error;
     }
   }
-
   async updateProfile(
     id: string,
     dto: UpdateUserDto,
@@ -87,8 +108,7 @@ export class UsersService {
     });
 
     if (file) {
-
-      if(user.picture) {
+      if (user.picture) {
         const filePath = join(process.cwd(), 'uploads/users', user.picture);
         try {
           await unlink(filePath);
@@ -108,8 +128,7 @@ export class UsersService {
     return user;
   }
 
-   async updateCurrency(id: string, body: any) {
-
+  async updateCurrency(id: string, body: any) {
     const user = await this.prisma.user.findUnique({
       where: { id },
     });
@@ -119,14 +138,29 @@ export class UsersService {
     }
 
     const updatedUser = await this.prisma.user.update({
-      where: {id},
+      where: { id },
       data: {
-        currency: body.currency
-      }
-    })
+        currency: body.currency,
+      },
+    });
 
-    console.log(updatedUser)
+    console.log(updatedUser);
     return user;
   }
 
+  async searchUser(email: string, userId: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    if (user.id === userId) {
+      throw new BadRequestException('You cannot search yourself');
+    }
+
+    return user;
+  }
 }
