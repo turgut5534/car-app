@@ -19,6 +19,16 @@ export const FamilyRole = {
 export type FamilyRole = (typeof FamilyRole)[keyof typeof FamilyRole]
 
 
+export const InvitationStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type InvitationStatus = (typeof InvitationStatus)[keyof typeof InvitationStatus]
+
+
 export const CarRole = {
   OWNER: 'OWNER',
   ADMIN: 'ADMIN',

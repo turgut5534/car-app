@@ -388,6 +388,7 @@ export const ModelName = {
   Car: 'Car',
   Family: 'Family',
   FamilyMember: 'FamilyMember',
+  FamilyInvitation: 'FamilyInvitation',
   CarPhotos: 'CarPhotos',
   ServiceRecord: 'ServiceRecord',
   ServiceAttachment: 'ServiceAttachment',
@@ -416,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "car" | "family" | "familyMember" | "carPhotos" | "serviceRecord" | "serviceAttachment" | "fuelRecord" | "fuelAttachment" | "expense" | "expenseAttachment" | "fuelCard" | "fuelCardTransaction" | "document" | "documentAttachment" | "reminder" | "notification"
+    modelProps: "user" | "car" | "family" | "familyMember" | "familyInvitation" | "carPhotos" | "serviceRecord" | "serviceAttachment" | "fuelRecord" | "fuelAttachment" | "expense" | "expenseAttachment" | "fuelCard" | "fuelCardTransaction" | "document" | "documentAttachment" | "reminder" | "notification"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -713,6 +714,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.FamilyMemberCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.FamilyMemberCountAggregateOutputType> | number
+        }
+      }
+    }
+    FamilyInvitation: {
+      payload: Prisma.$FamilyInvitationPayload<ExtArgs>
+      fields: Prisma.FamilyInvitationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FamilyInvitationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyInvitationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FamilyInvitationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyInvitationPayload>
+        }
+        findFirst: {
+          args: Prisma.FamilyInvitationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyInvitationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FamilyInvitationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyInvitationPayload>
+        }
+        findMany: {
+          args: Prisma.FamilyInvitationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyInvitationPayload>[]
+        }
+        create: {
+          args: Prisma.FamilyInvitationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyInvitationPayload>
+        }
+        createMany: {
+          args: Prisma.FamilyInvitationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FamilyInvitationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyInvitationPayload>[]
+        }
+        delete: {
+          args: Prisma.FamilyInvitationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyInvitationPayload>
+        }
+        update: {
+          args: Prisma.FamilyInvitationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyInvitationPayload>
+        }
+        deleteMany: {
+          args: Prisma.FamilyInvitationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FamilyInvitationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FamilyInvitationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyInvitationPayload>[]
+        }
+        upsert: {
+          args: Prisma.FamilyInvitationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyInvitationPayload>
+        }
+        aggregate: {
+          args: Prisma.FamilyInvitationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFamilyInvitation>
+        }
+        groupBy: {
+          args: Prisma.FamilyInvitationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FamilyInvitationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FamilyInvitationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FamilyInvitationCountAggregateOutputType> | number
         }
       }
     }
@@ -1776,6 +1851,19 @@ export const FamilyMemberScalarFieldEnum = {
 export type FamilyMemberScalarFieldEnum = (typeof FamilyMemberScalarFieldEnum)[keyof typeof FamilyMemberScalarFieldEnum]
 
 
+export const FamilyInvitationScalarFieldEnum = {
+  id: 'id',
+  familyId: 'familyId',
+  email: 'email',
+  invitedBy: 'invitedBy',
+  status: 'status',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
+} as const
+
+export type FamilyInvitationScalarFieldEnum = (typeof FamilyInvitationScalarFieldEnum)[keyof typeof FamilyInvitationScalarFieldEnum]
+
+
 export const CarPhotosScalarFieldEnum = {
   id: 'id',
   carId: 'carId',
@@ -2085,6 +2173,20 @@ export type ListEnumFamilyRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 
 
 /**
+ * Reference to a field of type 'InvitationStatus'
+ */
+export type EnumInvitationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvitationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'InvitationStatus[]'
+ */
+export type ListEnumInvitationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvitationStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'ServiceCategory'
  */
 export type EnumServiceCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceCategory'>
@@ -2309,6 +2411,7 @@ export type GlobalOmitConfig = {
   car?: Prisma.CarOmit
   family?: Prisma.FamilyOmit
   familyMember?: Prisma.FamilyMemberOmit
+  familyInvitation?: Prisma.FamilyInvitationOmit
   carPhotos?: Prisma.CarPhotosOmit
   serviceRecord?: Prisma.ServiceRecordOmit
   serviceAttachment?: Prisma.ServiceAttachmentOmit

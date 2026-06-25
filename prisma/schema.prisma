@@ -38,6 +38,7 @@ model User {
   createdTransactions FuelCardTransaction[]
   uploadedDocuments   Document[] 
   notifications Notification[]
+  invitations FamilyInvitation[]
 }
 
 model Car {
@@ -79,6 +80,7 @@ model Family {
   members   FamilyMember[]
   cars      Car[]
   notifications Notification[]
+  invitations FamilyInvitation[]
 }
 
 model FamilyMember {
@@ -100,6 +102,29 @@ enum FamilyRole {
   ADMIN
   MEMBER
   VIEWER
+}
+
+model FamilyInvitation {
+  id        String   @id @default(uuid())
+  familyId  String
+  email     String
+  invitedBy String
+  status    InvitationStatus @default(PENDING)
+  createdAt DateTime @default(now())
+  expiresAt DateTime?
+
+  family    Family @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  inviter   User   @relation(fields: [invitedBy], references: [id])
+
+  @@unique([familyId, email])
+  @@index([email])
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  EXPIRED
 }
 
 model CarPhotos {

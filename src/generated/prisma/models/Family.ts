@@ -186,6 +186,7 @@ export type FamilyWhereInput = {
   members?: Prisma.FamilyMemberListRelationFilter
   cars?: Prisma.CarListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
+  invitations?: Prisma.FamilyInvitationListRelationFilter
 }
 
 export type FamilyOrderByWithRelationInput = {
@@ -198,6 +199,7 @@ export type FamilyOrderByWithRelationInput = {
   members?: Prisma.FamilyMemberOrderByRelationAggregateInput
   cars?: Prisma.CarOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
+  invitations?: Prisma.FamilyInvitationOrderByRelationAggregateInput
 }
 
 export type FamilyWhereUniqueInput = Prisma.AtLeast<{
@@ -213,6 +215,7 @@ export type FamilyWhereUniqueInput = Prisma.AtLeast<{
   members?: Prisma.FamilyMemberListRelationFilter
   cars?: Prisma.CarListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
+  invitations?: Prisma.FamilyInvitationListRelationFilter
 }, "id" | "ownerId">
 
 export type FamilyOrderByWithAggregationInput = {
@@ -246,6 +249,7 @@ export type FamilyCreateInput = {
   members?: Prisma.FamilyMemberCreateNestedManyWithoutFamilyInput
   cars?: Prisma.CarCreateNestedManyWithoutFamilyInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFamilyInput
+  invitations?: Prisma.FamilyInvitationCreateNestedManyWithoutFamilyInput
 }
 
 export type FamilyUncheckedCreateInput = {
@@ -257,6 +261,7 @@ export type FamilyUncheckedCreateInput = {
   members?: Prisma.FamilyMemberUncheckedCreateNestedManyWithoutFamilyInput
   cars?: Prisma.CarUncheckedCreateNestedManyWithoutFamilyInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFamilyInput
+  invitations?: Prisma.FamilyInvitationUncheckedCreateNestedManyWithoutFamilyInput
 }
 
 export type FamilyUpdateInput = {
@@ -268,6 +273,7 @@ export type FamilyUpdateInput = {
   members?: Prisma.FamilyMemberUpdateManyWithoutFamilyNestedInput
   cars?: Prisma.CarUpdateManyWithoutFamilyNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFamilyNestedInput
+  invitations?: Prisma.FamilyInvitationUpdateManyWithoutFamilyNestedInput
 }
 
 export type FamilyUncheckedUpdateInput = {
@@ -279,6 +285,7 @@ export type FamilyUncheckedUpdateInput = {
   members?: Prisma.FamilyMemberUncheckedUpdateManyWithoutFamilyNestedInput
   cars?: Prisma.CarUncheckedUpdateManyWithoutFamilyNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFamilyNestedInput
+  invitations?: Prisma.FamilyInvitationUncheckedUpdateManyWithoutFamilyNestedInput
 }
 
 export type FamilyCreateManyInput = {
@@ -400,6 +407,20 @@ export type FamilyUpdateOneRequiredWithoutMembersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.FamilyUpdateToOneWithWhereWithoutMembersInput, Prisma.FamilyUpdateWithoutMembersInput>, Prisma.FamilyUncheckedUpdateWithoutMembersInput>
 }
 
+export type FamilyCreateNestedOneWithoutInvitationsInput = {
+  create?: Prisma.XOR<Prisma.FamilyCreateWithoutInvitationsInput, Prisma.FamilyUncheckedCreateWithoutInvitationsInput>
+  connectOrCreate?: Prisma.FamilyCreateOrConnectWithoutInvitationsInput
+  connect?: Prisma.FamilyWhereUniqueInput
+}
+
+export type FamilyUpdateOneRequiredWithoutInvitationsNestedInput = {
+  create?: Prisma.XOR<Prisma.FamilyCreateWithoutInvitationsInput, Prisma.FamilyUncheckedCreateWithoutInvitationsInput>
+  connectOrCreate?: Prisma.FamilyCreateOrConnectWithoutInvitationsInput
+  upsert?: Prisma.FamilyUpsertWithoutInvitationsInput
+  connect?: Prisma.FamilyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FamilyUpdateToOneWithWhereWithoutInvitationsInput, Prisma.FamilyUpdateWithoutInvitationsInput>, Prisma.FamilyUncheckedUpdateWithoutInvitationsInput>
+}
+
 export type FamilyCreateNestedOneWithoutNotificationsInput = {
   create?: Prisma.XOR<Prisma.FamilyCreateWithoutNotificationsInput, Prisma.FamilyUncheckedCreateWithoutNotificationsInput>
   connectOrCreate?: Prisma.FamilyCreateOrConnectWithoutNotificationsInput
@@ -424,6 +445,7 @@ export type FamilyCreateWithoutOwnerInput = {
   members?: Prisma.FamilyMemberCreateNestedManyWithoutFamilyInput
   cars?: Prisma.CarCreateNestedManyWithoutFamilyInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFamilyInput
+  invitations?: Prisma.FamilyInvitationCreateNestedManyWithoutFamilyInput
 }
 
 export type FamilyUncheckedCreateWithoutOwnerInput = {
@@ -434,6 +456,7 @@ export type FamilyUncheckedCreateWithoutOwnerInput = {
   members?: Prisma.FamilyMemberUncheckedCreateNestedManyWithoutFamilyInput
   cars?: Prisma.CarUncheckedCreateNestedManyWithoutFamilyInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFamilyInput
+  invitations?: Prisma.FamilyInvitationUncheckedCreateNestedManyWithoutFamilyInput
 }
 
 export type FamilyCreateOrConnectWithoutOwnerInput = {
@@ -460,6 +483,7 @@ export type FamilyUpdateWithoutOwnerInput = {
   members?: Prisma.FamilyMemberUpdateManyWithoutFamilyNestedInput
   cars?: Prisma.CarUpdateManyWithoutFamilyNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFamilyNestedInput
+  invitations?: Prisma.FamilyInvitationUpdateManyWithoutFamilyNestedInput
 }
 
 export type FamilyUncheckedUpdateWithoutOwnerInput = {
@@ -470,6 +494,7 @@ export type FamilyUncheckedUpdateWithoutOwnerInput = {
   members?: Prisma.FamilyMemberUncheckedUpdateManyWithoutFamilyNestedInput
   cars?: Prisma.CarUncheckedUpdateManyWithoutFamilyNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFamilyNestedInput
+  invitations?: Prisma.FamilyInvitationUncheckedUpdateManyWithoutFamilyNestedInput
 }
 
 export type FamilyCreateWithoutCarsInput = {
@@ -480,6 +505,7 @@ export type FamilyCreateWithoutCarsInput = {
   owner: Prisma.UserCreateNestedOneWithoutOwnedFamiliesInput
   members?: Prisma.FamilyMemberCreateNestedManyWithoutFamilyInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFamilyInput
+  invitations?: Prisma.FamilyInvitationCreateNestedManyWithoutFamilyInput
 }
 
 export type FamilyUncheckedCreateWithoutCarsInput = {
@@ -490,6 +516,7 @@ export type FamilyUncheckedCreateWithoutCarsInput = {
   updatedAt?: Date | string
   members?: Prisma.FamilyMemberUncheckedCreateNestedManyWithoutFamilyInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFamilyInput
+  invitations?: Prisma.FamilyInvitationUncheckedCreateNestedManyWithoutFamilyInput
 }
 
 export type FamilyCreateOrConnectWithoutCarsInput = {
@@ -516,6 +543,7 @@ export type FamilyUpdateWithoutCarsInput = {
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedFamiliesNestedInput
   members?: Prisma.FamilyMemberUpdateManyWithoutFamilyNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFamilyNestedInput
+  invitations?: Prisma.FamilyInvitationUpdateManyWithoutFamilyNestedInput
 }
 
 export type FamilyUncheckedUpdateWithoutCarsInput = {
@@ -526,6 +554,7 @@ export type FamilyUncheckedUpdateWithoutCarsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.FamilyMemberUncheckedUpdateManyWithoutFamilyNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFamilyNestedInput
+  invitations?: Prisma.FamilyInvitationUncheckedUpdateManyWithoutFamilyNestedInput
 }
 
 export type FamilyCreateWithoutMembersInput = {
@@ -536,6 +565,7 @@ export type FamilyCreateWithoutMembersInput = {
   owner: Prisma.UserCreateNestedOneWithoutOwnedFamiliesInput
   cars?: Prisma.CarCreateNestedManyWithoutFamilyInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutFamilyInput
+  invitations?: Prisma.FamilyInvitationCreateNestedManyWithoutFamilyInput
 }
 
 export type FamilyUncheckedCreateWithoutMembersInput = {
@@ -546,6 +576,7 @@ export type FamilyUncheckedCreateWithoutMembersInput = {
   updatedAt?: Date | string
   cars?: Prisma.CarUncheckedCreateNestedManyWithoutFamilyInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFamilyInput
+  invitations?: Prisma.FamilyInvitationUncheckedCreateNestedManyWithoutFamilyInput
 }
 
 export type FamilyCreateOrConnectWithoutMembersInput = {
@@ -572,6 +603,7 @@ export type FamilyUpdateWithoutMembersInput = {
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedFamiliesNestedInput
   cars?: Prisma.CarUpdateManyWithoutFamilyNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutFamilyNestedInput
+  invitations?: Prisma.FamilyInvitationUpdateManyWithoutFamilyNestedInput
 }
 
 export type FamilyUncheckedUpdateWithoutMembersInput = {
@@ -580,6 +612,67 @@ export type FamilyUncheckedUpdateWithoutMembersInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cars?: Prisma.CarUncheckedUpdateManyWithoutFamilyNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFamilyNestedInput
+  invitations?: Prisma.FamilyInvitationUncheckedUpdateManyWithoutFamilyNestedInput
+}
+
+export type FamilyCreateWithoutInvitationsInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutOwnedFamiliesInput
+  members?: Prisma.FamilyMemberCreateNestedManyWithoutFamilyInput
+  cars?: Prisma.CarCreateNestedManyWithoutFamilyInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutFamilyInput
+}
+
+export type FamilyUncheckedCreateWithoutInvitationsInput = {
+  id?: string
+  name: string
+  ownerId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.FamilyMemberUncheckedCreateNestedManyWithoutFamilyInput
+  cars?: Prisma.CarUncheckedCreateNestedManyWithoutFamilyInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutFamilyInput
+}
+
+export type FamilyCreateOrConnectWithoutInvitationsInput = {
+  where: Prisma.FamilyWhereUniqueInput
+  create: Prisma.XOR<Prisma.FamilyCreateWithoutInvitationsInput, Prisma.FamilyUncheckedCreateWithoutInvitationsInput>
+}
+
+export type FamilyUpsertWithoutInvitationsInput = {
+  update: Prisma.XOR<Prisma.FamilyUpdateWithoutInvitationsInput, Prisma.FamilyUncheckedUpdateWithoutInvitationsInput>
+  create: Prisma.XOR<Prisma.FamilyCreateWithoutInvitationsInput, Prisma.FamilyUncheckedCreateWithoutInvitationsInput>
+  where?: Prisma.FamilyWhereInput
+}
+
+export type FamilyUpdateToOneWithWhereWithoutInvitationsInput = {
+  where?: Prisma.FamilyWhereInput
+  data: Prisma.XOR<Prisma.FamilyUpdateWithoutInvitationsInput, Prisma.FamilyUncheckedUpdateWithoutInvitationsInput>
+}
+
+export type FamilyUpdateWithoutInvitationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedFamiliesNestedInput
+  members?: Prisma.FamilyMemberUpdateManyWithoutFamilyNestedInput
+  cars?: Prisma.CarUpdateManyWithoutFamilyNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutFamilyNestedInput
+}
+
+export type FamilyUncheckedUpdateWithoutInvitationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.FamilyMemberUncheckedUpdateManyWithoutFamilyNestedInput
   cars?: Prisma.CarUncheckedUpdateManyWithoutFamilyNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutFamilyNestedInput
 }
@@ -592,6 +685,7 @@ export type FamilyCreateWithoutNotificationsInput = {
   owner: Prisma.UserCreateNestedOneWithoutOwnedFamiliesInput
   members?: Prisma.FamilyMemberCreateNestedManyWithoutFamilyInput
   cars?: Prisma.CarCreateNestedManyWithoutFamilyInput
+  invitations?: Prisma.FamilyInvitationCreateNestedManyWithoutFamilyInput
 }
 
 export type FamilyUncheckedCreateWithoutNotificationsInput = {
@@ -602,6 +696,7 @@ export type FamilyUncheckedCreateWithoutNotificationsInput = {
   updatedAt?: Date | string
   members?: Prisma.FamilyMemberUncheckedCreateNestedManyWithoutFamilyInput
   cars?: Prisma.CarUncheckedCreateNestedManyWithoutFamilyInput
+  invitations?: Prisma.FamilyInvitationUncheckedCreateNestedManyWithoutFamilyInput
 }
 
 export type FamilyCreateOrConnectWithoutNotificationsInput = {
@@ -628,6 +723,7 @@ export type FamilyUpdateWithoutNotificationsInput = {
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedFamiliesNestedInput
   members?: Prisma.FamilyMemberUpdateManyWithoutFamilyNestedInput
   cars?: Prisma.CarUpdateManyWithoutFamilyNestedInput
+  invitations?: Prisma.FamilyInvitationUpdateManyWithoutFamilyNestedInput
 }
 
 export type FamilyUncheckedUpdateWithoutNotificationsInput = {
@@ -638,6 +734,7 @@ export type FamilyUncheckedUpdateWithoutNotificationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.FamilyMemberUncheckedUpdateManyWithoutFamilyNestedInput
   cars?: Prisma.CarUncheckedUpdateManyWithoutFamilyNestedInput
+  invitations?: Prisma.FamilyInvitationUncheckedUpdateManyWithoutFamilyNestedInput
 }
 
 
@@ -649,12 +746,14 @@ export type FamilyCountOutputType = {
   members: number
   cars: number
   notifications: number
+  invitations: number
 }
 
 export type FamilyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   members?: boolean | FamilyCountOutputTypeCountMembersArgs
   cars?: boolean | FamilyCountOutputTypeCountCarsArgs
   notifications?: boolean | FamilyCountOutputTypeCountNotificationsArgs
+  invitations?: boolean | FamilyCountOutputTypeCountInvitationsArgs
 }
 
 /**
@@ -688,6 +787,13 @@ export type FamilyCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.
   where?: Prisma.NotificationWhereInput
 }
 
+/**
+ * FamilyCountOutputType without action
+ */
+export type FamilyCountOutputTypeCountInvitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FamilyInvitationWhereInput
+}
+
 
 export type FamilySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -699,6 +805,7 @@ export type FamilySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   members?: boolean | Prisma.Family$membersArgs<ExtArgs>
   cars?: boolean | Prisma.Family$carsArgs<ExtArgs>
   notifications?: boolean | Prisma.Family$notificationsArgs<ExtArgs>
+  invitations?: boolean | Prisma.Family$invitationsArgs<ExtArgs>
   _count?: boolean | Prisma.FamilyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["family"]>
 
@@ -734,6 +841,7 @@ export type FamilyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   members?: boolean | Prisma.Family$membersArgs<ExtArgs>
   cars?: boolean | Prisma.Family$carsArgs<ExtArgs>
   notifications?: boolean | Prisma.Family$notificationsArgs<ExtArgs>
+  invitations?: boolean | Prisma.Family$invitationsArgs<ExtArgs>
   _count?: boolean | Prisma.FamilyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FamilyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -750,6 +858,7 @@ export type $FamilyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     members: Prisma.$FamilyMemberPayload<ExtArgs>[]
     cars: Prisma.$CarPayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
+    invitations: Prisma.$FamilyInvitationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1155,6 +1264,7 @@ export interface Prisma__FamilyClient<T, Null = never, ExtArgs extends runtime.T
   members<T extends Prisma.Family$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Family$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FamilyMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cars<T extends Prisma.Family$carsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Family$carsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.Family$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Family$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  invitations<T extends Prisma.Family$invitationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Family$invitationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FamilyInvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1659,6 +1769,30 @@ export type Family$notificationsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * Family.invitations
+ */
+export type Family$invitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FamilyInvitation
+   */
+  select?: Prisma.FamilyInvitationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FamilyInvitation
+   */
+  omit?: Prisma.FamilyInvitationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FamilyInvitationInclude<ExtArgs> | null
+  where?: Prisma.FamilyInvitationWhereInput
+  orderBy?: Prisma.FamilyInvitationOrderByWithRelationInput | Prisma.FamilyInvitationOrderByWithRelationInput[]
+  cursor?: Prisma.FamilyInvitationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FamilyInvitationScalarFieldEnum | Prisma.FamilyInvitationScalarFieldEnum[]
 }
 
 /**

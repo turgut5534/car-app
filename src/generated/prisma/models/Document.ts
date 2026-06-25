@@ -485,10 +485,6 @@ export type EnumDocumentTypeFieldUpdateOperationsInput = {
   set?: $Enums.DocumentType
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type DocumentCreateNestedOneWithoutAttachmentsInput = {
   create?: Prisma.XOR<Prisma.DocumentCreateWithoutAttachmentsInput, Prisma.DocumentUncheckedCreateWithoutAttachmentsInput>
   connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutAttachmentsInput

@@ -35,7 +35,6 @@ export class FamilyService {
   }
 
   async findFamilyMembers(userId: string) {
-    
     const family = await this.prisma.family.findUnique({
       where: {
         ownerId: userId,
@@ -50,9 +49,8 @@ export class FamilyService {
       where: {
         familyId: family.id,
         userId: {
-          not: userId
+          not: userId,
         },
-        is_approved: true
       },
       include: {
         user: true,
@@ -103,9 +101,6 @@ export class FamilyService {
       });
 
       if (existing) {
-        if (!existing.is_approved) {
-          throw new BadRequestException('You already sent invitation');
-        }
         throw new BadRequestException('User is already in the family');
       }
 
@@ -119,10 +114,31 @@ export class FamilyService {
         throw new NotFoundException('User not found');
       }
 
-      await this.prisma.familyMember.create({
+      // await this.prisma.familyMember.create({
+      //   data: {
+      //     familyId: currentFamily.id,
+      //     userId: invitedUser.id,
+      //   },
+      // });
+
+      const invitationExists = await this.prisma.familyInvitation.findFirst({
+        where: {
+          email,
+          invitedBy: userId,
+        },
+      });
+
+      if (invitationExists) {
+        throw new BadRequestException(
+          'You already sent an invitation to this user',
+        );
+      }
+
+      await this.prisma.familyInvitation.create({
         data: {
-          familyId: currentFamily.id,
-          userId: invitedUser.id,
+          familyId: familyId,
+          email,
+          invitedBy: userId,
         },
       });
 
@@ -130,13 +146,38 @@ export class FamilyService {
         userId: invitedUser.id,
         title: 'Family Invitation',
         message: `${invitingUser.email} invited you to join the family`,
-        type: NotificationType.FAMILY_INVITE,
+        type: NotificationType.FAMILY_INVITE
       });
 
       return invitedUser;
     } catch (e) {
       console.log(e);
     }
+  }
+
+  async getInvitations(userId: string) {
+
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: userId
+      }
+    })
+
+    if (!user) {
+      throw new NotFoundException('User not found')
+    }
+
+    const invitations = await this.prisma.familyInvitation.findMany({
+      where: {
+        email: user.email
+      }
+    })
+
+    return invitations
+  }
+  
+  async acceptInvitation(userId: string, invitationId: string) {
+
   }
 
   update(id: number, updateFamilyDto: UpdateFamilyDto) {

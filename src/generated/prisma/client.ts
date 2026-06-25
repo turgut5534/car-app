@@ -60,6 +60,11 @@ export type Family = Prisma.FamilyModel
  */
 export type FamilyMember = Prisma.FamilyMemberModel
 /**
+ * Model FamilyInvitation
+ * 
+ */
+export type FamilyInvitation = Prisma.FamilyInvitationModel
+/**
  * Model CarPhotos
  * 
  */

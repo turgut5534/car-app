@@ -55,6 +55,7 @@ export const ModelName = {
   Car: 'Car',
   Family: 'Family',
   FamilyMember: 'FamilyMember',
+  FamilyInvitation: 'FamilyInvitation',
   CarPhotos: 'CarPhotos',
   ServiceRecord: 'ServiceRecord',
   ServiceAttachment: 'ServiceAttachment',
@@ -143,6 +144,19 @@ export const FamilyMemberScalarFieldEnum = {
 } as const
 
 export type FamilyMemberScalarFieldEnum = (typeof FamilyMemberScalarFieldEnum)[keyof typeof FamilyMemberScalarFieldEnum]
+
+
+export const FamilyInvitationScalarFieldEnum = {
+  id: 'id',
+  familyId: 'familyId',
+  email: 'email',
+  invitedBy: 'invitedBy',
+  status: 'status',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
+} as const
+
+export type FamilyInvitationScalarFieldEnum = (typeof FamilyInvitationScalarFieldEnum)[keyof typeof FamilyInvitationScalarFieldEnum]
 
 
 export const CarPhotosScalarFieldEnum = {

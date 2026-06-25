@@ -29,14 +29,28 @@ export class FamilyController {
     return this.familyService.findMyFamily(userId);
   }
 
+  @Get('invitations')
+  getInvitations(@UserId() userId: string) {
+    return this.familyService.getInvitations(userId);
+  }
+
+  @Post('invitations/accept/:id')
+  acceptInvitation(@UserId() userId: string, @Param('id') invitationId: string ) {
+    return this.familyService.acceptInvitation(userId, invitationId);
+  }
+
   @Get('members')
   findFamilyMembers(@UserId() userId: string) {
     return this.familyService.findFamilyMembers(userId);
   }
 
   @Post(':id/invite')
-  inviteUser(@Param('id') familyId: string ,@UserId() userId: string, @Body('email') email: string) {
-    console.log(familyId )
+  inviteUser(
+    @Param('id') familyId: string,
+    @UserId() userId: string,
+    @Body('email') email: string,
+  ) {
+    console.log(familyId);
     return this.familyService.inviteUser(familyId, userId, email);
   }
 
