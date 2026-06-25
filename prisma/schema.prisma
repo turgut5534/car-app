@@ -78,7 +78,7 @@ model Family {
 
   members   FamilyMember[]
   cars      Car[]
-  notifications Notification[]notifications Notification[]
+  notifications Notification[]
 }
 
 model FamilyMember {

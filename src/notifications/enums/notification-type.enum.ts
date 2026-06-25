@@ -1,0 +1,38 @@
+// src/notifications/enums/notification-type.enum.ts
+
+export enum NotificationType {
+  INFO = 'INFO',
+
+  // Family
+  FAMILY_INVITE = 'FAMILY_INVITE',
+  FAMILY_MEMBER_JOINED = 'FAMILY_MEMBER_JOINED',
+  FAMILY_MEMBER_REMOVED = 'FAMILY_MEMBER_REMOVED',
+
+  // Reminders
+  REMINDER = 'REMINDER',
+  REMINDER_DUE = 'REMINDER_DUE',
+  REMINDER_OVERDUE = 'REMINDER_OVERDUE',
+
+  // Vehicle maintenance
+  SERVICE_DUE = 'SERVICE_DUE',
+  OIL_CHANGE_DUE = 'OIL_CHANGE_DUE',
+  INSPECTION_DUE = 'INSPECTION_DUE',
+
+  // Documents
+  DOCUMENT_EXPIRING = 'DOCUMENT_EXPIRING',
+  INSURANCE_EXPIRING = 'INSURANCE_EXPIRING',
+
+  // Car sharing
+  CAR_SHARED = 'CAR_SHARED',
+
+  // Fuel card
+  FUEL_CARD_LOW_BALANCE = 'FUEL_CARD_LOW_BALANCE',
+
+  // Expenses
+  EXPENSE_ADDED = 'EXPENSE_ADDED',
+
+  // Generic
+  SUCCESS = 'SUCCESS',
+  WARNING = 'WARNING',
+  ERROR = 'ERROR',
+}

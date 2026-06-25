@@ -1,8 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { NotificationsService } from './notifications.service';
 import { CreateNotificationDto } from './dto/create-notification.dto';
 import { UpdateNotificationDto } from './dto/update-notification.dto';
+import { UserId } from 'src/auth/decorators/current-user.decorator';
+import { JwtAuthGuard } from 'src/middlewares/jwt-guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('notifications')
 export class NotificationsController {
   constructor(private readonly notificationsService: NotificationsService) {}
@@ -13,8 +16,8 @@ export class NotificationsController {
   }
 
   @Get()
-  findAll() {
-    return this.notificationsService.findAll();
+  findAll(@UserId() userId: string) {
+    return this.notificationsService.findAll(userId);
   }
 
   @Get(':id')
@@ -31,4 +34,5 @@ export class NotificationsController {
   remove(@Param('id') id: string) {
     return this.notificationsService.remove(+id);
   }
+
 }

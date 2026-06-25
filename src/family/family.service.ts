@@ -1,11 +1,20 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateFamilyDto } from './dto/create-family.dto';
 import { UpdateFamilyDto } from './dto/update-family.dto';
 import { PrismaService } from 'src/prisma.service';
+import { NotificationsService } from 'src/notifications/notifications.service';
+import { NotificationType } from 'src/generated/prisma/client';
 
 @Injectable()
 export class FamilyService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly notificationsService: NotificationsService,
+  ) {}
 
   create(createFamilyDto: CreateFamilyDto) {
     return 'This action adds a new family';
@@ -26,6 +35,7 @@ export class FamilyService {
   }
 
   async findFamilyMembers(userId: string) {
+    
     const family = await this.prisma.family.findUnique({
       where: {
         ownerId: userId,
@@ -39,6 +49,10 @@ export class FamilyService {
     const familyMembers = await this.prisma.familyMember.findMany({
       where: {
         familyId: family.id,
+        userId: {
+          not: userId
+        },
+        is_approved: true
       },
       include: {
         user: true,
@@ -57,7 +71,7 @@ export class FamilyService {
     };
   }
 
-  async inviteUser(familyId, email: string) {
+  async inviteUser(familyId, userId, email: string) {
     try {
       const invitedUser = await this.prisma.user.findUnique({
         where: {
@@ -89,10 +103,20 @@ export class FamilyService {
       });
 
       if (existing) {
-        if(!existing.is_approved) {
+        if (!existing.is_approved) {
           throw new BadRequestException('You already sent invitation');
         }
         throw new BadRequestException('User is already in the family');
+      }
+
+      const invitingUser = await this.prisma.user.findUnique({
+        where: {
+          id: userId,
+        },
+      });
+
+      if (!invitingUser) {
+        throw new NotFoundException('User not found');
       }
 
       await this.prisma.familyMember.create({
@@ -102,8 +126,14 @@ export class FamilyService {
         },
       });
 
+      await this.notificationsService.send({
+        userId: invitedUser.id,
+        title: 'Family Invitation',
+        message: `${invitingUser.email} invited you to join the family`,
+        type: NotificationType.FAMILY_INVITE,
+      });
+
       return invitedUser;
-      
     } catch (e) {
       console.log(e);
     }

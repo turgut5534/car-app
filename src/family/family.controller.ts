@@ -35,9 +35,9 @@ export class FamilyController {
   }
 
   @Post(':id/invite')
-  inviteUser(@Param('id') familyId: string , @Body('email') email: string) {
+  inviteUser(@Param('id') familyId: string ,@UserId() userId: string, @Body('email') email: string) {
     console.log(familyId )
-    return this.familyService.inviteUser(familyId, email);
+    return this.familyService.inviteUser(familyId, userId, email);
   }
 
   @Patch(':id')
